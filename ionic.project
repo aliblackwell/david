@@ -1,4 +1,8 @@
 {
   "name": "David Ionic",
-  "app_id": ""
+  "app_id": "6ca4826b",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ]
 }
