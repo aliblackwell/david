@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('david', ['ionic', 'david.controllers'])
+angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.controllers', 'david.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -41,10 +41,31 @@ angular.module('david', ['ionic', 'david.controllers'])
 
     .state('interactive', {
       url: '/interactive',
+      cache: false,
       views: {
         interactive: {
           templateUrl: 'templates/interactive.html',
           controller: 'interactiveCtrl'
+        }
+      }
+    })
+
+    .state('scanningwords', {
+      url: '/scanningwords',
+      views: {
+        scanningwords: {
+          templateUrl: 'templates/scanningwords.html',
+          controller: 'scanningwordsCtrl'
+        }
+      }
+    })
+
+    .state('list', {
+      url: '/list',
+      views: {
+        interactive: {
+          templateUrl: 'templates/list.html',
+          controller: 'listCtrl'
         }
       }
     })
@@ -60,4 +81,4 @@ angular.module('david', ['ionic', 'david.controllers'])
     })
   })
 
-  .constant('FIREBASE_URL', '');
+  .constant('FIREBASE_URL', 'https://daviddavid.firebaseio.com/');
