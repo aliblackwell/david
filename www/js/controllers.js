@@ -15,12 +15,16 @@ angular.module('david.controllers', [])
     });
   }])
 
-  .controller('interactiveCtrl', ['$scope', '$location', 'Settings', function ($scope, $location, Settings){
+  .controller('interactiveCtrl', ['$scope', '$location', '$state', 'Settings', function ($scope, $location, $state, Settings){
     var settings = Settings;
     settings.$loaded().then(function(){
-      console.log(settings.section);
-      $location.url('/'+settings.section);
+
+      $location.url('/tab/'+settings.section);
     })
+    console.log($scope)
+    $scope.settings = settings;
+    $scope.$state = $state
+    console.log($scope.$state)
 
 
   }])

@@ -25,53 +25,62 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.contr
 
 
 .config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/home');
+  $urlRouterProvider.otherwise('/tab/interactive');
   $stateProvider
 
-    .state('home', {
+    // setup an abstract state for the tabs directive
+    .state('tab', {
+      url: '/tab',
+      abstract: true,
+      templateUrl: 'templates/tabs.html'
+    })
+
+    .state('tab.interactive', {
+      url: '/interactive',
+      cache: false,
+      views: {
+        'interactive': {
+          templateUrl: 'templates/interactive.html',
+          controller: 'interactiveCtrl'
+        },
+        'loading@tab.interactive': {
+          templateUrl: 'templates/loading.html'
+        },
+        'scanningwords@tab.interactive': {
+          templateUrl: 'templates/scanningwords.html'
+        }
+      }
+    })
+
+    .state('tab.home', {
       url: '/home',
+      cache: false,
       views: {
         home: {
           templateUrl: 'templates/home.html',
           controller: 'homeCtrl'
         }
       }
-
     })
 
-    .state('interactive', {
-      url: '/interactive',
+
+
+
+
+    .state('tab.list', {
+      url: '/list',
       cache: false,
       views: {
-        interactive: {
-          templateUrl: 'templates/interactive.html',
-          controller: 'interactiveCtrl'
-        }
-      }
-    })
-
-    .state('scanningwords', {
-      url: '/scanningwords',
-      views: {
-        scanningwords: {
-          templateUrl: 'templates/scanningwords.html',
-          controller: 'scanningwordsCtrl'
-        }
-      }
-    })
-
-    .state('list', {
-      url: '/list',
-      views: {
-        interactive: {
+        list: {
           templateUrl: 'templates/list.html',
           controller: 'listCtrl'
         }
       }
     })
 
-    .state('stats', {
+    .state('tab.stats', {
       url: '/stats',
+      cache: false,
       views: {
         stats: {
           templateUrl: 'templates/stats.html',
