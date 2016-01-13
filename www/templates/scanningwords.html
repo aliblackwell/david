@@ -1,7 +1,16 @@
+<ion-view title="Scanning">
+  <ion-content padding="true">
     <h2>Scanning</h2>
-    <div class="" ng-repeat="word in words">
 
-      <p ng-click="tapWord(word)">{{word}}</p>
+
+    <div class="list list-inset" ng-repeat="word in words">
+
+      <div class="item" ng-click="tapWord(word)">
+        {{word.word}}
+        <span class="word-bar" style="width: {{word.tapCount}}px;"></span>
+      </div>
 
     </div>
+  </ion-content>
+</ion-view>
 
