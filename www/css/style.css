@@ -1,1 +1,19 @@
 /* Empty. Add your own CSS if you like */
+
+body {
+  background: url(../img/bg3.jpg);
+  background-size: cover;
+}
+
+.pane, .view {
+  background-color: transparent;
+}
+
+.word-bar {
+  background: rgba(200,200,255,0.5);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  z-index: -1;
+}

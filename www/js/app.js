@@ -5,7 +5,12 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.controllers', 'david.services'])
 
-.run(function($ionicPlatform) {
+.config(function($ionicConfigProvider) {
+  // Disable caching globally
+  $ionicConfigProvider.views.maxCache(0);
+})
+
+.run(function($ionicPlatform, Settings, $location) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -21,73 +26,70 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.contr
       StatusBar.styleDefault();
     }
   });
+
+  // Change the route when the settings change
+  var settings = Settings;
+  settings.$watch(function() {
+    $location.path('/' + settings.section);
+  });
+
+
 })
 
 
 .config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/tab/interactive');
+  //$urlRouterProvider.otherwise('/tab/interactive');
   $stateProvider
 
-    // setup an abstract state for the tabs directive
+    .state('scanningwords', {
+      url: '/scanningwords',
+      views: {
+        'main-view': {
+          templateUrl: 'templates/scanningwords.html',
+          controller: 'scanningwordsCtrl'
+        }
+      }
+    })
+
+    .state('hips', {
+      url: '/hips',
+      views: {
+        'main-view': {
+          templateUrl: 'templates/hips.html',
+          controller: 'hipsCtrl'
+        }
+      }
+    })
+
     .state('tab', {
-      url: '/tab',
-      abstract: true,
-      templateUrl: 'templates/tabs.html'
-    })
-
-    .state('tab.interactive', {
-      url: '/interactive',
-      cache: false,
+      url: '/tabs',
       views: {
-        'interactive': {
-          templateUrl: 'templates/interactive.html',
-          controller: 'interactiveCtrl'
-        },
-        'loading@tab.interactive': {
-          templateUrl: 'templates/loading.html'
-        },
-        'scanningwords@tab.interactive': {
-          templateUrl: 'templates/scanningwords.html'
+        'main-view': {
+          templateUrl: 'templates/tabs.html'
         }
       }
     })
 
-    .state('tab.home', {
-      url: '/home',
-      cache: false,
-      views: {
-        home: {
-          templateUrl: 'templates/home.html',
-          controller: 'homeCtrl'
-        }
-      }
-    })
-
-
-
-
-
-    .state('tab.list', {
-      url: '/list',
-      cache: false,
-      views: {
-        list: {
-          templateUrl: 'templates/list.html',
-          controller: 'listCtrl'
-        }
-      }
-    })
-
+    .state('tab.hips', {
+          url: '/hips',
+          views: {
+            'hips-tab': {
+              templateUrl: 'templates/hips.html',
+              controller: 'hipsCtrl'
+            }
+          }
+        })
     .state('tab.stats', {
       url: '/stats',
-      cache: false,
       views: {
-        stats: {
+        'stats-tab': {
           templateUrl: 'templates/stats.html',
           controller: 'statsCtrl'
         }
       }
     })
+
+
   })
 
-  .constant('FIREBASE_URL', 'https://daviddavid.firebaseio.com/');
+  .constant('FIREBASE_URL', 'https://david-ionic.firebaseio.com/');
