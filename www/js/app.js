@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.controllers', 'david.services'])
+angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.services', 'david.scanningControllers', 'david.miscControllers', 'david.welcomeControllers'])
 
 .config(function($ionicConfigProvider) {
   // Disable caching globally
@@ -41,10 +41,40 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.contr
   //$urlRouterProvider.otherwise('/tab/interactive');
   $stateProvider
 
-    .state('scanningwords', {
+    .state('welcome', {
+      url: '/welcome',
+      views: {
+        'main-view': {
+          templateUrl: 'js/welcome/welcome.html',
+          controller: 'welcomeCtrl'
+        }
+      }
+    })
+
+    .state('scanningwords-tabs', {
       url: '/scanningwords',
       views: {
         'main-view': {
+          templateUrl: 'templates/scanningwords-tabs.html',
+          controller: 'scanningwordsTabsCtrl'
+        }
+      }
+    })
+
+    .state('scanningwords-tabs.epoq', {
+      url: '/epoq',
+      views: {
+        'epoq-view': {
+          templateUrl: 'templates/epoq.html',
+          controller: 'epoqCtrl'
+        }
+      }
+    })
+
+    .state('scanningwords-tabs.scanningwords', {
+      url: '/content',
+      views: {
+        'scanning-view': {
           templateUrl: 'templates/scanningwords.html',
           controller: 'scanningwordsCtrl'
         }
