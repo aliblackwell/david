@@ -5,6 +5,18 @@ body {
   background-size: cover;
 }
 
+
+body,
+.ionic-body, .tab-item,
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+input,
+button,
+select,
+textarea {
+  font-family: "Jura", sans-serif;
+}
+
 .pane, .view {
   background-color: transparent;
 }
@@ -17,3 +29,30 @@ body {
   height: 100%;
   z-index: -1;
 }
+
+.popup {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background-color: rgba(200,200,255,0.9);
+  z-index: 999;
+  padding-top: 240px;
+}
+
+.epoq-logo {
+  text-align: center;
+  width: 100%;
+}
+
+.epoq-logo img {
+  margin: 0px auto;
+  display: block;
+  max-width: 100%;
+}
+
+/*.disable-clickon-tabs  {
+    pointer-events: none !important;
+}*/

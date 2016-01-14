@@ -1,4 +1,4 @@
-angular.module('david.controllers', [])
+angular.module('david.scanningControllers', [])
 
   // .controller('appCtrl', ['$scope', function ($scope){
   //   console.log('App')
@@ -18,6 +18,13 @@ angular.module('david.controllers', [])
 
   // }])
 
+  .controller('scanningwordsTabsCtrl', ['$scope', '$timeout', '$ionicTabsDelegate', '$state', function ($scope, $timeout, $ionicTabsDelegate, $state){
+
+    $timeout(function() {
+      $ionicTabsDelegate.select(1);
+    }, 20);
+  }])
+
   .controller('scanningwordsCtrl', ['$scope', 'ScanningWords', function ($scope, ScanningWords){
     var words = ScanningWords;
     words.$loaded().then(function() {
@@ -30,20 +37,11 @@ angular.module('david.controllers', [])
       word.tapCount++;
     }
 
+    $scope.showScanningTab = true;
 
   }])
 
-  .controller('hipsCtrl', ['$scope', function() {
-    console.log('HIPS');
-  }])
 
-  .controller('tabsCtrl', ['$scope', function() {
-    console.log('Tabs');
-  }])
-
-  .controller('statsCtrl', ['$scope', function() {
-    console.log('Stats');
-  }])
 
   // .controller('listCtrl', ['$scope', 'Items', function ($scope, Items){
 
