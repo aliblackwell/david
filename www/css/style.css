@@ -53,6 +53,10 @@ textarea {
   max-width: 100%;
 }
 
+.epoq-voice {
+  font-size: 2rem;
+}
+
 /*.disable-clickon-tabs  {
     pointer-events: none !important;
 }*/

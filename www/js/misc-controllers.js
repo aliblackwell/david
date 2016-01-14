@@ -15,3 +15,7 @@ angular.module('david.miscControllers', [])
   .controller('statsCtrl', ['$scope', function() {
     console.log('Stats');
   }])
+
+  .controller('foyerCtrl', ['$scope', function() {
+    console.log('Foyer');
+  }])

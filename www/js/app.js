@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.services', 'david.scanningControllers', 'david.miscControllers', 'david.welcomeControllers'])
+angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.global.services', 'david.show.services', 'david.scanningControllers', 'david.miscControllers', 'david.davidtolifeControllers', 'david.welcomeControllers'])
 
 .config(function($ionicConfigProvider) {
   // Disable caching globally
@@ -30,23 +30,48 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.servi
   // Change the route when the settings change
   var settings = Settings;
   settings.$watch(function() {
-    $location.path('/' + settings.section);
-  });
+    //if ($location.path() != '/welcome') {
+      $location.path('/' + settings.section);
+    //}
 
+  });
 
 })
 
 
 .config(function($stateProvider, $urlRouterProvider) {
-  //$urlRouterProvider.otherwise('/tab/interactive');
+  $urlRouterProvider.otherwise('/welcome');
   $stateProvider
 
     .state('welcome', {
       url: '/welcome',
+      cache: false,
       views: {
         'main-view': {
           templateUrl: 'js/welcome/welcome.html',
           controller: 'welcomeCtrl'
+        }
+      }
+    })
+
+    .state('foyer', {
+      url: '/foyer',
+      views: {
+        'main-view': {
+          templateUrl: 'js/foyer/foyer.html',
+          controller: 'foyerCtrl'
+        }
+      }
+    })
+
+
+
+    .state('davidtolife', {
+      url: '/davidtolife',
+      views: {
+        'main-view': {
+          templateUrl: 'js/davidtolife/davidtolife.html',
+          controller: 'davidtolifeCtrl'
         }
       }
     })
