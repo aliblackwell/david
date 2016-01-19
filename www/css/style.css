@@ -1,10 +1,19 @@
 /* Empty. Add your own CSS if you like */
 
 body {
-  background: url(../img/bg3.jpg);
-  background-size: cover;
+  background: #0408a9;
 }
 
+
+body .bar-dark {
+  background-color: #0066ff !important;
+}
+
+
+
+.epoq-logo.breathing {
+  display: none;
+}
 
 body,
 .ionic-body, .tab-item,
@@ -15,6 +24,13 @@ button,
 select,
 textarea {
   font-family: "Jura", sans-serif;
+}
+
+.title-left {
+  background-image: url(../img/epoq_logo-icon_WHITE.svg);
+  background-repeat: no-repeat;
+  background-size: 39px;
+  background-position: right 2px;
 }
 
 .pane, .view {
@@ -42,6 +58,16 @@ textarea {
   padding-top: 240px;
 }
 
+.holding-page {
+  text-align: center;
+  width: 100%;
+}
+
+.holding-logo {
+  max-width: 70%;
+  margin: 0px auto;
+}
+
 .epoq-logo {
   text-align: center;
   width: 100%;
@@ -57,6 +83,3 @@ textarea {
   font-size: 2rem;
 }
 
-/*.disable-clickon-tabs  {
-    pointer-events: none !important;
-}*/
