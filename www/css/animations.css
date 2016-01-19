@@ -50,3 +50,41 @@
     transform: scale(0.9);
   }
 }
+
+.bg-logo {
+ position: absolute;
+ opacity: 0.1;
+ top: 20%;
+ -webkit-animation: pulsing 4s ease-out infinite normal;
+ animation: pulsing 4s ease-out infinite normal;
+}
+
+
+
+@-webkit-keyframes pulsing {
+  0% {
+    opacity: 0.1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 0.1;
+  }
+}
+
+keyframes pulsing {
+  0% {
+    opacity: 0.1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 0.1;
+  }
+}

@@ -3,14 +3,14 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.global.services', 'david.show.services', 'david.scanningControllers', 'david.miscControllers', 'david.davidtolifeControllers', 'david.welcomeControllers'])
+angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.global.services', 'david.show.services', 'david.scanningControllers', 'david.miscControllers', 'david.davidtolifeControllers', 'david.decisionsControllers', 'david.welcomeControllers', 'ionic.contrib.ui.tinderCards'])
 
 .config(function($ionicConfigProvider) {
   // Disable caching globally
   $ionicConfigProvider.views.maxCache(0);
 })
 
-.run(function($ionicPlatform, Settings, $location) {
+.run(function($ionicPlatform, Settings, $location, $rootScope) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -27,14 +27,27 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
     }
   });
 
-  // Change the route when the settings change
-  var settings = Settings;
-  settings.$watch(function() {
-    //if ($location.path() != '/welcome') {
-      $location.path('/' + settings.section);
-    //}
 
-  });
+  $rootScope.watchSettings = function() {
+
+    // stop watching if already watching
+    if ($rootScope.unwatchSettings) {
+      console.log('unwatching');
+      $rootScope.unwatchSettings();
+    }
+    var settings = new Settings();
+    $rootScope.unwatchSettings = settings.$watch(function() {
+      console.log('changed!')
+      $location.path('/' + settings.section);
+    });
+  }
+
+  // Change the route when the settings change
+  if (localStorage.getItem('showId')) {
+    $rootScope.watchSettings();
+  }
+
+
 
 })
 
@@ -43,35 +56,55 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
   $urlRouterProvider.otherwise('/welcome');
   $stateProvider
 
-    .state('welcome', {
+    .state('welcome-tabs', {
       url: '/welcome',
       cache: false,
       views: {
         'main-view': {
-          templateUrl: 'js/welcome/welcome.html',
+          templateUrl: 'js/welcome/welcome-tabs.html',
+          controller: 'welcomeTabsCtrl'
+        }
+      }
+    })
+
+    .state('welcome-tabs.epoq', {
+      url: '/epoq',
+      views: {
+        'epoq-view': {
+          templateUrl: 'js/welcome/epoq.html',
+          controller: 'welcomeEpoqCtrl'
+        }
+      }
+    })
+
+    .state('welcome-tabs.details', {
+      url: '/details',
+      views: {
+        'details-view': {
+          templateUrl: 'js/welcome/details.html',
           controller: 'welcomeCtrl'
         }
       }
     })
 
-    .state('foyer', {
-      url: '/foyer',
-      views: {
-        'main-view': {
-          templateUrl: 'js/foyer/foyer.html',
-          controller: 'foyerCtrl'
-        }
-      }
-    })
-
-
-
     .state('davidtolife', {
       url: '/davidtolife',
+      cache: false,
       views: {
         'main-view': {
           templateUrl: 'js/davidtolife/davidtolife.html',
           controller: 'davidtolifeCtrl'
+        }
+      }
+    })
+
+    .state('decisions', {
+      url: '/decisions',
+      cache: false,
+      views: {
+        'main-view': {
+          templateUrl: 'js/decisions/decisions.html',
+          controller: 'decisionsCtrl'
         }
       }
     })

@@ -1,7 +1,22 @@
 <ion-view title="Reveal David">
   <ion-content padding="true">
 
+    <td-cards>
+      <td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe-left="cardSwipedLeft(card)" on-swipe-right="cardSwipedRight(card)" on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}}">
+        <div class="image">
+          <div class="no-text">NOPE</div>
+          <img ng-src="{{card.image}}">
+          <div class="yes-text">LIKE</div>
+        </div>
+      </td-card>
+    </td-cards>
 
+
+    <div class="holding-page" ng-show="epoq">
+      <img class="holding-logo" src="img/epoq_logo_BLUE.svg">
+      <h1>Welcome to David</h1>
+
+    </div>
 
   </ion-content>
 </ion-view>

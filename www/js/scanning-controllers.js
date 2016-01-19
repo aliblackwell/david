@@ -10,7 +10,7 @@ angular.module('david.scanningControllers', [])
   .controller('scanningwordsCtrl', ['$scope', 'ScanningWords', function ($scope, ScanningWords){
     var words = ScanningWords;
     words.$loaded().then(function() {
-      console.log(words);
+
     })
 
     words.$bindTo($scope, 'words');
@@ -22,27 +22,3 @@ angular.module('david.scanningControllers', [])
     $scope.showScanningTab = true;
 
   }])
-
-
-
-  // .controller('listCtrl', ['$scope', 'Items', function ($scope, Items){
-
-  //   $scope.items = Items;
-
-  //   $scope.addItem = function() {
-  //     var name = prompt("What buy?");
-  //     if (name) {
-  //       $scope.items.$add({
-  //         "name": name
-  //       })
-  //     }
-  //   };
-
-
-  // }])
-
-  // .controller('statsCtrl', ['$scope', function ($scope){
-  //   $scope.d = {};
-  //   $scope.d.section = "STATS";
-  //   console.log("Stats Ctrl")
-  // }])
