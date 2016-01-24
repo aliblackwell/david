@@ -56,36 +56,17 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
   $urlRouterProvider.otherwise('/welcome');
   $stateProvider
 
-    .state('welcome-tabs', {
+    .state('welcome', {
       url: '/welcome',
-      cache: false,
       views: {
         'main-view': {
-          templateUrl: 'js/welcome/welcome-tabs.html',
-          controller: 'welcomeTabsCtrl'
-        }
-      }
-    })
-
-    .state('welcome-tabs.epoq', {
-      url: '/epoq',
-      views: {
-        'epoq-view': {
-          templateUrl: 'js/welcome/epoq.html',
-          controller: 'welcomeEpoqCtrl'
-        }
-      }
-    })
-
-    .state('welcome-tabs.details', {
-      url: '/details',
-      views: {
-        'details-view': {
-          templateUrl: 'js/welcome/details.html',
+          templateUrl: 'js/welcome/welcome.html',
           controller: 'welcomeCtrl'
         }
       }
     })
+
+
 
     .state('davidtolife', {
       url: '/davidtolife',
