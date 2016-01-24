@@ -3,14 +3,15 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.global.services', 'david.show.services', 'david.scanningControllers', 'david.miscControllers', 'david.davidtolifeControllers', 'david.decisionsControllers', 'david.welcomeControllers', 'ionic.contrib.ui.tinderCards'])
+angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.global.services', 'david.show.services', 'david.scanningControllers', 'david.davidtolifeControllers', 'david.decisionsControllers', 'david.welcomeControllers', 'ionic.contrib.ui.tinderCards','ui.router', 'david.intimacyController', 'david.hipsController'])
 
 .config(function($ionicConfigProvider) {
   // Disable caching globally
   $ionicConfigProvider.views.maxCache(0);
+  $ionicConfigProvider.views.transition('none');
 })
 
-.run(function($ionicPlatform, Settings, $location, $rootScope) {
+.run(function($ionicPlatform, Settings, $location, $rootScope, $state, $ionicViewSwitcher) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -25,27 +26,35 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+
+
+
+
+    $rootScope.watchSettings = function() {
+
+      // stop watching if already watching
+      if ($rootScope.unwatchSettings) {
+        console.log('unwatching');
+        $rootScope.unwatchSettings();
+      }
+      var settings = new Settings();
+      $rootScope.unwatchSettings = settings.$watch(function() {
+        $ionicViewSwitcher.nextDirection('back');
+        $state.go(settings.section);
+        if (window.navigator.vibrate) {
+          window.navigator.vibrate(200);
+        }
+      });
+    }
+
+    // Change the route when the settings change
+    if (localStorage.getItem('showId')) {
+      $rootScope.watchSettings();
+    }
+
   });
 
 
-  $rootScope.watchSettings = function() {
-
-    // stop watching if already watching
-    if ($rootScope.unwatchSettings) {
-      console.log('unwatching');
-      $rootScope.unwatchSettings();
-    }
-    var settings = new Settings();
-    $rootScope.unwatchSettings = settings.$watch(function() {
-      console.log('changed!')
-      $location.path('/' + settings.section);
-    });
-  }
-
-  // Change the route when the settings change
-  if (localStorage.getItem('showId')) {
-    $rootScope.watchSettings();
-  }
 
 
 
@@ -66,8 +75,6 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
       }
     })
 
-
-
     .state('davidtolife', {
       url: '/davidtolife',
       cache: false,
@@ -86,6 +93,28 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
         'main-view': {
           templateUrl: 'js/decisions/decisions.html',
           controller: 'decisionsCtrl'
+        }
+      }
+    })
+
+    .state('hips', {
+      url: '/hips',
+      cache: false,
+      views: {
+        'main-view': {
+          templateUrl: 'js/hips/hips.html',
+          controller: 'hipsCtrl'
+        }
+      }
+    })
+
+    .state('intimacy', {
+      url: '/intimacy',
+      cache: false,
+      views: {
+        'main-view': {
+          templateUrl: 'js/intimacy/intimacy.html',
+          controller: 'intimacyCtrl'
         }
       }
     })
@@ -119,45 +148,6 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
         }
       }
     })
-
-    .state('hips', {
-      url: '/hips',
-      views: {
-        'main-view': {
-          templateUrl: 'templates/hips.html',
-          controller: 'hipsCtrl'
-        }
-      }
-    })
-
-    .state('tab', {
-      url: '/tabs',
-      views: {
-        'main-view': {
-          templateUrl: 'templates/tabs.html'
-        }
-      }
-    })
-
-    .state('tab.hips', {
-          url: '/hips',
-          views: {
-            'hips-tab': {
-              templateUrl: 'templates/hips.html',
-              controller: 'hipsCtrl'
-            }
-          }
-        })
-    .state('tab.stats', {
-      url: '/stats',
-      views: {
-        'stats-tab': {
-          templateUrl: 'templates/stats.html',
-          controller: 'statsCtrl'
-        }
-      }
-    })
-
 
   })
 

@@ -2,12 +2,6 @@
 
 angular.module('david.welcomeControllers', [])
 
-
-  .controller('welcomeEpoqCtrl', ['$scope', '$timeout', '$ionicTabsDelegate', '$state', function ($scope, $timeout, $ionicTabsDelegate, $state){
-
-  }])
-
-
   .controller('welcomeCtrl', ['$scope', 'User', 'AvailablePerformances', '$location', 'Settings', '$rootScope', '$timeout', function ($scope, User, AvailablePerformances, $location, Settings, $rootScope, $timeout){
 
     var user, shows;
@@ -38,13 +32,11 @@ angular.module('david.welcomeControllers', [])
     $scope.saveResponse = function() {
       $scope.d.saveState = 'Saved';
       $scope.d.buttonStyle = 'button-balanced';
-      $scope.d.buttonIcon = ' ';
     }
 
     $scope.resetSave = function() {
       $scope.d.saveState = 'Save';
       $scope.d.buttonStyle = 'button-positive';
-      $scope.d.buttonIcon = '';
     }
 
   }])
