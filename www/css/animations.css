@@ -63,7 +63,7 @@
 
 @-webkit-keyframes pulsing {
   0% {
-    opacity: 0.1;
+    opacity: 0.05;
   }
 
   50% {
@@ -71,13 +71,13 @@
   }
 
   100% {
-    opacity: 0.1;
+    opacity: 0.05;
   }
 }
 
 keyframes pulsing {
   0% {
-    opacity: 0.1;
+    opacity: 0;
   }
 
   50% {
@@ -85,6 +85,6 @@ keyframes pulsing {
   }
 
   100% {
-    opacity: 0.1;
+    opacity: 0;
   }
 }
