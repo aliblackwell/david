@@ -1,0 +1,42 @@
+<ion-view title="Hips">
+  <ion-content padding="true">
+
+    <div class="hips">
+      <h1>hips</h1>
+
+      <span class="countdown">{{d.countdown}}</span>
+
+      <span class="choice">{{d.distance}}</span>
+
+      <span class="audienceresult">{{d.audienceResult}}</span>
+
+      <div ng-show="!d.voted">
+
+
+        <input type="range" min="0" max="100" ng-model="d.distance">
+        <button class="button button-full" ng-class="d.buttonStyle" ng-click="submitRange()">{{d.saveState}}</button>
+
+      </div>
+
+      <div ng-show="d.voted">
+        <h1>David is coming</h1>
+      </div>
+
+    </div>
+  </ion-content>
+  <script id="templates/modal.html" type="text/ng-template">
+        <ion-modal-view>
+          <ion-header-bar class="bar bar-header bar-positive">
+            <h1 class="title">Results</h1>
+            <button class="button button-clear button-primary" ng-click="closeModal()">Cancel</button>
+          </ion-header-bar>
+          <ion-content class="padding">
+            {{d.audienceResult}}
+
+
+
+          </ion-content>
+        </ion-modal-view>
+      </script>
+</ion-view>
+

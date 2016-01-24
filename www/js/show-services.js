@@ -38,5 +38,23 @@ angular.module('david.show.services', [])
     return FinishedSwipes;
   })
 
+  .factory("Hips", function($firebaseObject, FirebaseShowURL) {
+    var Hips = function(user) {
+      var f = new FirebaseShowURL();
+      var itemsRef = new Firebase(f.url + '/hips/responses/' + user.$id);
+      return $firebaseObject(itemsRef);
+    }
+    return Hips;
+  })
+
+  .factory("HipsResult", function($firebaseObject, FirebaseShowURL) {
+    var HipsResult = function() {
+      var f = new FirebaseShowURL();
+      var itemsRef = new Firebase(f.url + '/hips/result/');
+      return $firebaseObject(itemsRef);
+    }
+    return HipsResult;
+  })
+
 
 
