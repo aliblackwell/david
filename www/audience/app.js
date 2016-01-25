@@ -67,6 +67,7 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
 
     .state('welcome', {
       url: '/welcome',
+      cache: false,
       views: {
         'main-view': {
           templateUrl: 'audience/welcome/welcome.html',

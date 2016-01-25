@@ -18,7 +18,7 @@ angular.module('david.davidtolifeControllers', [])
       finished.$add(user);
     }
 
-    var user = User;
+    var user = new User();
 
     user.$loaded().then(function(){
       user.uuid = user.$id;

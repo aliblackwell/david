@@ -12,8 +12,11 @@ angular.module('david.global.services', [])
   })
 
   .factory("AvailablePerformances", function($firebaseObject, FIREBASE_URL) {
-    var itemsRef = new Firebase(FIREBASE_URL + '/availablePerformances');
-    return $firebaseObject(itemsRef);
+    var AvailablePerformances = function() {
+      var itemsRef = new Firebase(FIREBASE_URL + '/availablePerformances');
+      return $firebaseObject(itemsRef);
+    }
+    return AvailablePerformances;
   })
 
 

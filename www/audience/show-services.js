@@ -1,18 +1,21 @@
 angular.module('david.show.services', [])
 
   .factory("User", function($firebaseObject, FIREBASE_URL) {
-    var showId, uuid,
-        itemsRef, fbUrl;
-    // Get/Set UUID
-    if (localStorage.getItem('uuid')) {
-      uuid = localStorage.getItem('uuid');
-    } else {
-      uuid = guid();
-      localStorage.setItem('uuid', uuid);
+    var User = function() {
+      var showId, uuid,
+          itemsRef, fbUrl;
+      // Get/Set UUID
+      if (localStorage.getItem('uuid')) {
+        uuid = localStorage.getItem('uuid');
+      } else {
+        uuid = guid();
+        localStorage.setItem('uuid', uuid);
+      }
+      fbUrl = FIREBASE_URL + 'users/'+uuid;
+      itemsRef = new Firebase(fbUrl);
+      return $firebaseObject(itemsRef);
     }
-    fbUrl = FIREBASE_URL + 'users/'+uuid;
-    itemsRef = new Firebase(fbUrl);
-    return $firebaseObject(itemsRef);
+    return User;
   })
 
   .factory("Items", function($firebaseArray, FirebaseShowURL) {
@@ -54,10 +57,19 @@ angular.module('david.show.services', [])
     return FinishedSwipes;
   })
 
-  .factory("Hips", function($firebaseObject, FirebaseShowURL) {
-    var Hips = function(user) {
+  .factory("HipsResponses", function($firebaseObject, FirebaseShowURL) {
+    var HipsResponses = function(user, voteIteration) {
       var f = new FirebaseShowURL();
-      var itemsRef = new Firebase(f.url + '/hips/responses/' + user.$id);
+      var itemsRef = new Firebase(f.url + '/hips/responses/' + voteIteration + '/' + user.$id);
+      return $firebaseObject(itemsRef);
+    }
+    return HipsResponses;
+  })
+
+  .factory("Hips", function($firebaseObject, FirebaseShowURL) {
+    var Hips = function() {
+      var f = new FirebaseShowURL();
+      var itemsRef = new Firebase(f.url + '/hips');
       return $firebaseObject(itemsRef);
     }
     return Hips;
@@ -66,7 +78,7 @@ angular.module('david.show.services', [])
   .factory("HipsResult", function($firebaseObject, FirebaseShowURL) {
     var HipsResult = function() {
       var f = new FirebaseShowURL();
-      var itemsRef = new Firebase(f.url + '/hips/result/');
+      var itemsRef = new Firebase(f.url + '/hips/result');
       return $firebaseObject(itemsRef);
     }
     return HipsResult;

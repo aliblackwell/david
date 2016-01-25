@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('david.hipsController', [])
-  .controller('hipsCtrl', ['$scope', 'User', 'Hips', 'HipsResult', 'HipsTimer', '$timeout', '$ionicModal', function ($scope, User, Hips, HipsResult, HipsTimer, $timeout, $ionicModal){
+  .controller('hipsCtrl', ['$scope', 'User', 'Hips', 'HipsResult', 'HipsTimer', 'HipsResponses', '$timeout', '$ionicModal', function ($scope, User, Hips, HipsResult, HipsTimer, HipsResponses, $timeout, $ionicModal){
 
     /*
       This controller saves the user response
@@ -9,9 +9,9 @@ angular.module('david.hipsController', [])
     */
 
     var unwatchResults, choice,
-        timer,
+        timer, hips,
         results = new HipsResult(),
-        user = User;
+        user = new User();
 
     $scope.d = {}
 
@@ -50,16 +50,20 @@ angular.module('david.hipsController', [])
 
     user.$loaded().then(function(){
       user.uuid = user.$id;
-      choice = new Hips(user);
     });
 
     $scope.submitRange = function() {
-      choice.decision = $scope.d.distance;
-      choice.$save();
-      $scope.d.saveState = 'Saved';
-      $scope.d.buttonStyle = 'button-balanced';
-      $scope.d.voted = true;
-      $timeout(resetButton, 1000);
+      hips = new Hips();
+      hips.$loaded().then(function(){
+        var saveLocation = new HipsResponses(user, hips.voteIteration);
+        saveLocation.decision = $scope.d.distance;
+        console.log(saveLocation);
+        saveLocation.$save();
+        $scope.d.saveState = 'Saved';
+        $scope.d.buttonStyle = 'button-balanced';
+        $scope.d.voted = true;
+        $timeout(resetButton, 1000);
+      })
     };
 
     $scope.closeModal = function() {
