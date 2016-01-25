@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('david.hipsController', [])
-  .controller('hipsCtrl', ['$scope', 'User', 'Hips', 'HipsResult', '$timeout', '$ionicModal', function ($scope, User, Hips, HipsResult, $timeout, $ionicModal){
+  .controller('hipsCtrl', ['$scope', 'User', 'Hips', 'HipsResult', 'HipsTimer', '$timeout', '$ionicModal', function ($scope, User, Hips, HipsResult, HipsTimer, $timeout, $ionicModal){
 
     /*
       This controller saves the user response
@@ -9,6 +9,7 @@ angular.module('david.hipsController', [])
     */
 
     var unwatchResults, choice,
+        timer,
         results = new HipsResult(),
         user = User;
 
@@ -31,21 +32,17 @@ angular.module('david.hipsController', [])
       return word;
     }
 
-    // Should be run whenever this view is closed
-    var closeView = function() {
-      $scope.unwatchResults();
-      $scope.closeModal();
-      results.destroy();
-      user.destroy();
-    }
-
-
 
     $scope.d.voted = false;
 
     $scope.d.distance = 50;
 
-    $scope.d.countdown = 14; // read from firebase.hips.timer
+    timer = new HipsTimer();
+    var timerUnwatch = timer.$watch(function() {
+      $scope.d.timer = timer.$value;
+    })
+
+
 
     resetButton();
 
@@ -98,6 +95,23 @@ angular.module('david.hipsController', [])
     });
 
 
+    // Should be run whenever this view is closed
+    $scope.$on('$destroy', function() {
+      console.log('destroying view')
+      $scope.unwatchResults();
+      if ($scope.modal) {
+        $scope.closeModal();
+      }
+      if (results) {
+        results.$destroy();
+      }
+      if (user) {
+        user.$destroy();
+      }
+      if(timerUnwatch) {
+        timerUnwatch()
+      }
+    })
 
 
 
