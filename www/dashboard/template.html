@@ -21,11 +21,15 @@
       </div>
       <div class="item item-text-wrap">
 
+        <button class="button button-positive" ng-if="section.controls" ng-click="launchControls(section)">
+          Launch Controls
+        </button>
+
+
+
 
         <ul class="list">
-
           <li class="item item-toggle">
-
              <label class="toggle toggle-assertive">
                <input type="checkbox" ng-change="changeActiveSection(section)" ng-model="section.active" ng-disabled="section.active">
                <div class="track">
@@ -33,12 +37,27 @@
                </div>
              </label>
           </li>
-
         </ul>
       </div>
-
     </div>
 
   </ion-content>
 </ion-view>
+
+<script id="hips.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+      <h1 class="title">Hips</h1>
+      <button class="button button-clear button-primary" ng-click="closeModal()">Close</button>
+    </ion-header-bar>
+    <ion-content>
+      <button class="button button-primary" ng-click="hipsStart()">Start Hips</button>
+      {{d.timer}}
+      {{d.result}}
+
+
+    </ion-content>
+  </ion-modal-view>
+</script>
+
 

@@ -8,17 +8,20 @@ angular.module('dashboard.services', [])
         'welcome': {
           'key': 'welcome',
           'title': 'Welcome',
-          'active': false
+          'active': false,
+          'controls': false
         },
         'davidtolife': {
           'key': 'davidtolife',
           'title': 'David to Life',
-          'active': false
+          'active': false,
+          'controls': false
         },
         'hips': {
           'key': 'hips',
           'title': 'Hips',
-          'active': false
+          'active': false,
+          'controls': true
         }
 
       }
@@ -33,6 +36,22 @@ angular.module('dashboard.services', [])
       return $firebaseObject(itemsRef);
     }
     return ActiveSection;
-  });
+  })
+
+  .factory("Hips", function($firebaseObject, FIREBASE_URL){
+    var Hips = function(show_slug) {
+      var itemsRef = new Firebase(FIREBASE_URL + '/' + show_slug + '/hips');
+      return $firebaseObject(itemsRef);
+    }
+    return Hips;
+  })
+
+  .factory("HipsArchive", function($firebaseArray, FIREBASE_URL){
+    var HipsArchive = function(show_slug) {
+      var itemsRef = new Firebase(FIREBASE_URL + '/' + show_slug + '/hips/archive');
+      return $firebaseArray(itemsRef);
+    }
+    return HipsArchive;
+  })
 
 

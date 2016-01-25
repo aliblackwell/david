@@ -4,7 +4,7 @@
     <div class="hips">
       <h1>hips</h1>
 
-      <span class="countdown">{{d.countdown}}</span>
+      <span class="timer">{{d.timer}}</span>
 
       <span class="choice">{{d.distance}}</span>
 
@@ -12,8 +12,9 @@
 
       <div ng-show="!d.voted">
 
-
+      <div class="input range range-positive">
         <input type="range" min="0" max="100" ng-model="d.distance">
+      </div>
         <button class="button button-full" ng-class="d.buttonStyle" ng-click="submitRange()">{{d.saveState}}</button>
 
       </div>

@@ -72,5 +72,14 @@ angular.module('david.show.services', [])
     return HipsResult;
   })
 
+  .factory("HipsTimer", function($firebaseObject, FirebaseShowURL) {
+    var HipsTimer = function() {
+      var f = new FirebaseShowURL();
+      var itemsRef = new Firebase(f.url + '/hips/timer/');
+      return $firebaseObject(itemsRef);
+    }
+    return HipsTimer;
+  })
+
 
 
