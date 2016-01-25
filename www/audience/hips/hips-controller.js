@@ -6,12 +6,17 @@ angular.module('david.hipsController', [])
     /*
       This controller saves the user response
       It also watches hips/results and when it changes, it shows the results page
-
     */
+
+    var unwatchResults, choice,
+        results = new HipsResult(),
+        user = User;
+
+    $scope.d = {}
 
     var resetButton = function() {
       $scope.d.saveState = 'Save';
-      $scope.d.buttonStyle = 'button-positive'
+      $scope.d.buttonStyle = 'button-positive';
     }
 
     var getWordFromNumber = function(number) {
@@ -26,9 +31,15 @@ angular.module('david.hipsController', [])
       return word;
     }
 
-    var choice;
+    // Should be run whenever this view is closed
+    var closeView = function() {
+      $scope.unwatchResults();
+      $scope.closeModal();
+      results.destroy();
+      user.destroy();
+    }
 
-    $scope.d = {}
+
 
     $scope.d.voted = false;
 
@@ -38,7 +49,7 @@ angular.module('david.hipsController', [])
 
     resetButton();
 
-    var user = User;
+
 
     user.$loaded().then(function(){
       user.uuid = user.$id;
@@ -54,24 +65,35 @@ angular.module('david.hipsController', [])
       $timeout(resetButton, 1000);
     };
 
-    $ionicModal.fromTemplateUrl('templates/modal.html', {
-        scope: $scope
-    }).then(function(modal) {
-        $scope.modal = modal;
-    });
-
     $scope.closeModal = function() {
-      $scope.modal.hide();
+      if ($scope.modal) {
+        $scope.modal.hide().then(function(){
+          $scope.modal.remove();
+        })
+      }
       $scope.d.voted = false;
-    }
+    };
 
 
-    var results = new HipsResult();
-    var unwatchResults = results.$watch(function() {
+
+    $scope.unwatchResults = results.$watch(function() {
       if(results.$value != 0) {
         $scope.d.showResults = true;
         $scope.d.audienceResult = getWordFromNumber(results.$value);
-        $scope.modal.show();
+
+        // This if statement should never run as
+        // we remove it in $scope.closeModal BSTS
+        if ($scope.modal) {
+          $scope.modal.remove();
+        }
+
+        $ionicModal.fromTemplateUrl('templates/modal.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.modal = modal;
+            $scope.modal.show();
+            $timeout($scope.closeModal, 5000);
+        });
       }
     });
 

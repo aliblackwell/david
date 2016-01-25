@@ -1,4 +1,4 @@
-// Ionic Starter App
+// David Audience App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
@@ -69,7 +69,7 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
       url: '/welcome',
       views: {
         'main-view': {
-          templateUrl: 'js/welcome/welcome.html',
+          templateUrl: 'audience/welcome/welcome.html',
           controller: 'welcomeCtrl'
         }
       }
@@ -80,7 +80,7 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
       cache: false,
       views: {
         'main-view': {
-          templateUrl: 'js/davidtolife/davidtolife.html',
+          templateUrl: 'audience/davidtolife/davidtolife.html',
           controller: 'davidtolifeCtrl'
         }
       }
@@ -91,7 +91,7 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
       cache: false,
       views: {
         'main-view': {
-          templateUrl: 'js/decisions/decisions.html',
+          templateUrl: 'audience/decisions/decisions.html',
           controller: 'decisionsCtrl'
         }
       }
@@ -99,10 +99,10 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
 
     .state('hips', {
       url: '/hips',
-      cache: false,
+      cache: true,
       views: {
         'main-view': {
-          templateUrl: 'js/hips/hips.html',
+          templateUrl: 'audience/hips/hips.html',
           controller: 'hipsCtrl'
         }
       }
@@ -113,41 +113,14 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
       cache: false,
       views: {
         'main-view': {
-          templateUrl: 'js/intimacy/intimacy.html',
+          templateUrl: 'audience/intimacy/intimacy.html',
           controller: 'intimacyCtrl'
         }
       }
     })
 
-    .state('scanningwords-tabs', {
-      url: '/scanningwords',
-      views: {
-        'main-view': {
-          templateUrl: 'templates/scanningwords-tabs.html',
-          controller: 'scanningwordsTabsCtrl'
-        }
-      }
-    })
 
-    .state('scanningwords-tabs.epoq', {
-      url: '/epoq',
-      views: {
-        'epoq-view': {
-          templateUrl: 'templates/epoq.html',
-          controller: 'epoqCtrl'
-        }
-      }
-    })
 
-    .state('scanningwords-tabs.scanningwords', {
-      url: '/content',
-      views: {
-        'scanning-view': {
-          templateUrl: 'templates/scanningwords.html',
-          controller: 'scanningwordsCtrl'
-        }
-      }
-    })
 
   })
 

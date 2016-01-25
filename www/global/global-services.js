@@ -16,18 +16,5 @@ angular.module('david.global.services', [])
     return $firebaseObject(itemsRef);
   })
 
-  .factory("User", function($firebaseObject, FIREBASE_URL) {
-    var showId, uuid,
-        itemsRef, fbUrl;
-    // Get/Set UUID
-    if (localStorage.getItem('uuid')) {
-      uuid = localStorage.getItem('uuid');
-    } else {
-      uuid = guid();
-      localStorage.setItem('uuid', uuid);
-    }
-    fbUrl = FIREBASE_URL + 'users/'+uuid;
-    itemsRef = new Firebase(fbUrl);
-    return $firebaseObject(itemsRef);
-  })
+
 
