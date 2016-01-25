@@ -62,11 +62,11 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
 
 
 .config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/welcome');
+  $urlRouterProvider.otherwise('/');
   $stateProvider
 
     .state('welcome', {
-      url: '/welcome',
+      url: '/',
       cache: false,
       views: {
         'main-view': {
@@ -77,7 +77,6 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
     })
 
     .state('davidtolife', {
-      url: '/davidtolife',
       cache: false,
       views: {
         'main-view': {
@@ -88,7 +87,6 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
     })
 
     .state('decisions', {
-      url: '/decisions',
       cache: false,
       views: {
         'main-view': {
@@ -99,7 +97,6 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
     })
 
     .state('hips', {
-      url: '/hips',
       cache: true,
       views: {
         'main-view': {
@@ -110,7 +107,6 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
     })
 
     .state('intimacy', {
-      url: '/intimacy',
       cache: false,
       views: {
         'main-view': {

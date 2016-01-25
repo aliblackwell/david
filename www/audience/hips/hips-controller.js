@@ -82,6 +82,8 @@ angular.module('david.hipsController', [])
         $scope.d.showResults = true;
         $scope.d.audienceResult = getWordFromNumber(results.$value);
 
+
+
         // This if statement should never run as
         // we remove it in $scope.closeModal BSTS
         if ($scope.modal) {
@@ -93,6 +95,7 @@ angular.module('david.hipsController', [])
         }).then(function(modal) {
             $scope.modal = modal;
             $scope.modal.show();
+            $scope.d.distance = results.$value;
             $timeout($scope.closeModal, 5000);
         });
       }
