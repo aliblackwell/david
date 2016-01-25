@@ -1,5 +1,21 @@
 angular.module('david.show.services', [])
-   .factory("Items", function($firebaseArray, FirebaseShowURL) {
+
+  .factory("User", function($firebaseObject, FIREBASE_URL) {
+    var showId, uuid,
+        itemsRef, fbUrl;
+    // Get/Set UUID
+    if (localStorage.getItem('uuid')) {
+      uuid = localStorage.getItem('uuid');
+    } else {
+      uuid = guid();
+      localStorage.setItem('uuid', uuid);
+    }
+    fbUrl = FIREBASE_URL + 'users/'+uuid;
+    itemsRef = new Firebase(fbUrl);
+    return $firebaseObject(itemsRef);
+  })
+
+  .factory("Items", function($firebaseArray, FirebaseShowURL) {
     var url = new FirebaseShowURL();
     var itemsRef = new Firebase(url + '/items');
     return $firebaseArray(itemsRef);

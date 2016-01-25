@@ -1,0 +1,44 @@
+<ion-view title="Dashboard">
+  <ion-content padding="true">
+
+
+    <div class="list">
+
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Performance
+        </div>
+
+        <select ng-change="setShow()" ng-model="d.activeShow" ng-options="k as v.name for (k, v) in d.performances" >
+        </select>
+
+
+    </div>
+
+    <div class="card" ng-repeat="section in d.sections">
+      <div class="item item-divider">
+        {{section.title}}
+      </div>
+      <div class="item item-text-wrap">
+
+
+        <ul class="list">
+
+          <li class="item item-toggle">
+
+             <label class="toggle toggle-assertive">
+               <input type="checkbox" ng-change="changeActiveSection(section)" ng-model="section.active" ng-disabled="section.active">
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+             </label>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+
+  </ion-content>
+</ion-view>
+
