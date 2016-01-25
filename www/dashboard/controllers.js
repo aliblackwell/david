@@ -7,7 +7,7 @@ angular.module('dashboard.controllers', [])
 
     $scope.d = {};
 
-    performances = AvailablePerformances;
+    performances = new AvailablePerformances();
     performances.$loaded().then(function() {
       $scope.d.performances = performances;
     });
@@ -64,11 +64,15 @@ angular.module('dashboard.controllers', [])
     //  * countdown at /show_slug/hips/timer
     */
 
-    var hips;
+    var hips, voteIteration = 0;
 
     // count down from 15 seconds
     var hipsStartCountdown = function() {
       var count = 15;
+      hips.voteIteration = 'vote'+voteIteration;
+      voteIteration++;
+      hips.$save();
+
       $interval(function() {
         $scope.d.timer = count;
         hips.timer = count;
@@ -76,6 +80,7 @@ angular.module('dashboard.controllers', [])
         count--;
         if (count === 0) {
           $scope.hipsCalculateResults();
+
         }
       }, 1000, 16);
 
@@ -87,29 +92,29 @@ angular.module('dashboard.controllers', [])
     }
 
     $scope.hipsCalculateResults = function() {
-      console.log('calcu')
       var results = []
-      angular.forEach(hips.responses, function(response, key) {
-        results.push(parseInt(response.decision));
-      });
-      var total = results.reduce(function(previousValue, currentValue, currentIndex, array) {
-        return previousValue + currentValue;
-      });
-      var mean = total / results.length;
-      console.log(mean)
-      $scope.d.result = mean;
-      hips.result = mean;
-      hips.$save();
-
-
-      hipsSaveOldResults(hips.responses);
+      if (hips.responses) {
+        angular.forEach(hips.responses[hips.voteIteration], function(response, key) {
+          results.push(parseInt(response.decision));
+        });
+      }
+      if (results.length) {
+        var total = results.reduce(function(previousValue, currentValue, currentIndex, array) {
+          return previousValue + currentValue;
+        });
+        var mean = total / results.length;
+        $scope.d.result = mean;
+        hips.result = mean;
+        hips.$save();
+      }
+      hipsStartCountdown();
+      //hipsSaveOldResults(hips.responses);
     }
 
     $scope.hipsStart = function() {
       hips = new Hips($scope.d.activeShow);
       hips.$loaded().then(function(){
         hipsStartCountdown();
-
       })
     }
 

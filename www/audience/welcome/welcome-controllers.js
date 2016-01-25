@@ -13,10 +13,11 @@ angular.module('david.welcomeControllers', [])
     $scope.d.buttonStyle = 'button-positive'
 
     // Load available performances
-    shows = AvailablePerformances;
+    shows = new AvailablePerformances();
     shows.$loaded().then(function(){
       $scope.d.shows = shows;
-      user = User;
+      user = new User();
+      console.log(user);
       user.$bindTo($scope, 'user');
       if (user.name) {
         $scope.saveResponse();
@@ -38,5 +39,15 @@ angular.module('david.welcomeControllers', [])
       $scope.d.saveState = 'Save';
       $scope.d.buttonStyle = 'button-positive';
     }
+
+    // Should be run whenever this view is closed
+    $scope.$on('$destroy', function() {
+      if (shows) {
+        shows.$destroy()
+      }
+      if (user) {
+        user.$destroy();
+      }
+    })
 
   }])

@@ -4,11 +4,6 @@ body {
   background: #01579B;
 }
 
-[nav-view-transition="ios"][nav-view-direction="forward"], [nav-view-transition="ios"][nav-view-direction="back"] {
-  background: transparent !important;
-}
-
-
 
 
 .epoq-logo.breathing {
