@@ -46,12 +46,4 @@ angular.module('dashboard.services', [])
     return Hips;
   })
 
-  .factory("HipsArchive", function($firebaseArray, FIREBASE_URL){
-    var HipsArchive = function(show_slug) {
-      var itemsRef = new Firebase(FIREBASE_URL + '/' + show_slug + '/hips/archive');
-      return $firebaseArray(itemsRef);
-    }
-    return HipsArchive;
-  })
-
 

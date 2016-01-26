@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dashboard.controllers', [])
-  .controller('dashboardCtrl', ['$scope', 'AvailablePerformances','Sections','ActiveSection', '$ionicModal', 'Hips', 'HipsArchive', '$interval', function ($scope, AvailablePerformances, Sections, ActiveSection, $ionicModal, Hips, HipsArchive, $interval){
+  .controller('dashboardCtrl', ['$scope', 'AvailablePerformances','Sections','ActiveSection', '$ionicModal', 'Hips', '$interval', function ($scope, AvailablePerformances, Sections, ActiveSection, $ionicModal, Hips, $interval){
 
     var performances, sections;
 
@@ -54,7 +54,15 @@ angular.module('dashboard.controllers', [])
     }
 
     $scope.closeModal = function() {
-      $scope.modal.hide();
+      $scope.modal.hide().then(function() {
+        // cleanup
+        $scope.modal.remove();
+
+        if ($scope.clearInterval) {
+          $interval.cancel(clearInterval);
+        }
+
+      });
     }
 
 
@@ -73,7 +81,7 @@ angular.module('dashboard.controllers', [])
       voteIteration++;
       hips.$save();
 
-      $interval(function() {
+      $scope.clearInterval = $interval(function() {
         $scope.d.timer = count;
         hips.timer = count;
         hips.$save();
@@ -86,13 +94,10 @@ angular.module('dashboard.controllers', [])
 
     }
 
-    var hipsSaveOldResults = function(responses) {
-      var archive = new HipsArchive($scope.d.activeShow);
-      archive.$add(responses);
-    }
 
     $scope.hipsCalculateResults = function() {
-      var results = []
+      var mean,
+          results = []
       if (hips.responses) {
         angular.forEach(hips.responses[hips.voteIteration], function(response, key) {
           results.push(parseInt(response.decision));
@@ -102,11 +107,28 @@ angular.module('dashboard.controllers', [])
         var total = results.reduce(function(previousValue, currentValue, currentIndex, array) {
           return previousValue + currentValue;
         });
-        var mean = total / results.length;
+        mean = total / results.length;
         $scope.d.result = mean;
-        hips.result = mean;
-        hips.$save();
+      } else {
+        if($scope.d.result) {
+          // set mean to previous result
+          mean = $scope.d.result;
+        } else {
+          mean = 50;
+        }
       }
+      var newObj = {
+        "avg": mean,
+        "iteration": hips.voteIteration
+      }
+      if (!hips.results) {
+        hips.results = {}
+        hips.results.iterator = 0;
+      }
+      hips.results[hips.voteIteration] = newObj
+      hips.results.iterator++;
+      hips.$save();
+
       hipsStartCountdown();
       //hipsSaveOldResults(hips.responses);
     }

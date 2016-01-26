@@ -78,3 +78,14 @@ textarea {
   font-size: 2rem;
 }
 
+.epoq-voice {
+  font-size: 4.6vw;
+  text-align: center;
+  color: white;
+  position: absolute;
+  width: 100%;
+  top: 12.6vw;
+  left: 0;
+}
+
+
