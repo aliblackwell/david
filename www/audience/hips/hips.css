@@ -1,11 +1,23 @@
 input[type=range] {
   -webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
-  transform: rotate(270deg);
+
   width: 100%;
-  margin-top: 50%;
+  position: absolute;
+  top: 50%;
+  text-align: center;
+  left: 50%;
+  margin-left: -50%;
+
+  transform: translateY(-50%) rotate(270deg);
 }
 
+.hips h1 {
 
+}
+
+.hips input[disabled] {
+  opacity: 0.1;
+}
 
 .hips button {
   position: fixed;
@@ -14,6 +26,13 @@ input[type=range] {
     bottom: 0;
 }
 
+body .hips-footer {
+  margin: 0;
+  padding: 0;
+}
+
+
+
 .resultVis {
   position: absolute;
   width: 100%;
@@ -21,4 +40,26 @@ input[type=range] {
   top: 0;
   left: 0;
   background: red;
+}
+
+
+
+.timer {
+    font-size: 36px; /* Some tweener fallback that doesn't look awful */
+    /*font-size: 55.4vw;*/
+    font-size: 34.6vw;
+    display: block;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    letter-spacing: 1px;
+    top: 50%;
+    left: 0px;
+    transform: translateY(-50%);
+    z-index: -1;
+    color: rgba(255,255,255,.1);
+}
+
+.timer.voted {
+  color: rgba(255,255,255,.5);
 }

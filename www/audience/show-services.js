@@ -75,13 +75,13 @@ angular.module('david.show.services', [])
     return Hips;
   })
 
-  .factory("HipsResult", function($firebaseObject, FirebaseShowURL) {
-    var HipsResult = function() {
+  .factory("HipsResults", function($firebaseObject, FirebaseShowURL) {
+    var HipsResults = function() {
       var f = new FirebaseShowURL();
-      var itemsRef = new Firebase(f.url + '/hips/result');
+      var itemsRef = new Firebase(f.url + '/hips/results');
       return $firebaseObject(itemsRef);
     }
-    return HipsResult;
+    return HipsResults;
   })
 
   .factory("HipsTimer", function($firebaseObject, FirebaseShowURL) {
