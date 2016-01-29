@@ -1,0 +1,18 @@
+.skipping .buttons {
+  position: absolute;
+  bottom: 1vh;
+  right: 0;
+  width: 100%;
+}
+
+ion-content.skipping {
+  background: transparent;
+}
+
+ion-content.skipping.yes {
+  background: rgba(0,255,0,0.5);
+}
+.skipping .reset {
+  position: absolute;
+  bottom: 1vh;
+}

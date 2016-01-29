@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.global.services', 'david.show.services', 'david.scanningControllers', 'david.davidtolifeControllers', 'david.decisionsControllers', 'david.welcomeControllers', 'ionic.contrib.ui.tinderCards','ui.router', 'david.intimacyController', 'david.hipsController','david.countdown','david.ritControllers', 'ngTouchmove'])
+angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.global.services', 'david.show.services', 'david.scanningControllers', 'david.davidtolifeControllers', 'david.decisionsControllers', 'david.welcomeControllers', 'ionic.contrib.ui.tinderCards','ui.router', 'david.intimacyController', 'david.hipsController','david.countdown','david.ritControllers', 'ngTouchmove','david.skippingControllers'])
 
 .config(function($ionicConfigProvider) {
   // Disable caching globally
@@ -127,6 +127,16 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
         'main-view': {
           templateUrl: 'audience/intimacy/intimacy.html',
           controller: 'intimacyCtrl'
+        }
+      }
+    })
+
+    .state('skipping', {
+      cache: true,
+      views: {
+        'main-view': {
+          templateUrl: 'audience/skipping/skipping.html',
+          controller: 'skippingCtrl'
         }
       }
     })
