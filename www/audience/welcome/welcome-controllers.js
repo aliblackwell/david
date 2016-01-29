@@ -2,30 +2,43 @@
 
 angular.module('david.welcomeControllers', [])
 
-  .controller('welcomeCtrl', ['$scope', 'User', 'AvailablePerformances', '$location', 'Settings', '$rootScope', '$timeout', function ($scope, User, AvailablePerformances, $location, Settings, $rootScope, $timeout){
+  .controller('welcomeCtrl', ['$scope', 'User', 'AvailablePerformances', '$location', 'Settings', '$rootScope', '$timeout', 'Connection', function ($scope, User, AvailablePerformances, $location, Settings, $rootScope, $timeout, Connection){
 
     var user, shows;
 
     // Workaround for ion-content bug
     $scope.d = {};
 
-    $scope.d.saveState = 'Save';
-    $scope.d.buttonStyle = 'button-positive'
 
-    // Load available performances
-    shows = new AvailablePerformances();
-    shows.$loaded().then(function(){
-      $scope.d.shows = shows;
+
+
+
+
+    var loadAvailableShows = function() {
+      shows = new AvailablePerformances();
+      shows.$loaded().then(function(){
+        $scope.d.shows = shows;
+        $scope.d.saveState = 'Save';
+        $scope.d.buttonStyle = 'button-positive'
+        loadUser();
+      })
+    }
+
+    var loadUser = function() {
       user = new User();
-      console.log(user);
-      user.$bindTo($scope, 'user');
-      if (user.name) {
-        $scope.saveResponse();
-      }
-    })
+      user.$loaded().then(function(){
+        var connection = new Connection(user);
+        user.$bindTo($scope, 'user');
+        if (user.name) {
+          $scope.saveResponse();
+        }
+      })
+    }
 
     $scope.setShow = function() {
-      localStorage.setItem('showId', $scope.user.show);
+      if ($scope.user.show) {
+        localStorage.setItem('showId', $scope.user.show);
+      }
       $rootScope.watchSettings();
       $scope.resetSave();
     }
@@ -39,6 +52,8 @@ angular.module('david.welcomeControllers', [])
       $scope.d.saveState = 'Save';
       $scope.d.buttonStyle = 'button-positive';
     }
+
+    loadAvailableShows();
 
     // Should be run whenever this view is closed
     $scope.$on('$destroy', function() {

@@ -1,9 +1,21 @@
 <ion-view title="Decisions">
   <ion-content padding="true">
+    <img class="bg-logo" src="img/epoq_logo-icon_WHITE.svg">
+
+    <countdown timer="d.timer"></countdown>
 
 
+    <div class="decisions-results-wrapper">
+      <img class="results-image" ng-src="{{image.imgUrl}}" ng-repeat="image in d.results" style="width: {{d.thumbWidth}}vw">
+    </div>
 
 
+    <div class="choose-wrapper">
+      <h2>Choose</h2>
+      <img class="choice" ng-click="makeChoice(choices.choice1)" ng-src="{{choices.choice1.imgUrl}}" ng-class="{'chosen': choices.choice1.chosen}">
+
+      <img class="choice" ng-click="makeChoice(choices.choice2)" ng-src="{{choices.choice2.imgUrl}}" ng-class="{'chosen': choices.choice2.chosen}">
+    </div>
   </ion-content>
 </ion-view>
 

@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.global.services', 'david.show.services', 'david.scanningControllers', 'david.davidtolifeControllers', 'david.decisionsControllers', 'david.welcomeControllers', 'ionic.contrib.ui.tinderCards','ui.router', 'david.intimacyController', 'david.hipsController'])
+angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.global.services', 'david.show.services', 'david.scanningControllers', 'david.davidtolifeControllers', 'david.decisionsControllers', 'david.welcomeControllers', 'ionic.contrib.ui.tinderCards','ui.router', 'david.intimacyController', 'david.hipsController','david.countdown','david.ritControllers', 'ngTouchmove'])
 
 .config(function($ionicConfigProvider) {
   // Disable caching globally
@@ -30,6 +30,8 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
 
 
 
+
+
     $rootScope.watchSettings = function() {
 
       // stop watching if already watching
@@ -47,9 +49,12 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
       });
     }
 
+
     // Change the route when the settings change
     if (localStorage.getItem('showId')) {
-      $rootScope.watchSettings();
+      if (localStorage.getItem('showId') != 'undefined') {
+        $rootScope.watchSettings();
+      }
     }
 
   });
@@ -86,7 +91,7 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
       }
     })
 
-    .state('decisions', {
+    .state('skiporhips', {
       cache: false,
       views: {
         'main-view': {
@@ -95,6 +100,38 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
         }
       }
     })
+
+    .state('skipormundane', {
+      cache: false,
+      views: {
+        'main-view': {
+          templateUrl: 'audience/decisions/decisions.html',
+          controller: 'decisionsCtrl'
+        }
+      }
+    })
+
+    .state('intimacy', {
+      cache: false,
+      views: {
+        'main-view': {
+          templateUrl: 'audience/intimacy/intimacy.html',
+          controller: 'intimacyCtrl'
+        }
+      }
+    })
+
+    .state('intimacy-blank', {
+      cache: false,
+      views: {
+        'main-view': {
+          templateUrl: 'audience/intimacy/intimacy.html',
+          controller: 'intimacyCtrl'
+        }
+      }
+    })
+
+
 
     .state('hips', {
       cache: true,
@@ -106,12 +143,12 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
       }
     })
 
-    .state('intimacy', {
+    .state('religioninatie', {
       cache: false,
       views: {
         'main-view': {
-          templateUrl: 'audience/intimacy/intimacy.html',
-          controller: 'intimacyCtrl'
+          templateUrl: 'audience/religioninatie/religioninatie.html',
+          controller: 'religioninatieCtrl'
         }
       }
     })

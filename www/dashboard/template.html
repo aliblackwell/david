@@ -21,8 +21,8 @@
       </div>
       <div class="item item-text-wrap">
 
-        <button class="button button-positive" ng-if="section.controls" ng-click="launchControls(section)">
-          Launch Controls
+        <button class="button button-positive" ng-if="section.active && section.controls" ng-click="launchControls(section)">
+          {{section.actionWord}}
         </button>
 
 

@@ -44,22 +44,3 @@ body .hips-footer {
 
 
 
-.timer {
-    font-size: 36px; /* Some tweener fallback that doesn't look awful */
-    /*font-size: 55.4vw;*/
-    font-size: 34.6vw;
-    display: block;
-    width: 100%;
-    position: absolute;
-    text-align: center;
-    letter-spacing: 1px;
-    top: 50%;
-    left: 0px;
-    transform: translateY(-50%);
-    z-index: -1;
-    color: rgba(255,255,255,.1);
-}
-
-.timer.voted {
-  color: rgba(255,255,255,.5);
-}

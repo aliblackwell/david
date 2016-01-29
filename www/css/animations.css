@@ -1,56 +1,3 @@
-.breathing {
-  -webkit-animation: breathing 4s ease-out infinite normal;
-  animation: breathing 4s ease-out infinite normal;
-}
-
-@-webkit-keyframes breathing {
-  0% {
-    -webkit-transform: scale(0.9);
-    transform: scale(0.9);
-  }
-
-  25% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-
-  60% {
-    -webkit-transform: scale(0.9);
-    transform: scale(0.9);
-  }
-
-  100% {
-    -webkit-transform: scale(0.9);
-    transform: scale(0.9);
-  }
-}
-
-@keyframes breathing {
-  0% {
-    -webkit-transform: scale(0.9);
-    -ms-transform: scale(0.9);
-    transform: scale(0.9);
-  }
-
-  25% {
-    -webkit-transform: scale(1);
-    -ms-transform: scale(1);
-    transform: scale(1);
-  }
-
-  60% {
-    -webkit-transform: scale(0.9);
-    -ms-transform: scale(0.9);
-    transform: scale(0.9);
-  }
-
-  100% {
-    -webkit-transform: scale(0.9);
-    -ms-transform: scale(0.9);
-    transform: scale(0.9);
-  }
-}
-
 .bg-logo {
  position: absolute;
  opacity: 0.1;
@@ -60,11 +7,15 @@
  animation: pulsing 4s ease-out infinite normal;
 }
 
+.bg-logo.bold {
+  animation: pulsing-bold 4s ease-out infinite normal;
+}
+
 
 
 @-webkit-keyframes pulsing {
   0% {
-    opacity: 0.05;
+    opacity: 0;
   }
 
   50% {
@@ -72,7 +23,7 @@
   }
 
   100% {
-    opacity: 0.05;
+    opacity: 0;
   }
 }
 
@@ -87,5 +38,33 @@ keyframes pulsing {
 
   100% {
     opacity: 0;
+  }
+}
+
+@-webkit-keyframes pulsing-bold {
+  0% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.8;
+  }
+}
+
+keyframes pulsing-bold {
+  0% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.8;
   }
 }

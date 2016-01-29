@@ -1,7 +1,18 @@
 <ion-view title="Intimacy">
-  <ion-content padding="true">
-    <h1>intimacy</h1>
+  <ion-content padding="false" scroll="false" class="intimacy">
 
+<!--     <img ng-show="d.rippleActive" class="bg-logo bold" src="img/epoq_logo-icon_WHITE.svg">
+ -->
+    <span class="intimacy-trigger" ng-show="!d.rippleActive" on-touch="loadAnimation()">touch me</span>
+
+    <style>
+      ion-content.intimacy {
+        background: url('{{d.imgsrc}}') no-repeat top left;
+      }
+    </style>
+
+
+    <div class="ripple-wrap" ng-touchmove="onTouchmove($event)"><img ng-show="d.showImage" id="ripple-me" ng-src="{{d.imgsrc}}" height="768" width="1024" /></div>
 
 
   </ion-content>

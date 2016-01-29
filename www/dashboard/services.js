@@ -21,7 +21,37 @@ angular.module('dashboard.services', [])
           'key': 'hips',
           'title': 'Hips',
           'active': false,
+          'actionWord': 'Launch Modal',
           'controls': true
+        },
+        'skiporhips': {
+          'key': 'skiporhips',
+          'title': 'Skip or Hips?',
+          'actionWord': 'Start Countdown',
+          'active': false,
+          'controls': true
+        },
+        'skipormundane': {
+          'key': 'skipormundane',
+          'title': 'Skip or Mundane?',
+          'actionWord': 'Start Countdown',
+          'active': false,
+          'controls': true
+        },
+        'religioninatie': {
+          'key': 'religioninatie',
+          'title': 'Religion in a Tie',
+          'active': false
+        },
+        'intimacy': {
+          'key': 'intimacy',
+          'title': 'Intimacy',
+          'active': false
+        },
+        'intimacy-blank': {
+          'key': 'intimacy-blank',
+          'title': 'Intimacy Blank',
+          'active': false
         }
 
       }

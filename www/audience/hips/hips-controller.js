@@ -6,6 +6,8 @@ angular.module('david.hipsController', [])
     /*
       This controller saves the user response
       It also watches hips/results and when it changes, it shows the results page
+      // TODO: stop the david is coming message from trumping the results message when they vote late
+      // Improve the CSS of the animations
     */
 
     var unwatchResults, choice,
