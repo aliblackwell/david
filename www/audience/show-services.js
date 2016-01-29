@@ -176,4 +176,13 @@ angular.module('david.show.services', [])
     return DecisionStore;
   })
 
+  .factory("SkippingStore", function($firebaseObject, FirebaseShowURL) {
+    var SkippingStore = function(currentSection) {
+      var f = new FirebaseShowURL();
+      var itemsRef = new Firebase(f.url + '/skipping/');
+      return $firebaseObject(itemsRef);
+    }
+    return SkippingStore;
+  })
+
 

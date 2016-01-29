@@ -38,6 +38,11 @@ angular.module('dashboard.services', [])
           'active': false,
           'controls': true
         },
+        'skipping': {
+          'key': 'skipping',
+          'title': 'Skipping',
+          'active': false
+        },
         'intimacy': {
           'key': 'intimacy',
           'title': 'Intimacy',
