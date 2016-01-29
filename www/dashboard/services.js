@@ -38,11 +38,6 @@ angular.module('dashboard.services', [])
           'active': false,
           'controls': true
         },
-        'religioninatie': {
-          'key': 'religioninatie',
-          'title': 'Religion in a Tie',
-          'active': false
-        },
         'intimacy': {
           'key': 'intimacy',
           'title': 'Intimacy',

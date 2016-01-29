@@ -22,6 +22,16 @@
   z-index: 10;
 }
 
+.intimacy-trigger p {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  color: white;
+  font-size: 13vw;
+}
+
 .ripple-wrap {
   opacity: 0.8;
 }
