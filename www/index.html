@@ -13,16 +13,20 @@
     <link rel="stylesheet" href="audience/davidtolife/davidtolife.css">
     <link rel="stylesheet" href="audience/decisions/decisions.css">
     <link rel="stylesheet" href="audience/hips/hips.css">
+    <link rel="stylesheet" href="audience/intimacy/intimacy.css">
+    <link rel="stylesheet" href="audience/religioninatie/religioninatie.css">
+    <link rel="stylesheet" href="directives/countdown/countdown.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="lib/ionic-ion-tinder-cards/ionic.tdcards.css">
+    <link rel="stylesheet" href="css/ionic.tdcards.css">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
 
     <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
+    <script src="js-lib/ionic.bundle.js"></script>
+    <script src="js-lib/ionic.io.bundle.min.js"></script>
+    <script src="js-lib/ngTouchmove.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client... -->
@@ -43,17 +47,21 @@
     <script src="audience/decisions/decisions-controllers.js"></script>
     <script src="audience/intimacy/intimacy-controller.js"></script>
     <script src="audience/hips/hips-controller.js"></script>
+    <script src="audience/religioninatie/religioninatie-controller.js"></script>
+
+    <script src="directives/countdown/countdown-directive.js"></script>
+
     <script src="global/global-services.js"></script>
     <script src="audience/show-services.js"></script>
 
     <!-- Tinder cards -->
-    <script src="lib/ionic-ion-tinder-cards/ionic.tdcards.js"></script>
-    <script src="lib/collide/collide.js"></script>
+    <script src="js-lib/ionic.tdcards.js"></script>
+    <script src="js-lib/collide.js"></script>
 
 
   </head>
   <body ng-app="david">
-    <img class="bg-logo" src="img/epoq_logo-icon_WHITE.svg">
+
    <ion-nav-view name="main-view"></ion-nav-view>
   </body>
 </html>

@@ -1,14 +1,10 @@
 <ion-view title="Hips">
   <ion-content padding="true">
-
+    <img class="bg-logo" src="img/epoq_logo-icon_WHITE.svg">
     <div class="hips">
 
 
-      <span class="timer" ng-class="d.voted ? 'voted' : 'notvoted' ">{{d.timer}}</span>
-
-
-
-
+        <countdown timer="d.timer" ng-class="d.voted ? 'bold' : 'faded'"></countdown>
 
         <div class="input range range-positive">
           <input type="range" min="0" max="100" ng-model="d.distance"  ng-disabled="d.voted" ng-change="updateSliderMessage(d.distance)">
