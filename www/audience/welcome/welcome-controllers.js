@@ -12,11 +12,12 @@ angular.module('david.welcomeControllers', [])
 
 
 
-
+    console.log('w')
 
     var loadAvailableShows = function() {
       shows = new AvailablePerformances();
       shows.$loaded().then(function(){
+        console.log(shows)
         $scope.d.shows = shows;
         $scope.d.saveState = 'Save';
         $scope.d.buttonStyle = 'button-positive'
@@ -26,13 +27,12 @@ angular.module('david.welcomeControllers', [])
 
     var loadUser = function() {
       user = new User();
-      user.$loaded().then(function(){
-        var connection = new Connection(user);
-        user.$bindTo($scope, 'user');
-        if (user.name) {
-          $scope.saveResponse();
-        }
-      })
+      var connection = new Connection(user);
+      user.$bindTo($scope, 'user');
+      if (user.name) {
+        $scope.saveResponse();
+      }
+
     }
 
     $scope.setShow = function() {
