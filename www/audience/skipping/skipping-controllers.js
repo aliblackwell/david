@@ -5,8 +5,6 @@ angular.module('david.skippingControllers', [])
     var currentSection, images, store, numberOfDecisions;
     $scope.d = {}
 
-    $scope.timer = "HELLO THERE!";
-
     $scope.d.question = true;
     $scope.d.result = false;
 
@@ -15,14 +13,10 @@ angular.module('david.skippingControllers', [])
 
     user.$loaded().then(function() {
       loadDatabase();
-    })
+    });
 
     var loadDatabase = function() {
       store = new SkippingStore(currentSection, user);
-      store.$loaded().then(function(){
-        console.log(store);
-
-      })
     }
 
     $scope.chooseResult = function(answer) {
@@ -56,9 +50,5 @@ angular.module('david.skippingControllers', [])
         $scope.unwatchResults();
       }
 
-    })
-
-
-
-
+    });
   }])

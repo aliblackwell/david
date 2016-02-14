@@ -9,15 +9,9 @@ angular.module('david.welcomeControllers', [])
     // Workaround for ion-content bug
     $scope.d = {};
 
-
-
-
-    console.log('w')
-
     var loadAvailableShows = function() {
       shows = new AvailablePerformances();
       shows.$loaded().then(function(){
-        console.log(shows)
         $scope.d.shows = shows;
         $scope.d.saveState = 'Save';
         $scope.d.buttonStyle = 'button-positive'
@@ -63,6 +57,6 @@ angular.module('david.welcomeControllers', [])
       if (user) {
         user.$destroy();
       }
-    })
+    });
 
   }])

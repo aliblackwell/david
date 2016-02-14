@@ -5,9 +5,6 @@ angular.module('david.decisionsControllers', [])
     var currentSection, images, store, numberOfDecisions;
     $scope.d = {}
 
-    $scope.timer = "HELLO THERE!";
-
-
     var user = new User();
     currentSection = $state.current.name;
 
@@ -24,7 +21,6 @@ angular.module('david.decisionsControllers', [])
     }
 
     var loadPage = function() {
-
       images = new DecisionImages(currentSection);
       $scope.choices = images
       showAudienceResults();
@@ -34,9 +30,7 @@ angular.module('david.decisionsControllers', [])
     var watchResults = function() {
       // Every time the results change in Firebase
       $scope.unwatchResults = store.$watch(function() {
-
         showAudienceResults();
-
       })
     }
 
@@ -44,8 +38,8 @@ angular.module('david.decisionsControllers', [])
       numberOfDecisions = []
       angular.forEach(store, function(k,v) {
         numberOfDecisions.push(k)
-      })
-      console.log(numberOfDecisions)
+      });
+
       var numDecs;
       if (numberOfDecisions.length <= 8) {
         numDecs = 2;
@@ -58,7 +52,7 @@ angular.module('david.decisionsControllers', [])
       if (numberOfDecisions.length >= 17) {
         numDecs = 4;
       }
-      console.log(numDecs);
+
       $scope.d.thumbWidth = 100 / numDecs;
       $scope.d.results = store;
     }
@@ -72,9 +66,7 @@ angular.module('david.decisionsControllers', [])
         } else {
           v.chosen = true;
           saveChoice(v);
-
         }
-
       })
     }
 
@@ -94,10 +86,5 @@ angular.module('david.decisionsControllers', [])
       if($scope.unwatchResults) {
         $scope.unwatchResults();
       }
-
-    })
-
-
-
-
+    });
   }])

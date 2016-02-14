@@ -89,8 +89,6 @@ angular.module('david.hipsController', [])
       saveLocation = new HipsResponses(user, hips.voteIteration);
       saveLocation.decision = $scope.d.distance;
       saveLocation.$save();
-      console.log('saving')
-
     };
 
 
@@ -146,17 +144,13 @@ angular.module('david.hipsController', [])
 
         if (oldValue <= newValue) {
           timesToIterate = newValue - oldValue;
-          console.log(timesToIterate)
           $interval(function() {
             $scope.d.distance = parseInt($scope.d.distance) + 1;
-
           }, 10, timesToIterate);
         } else {
           timesToIterate = oldValue - newValue;
-          console.log(timesToIterate)
           $interval(function(){
               $scope.d.distance = parseInt($scope.d.distance) - 1;
-
           }, 10, timesToIterate);
         }
       }
@@ -195,7 +189,6 @@ angular.module('david.hipsController', [])
 
     // Should be run whenever this view is closed
     $scope.$on('$destroy', function() {
-      console.log('destroying view')
       $scope.unwatchResults();
 
       if (results) {

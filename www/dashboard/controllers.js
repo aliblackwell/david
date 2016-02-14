@@ -86,15 +86,12 @@ angular.module('dashboard.controllers', [])
       hips.$save();
 
       $scope.clearInterval = $interval(function() {
-        console.log(count)
         if (count != -1) {
           $scope.d.timer = count;
           hips.timer = count;
           hips.$save();
           count--;
-          console.log('iterating')
         } else {
-          console.log('calculating')
           $scope.hipsCalculateResults();
           hips.timer = ''
           hips.$save();
