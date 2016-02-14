@@ -11,7 +11,7 @@ angular.module('david.hipsController', [])
     */
 
     var unwatchResults, choice,
-        timer, hips,
+        timer, hips, saveLocation,
         introMessage = 'Move David...',
         user = new User();
 
@@ -23,10 +23,7 @@ angular.module('david.hipsController', [])
 
     hips = new Hips();
 
-    var resetButton = function() {
-      $scope.d.saveState = 'Save';
-      $scope.d.buttonStyle = 'button-positive';
-    }
+
 
     var getRelativeDistance = function(oldValue, newValue) {
       var message, start, end;
@@ -48,6 +45,8 @@ angular.module('david.hipsController', [])
     }
 
     $scope.updateSliderMessage = function(newValue) {
+
+      $scope.submitRange();
 
       var end = parseInt(newValue);
 
@@ -79,30 +78,18 @@ angular.module('david.hipsController', [])
 
 
 
-    resetButton();
-
-
 
     user.$loaded().then(function(){
       user.uuid = user.$id;
     });
 
+
+
     $scope.submitRange = function() {
-
-      var saveLocation = new HipsResponses(user, hips.voteIteration);
-      saveLocation.$loaded().then(function(){
-        saveLocation.decision = $scope.d.distance;
-        saveLocation.$save();
-        $scope.d.saveState = 'Saved';
-        $scope.d.buttonStyle = 'button-balanced';
-
-        $timeout(resetButton, 1000);
-        $timeout(function(){
-          $scope.d.voted = true;
-          $scope.d.message = 'David is coming';
-        }, 1000)
-      })
-
+      saveLocation = new HipsResponses(user, hips.voteIteration);
+      saveLocation.decision = $scope.d.distance;
+      saveLocation.$save();
+      console.log('saving')
 
     };
 
@@ -176,16 +163,14 @@ angular.module('david.hipsController', [])
     };
 
 
-    var results = new HipsResults()
+    var results = new HipsResults();
     // Every time the results change in Firebase
     $scope.unwatchResults = results.$watch(function() {
 
-      console.log('results changed')
+
 
       if(results[hips.voteIteration]) {
 
-        console.log(hips.voteIteration)
-        console.log(results[hips.voteIteration])
 
         // Display a message
         displayAudienceResult()
@@ -194,8 +179,9 @@ angular.module('david.hipsController', [])
         $scope.previousValue = results[hips.voteIteration].avg;
 
         // Update the slider with the new value
-        animateSlider(results[hips.voteIteration].avg);
-
+        $timeout(function(){
+          animateSlider(results[hips.voteIteration].avg);
+        }, 1000);
         // If they haven't voted by now, force the voted=true state
         $scope.d.voted = true;
 
