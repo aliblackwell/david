@@ -1,7 +1,7 @@
 /* Empty. Add your own CSS if you like */
 
 body {
-  background: #01579B;
+  background: rgb(0, 35, 102);
 }
 
 
@@ -79,7 +79,7 @@ textarea {
 }
 
 .epoq-voice {
-  font-size: 4.6vw;
+  font-size: 9vw;
   text-align: center;
   color: white;
   position: absolute;
