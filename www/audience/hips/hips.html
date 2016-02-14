@@ -4,13 +4,13 @@
     <div class="hips">
 
 
-        <countdown timer="d.timer" ng-class="d.voted ? 'bold' : 'faded'"></countdown>
+        <countdown timer="d.timer"></countdown>
 
         <div class="input range range-positive">
           <input type="range" min="0" max="100" ng-model="d.distance"  ng-disabled="d.voted" ng-change="updateSliderMessage(d.distance)">
         </div>
 
-      <div ng-show="!d.voted">
+      <div ng-show="">
         <button class="button button-balanced button-block  pull-right" ng-class="d.buttonStyle" ng-click="submitRange()">{{d.saveState}}</button>
 
       </div>
