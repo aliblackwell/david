@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dashboard.controllers', [])
-  .controller('dashboardCtrl', ['$scope', 'AvailablePerformances','Sections','ActiveSection', '$ionicModal', 'Hips', '$interval', function ($scope, AvailablePerformances, Sections, ActiveSection, $ionicModal, Hips, $interval){
+  .controller('dashboardCtrl', ['$scope', 'AvailablePerformances','Sections','ActiveSection', '$ionicModal', 'Hips', '$interval', '$timeout', function ($scope, AvailablePerformances, Sections, ActiveSection, $ionicModal, Hips, $interval, $timeout){
 
     var performances, sections;
 
@@ -59,7 +59,11 @@ angular.module('dashboard.controllers', [])
         $scope.modal.remove();
 
         if ($scope.clearInterval) {
-          $interval.cancel(clearInterval);
+          $interval.cancel($scope.clearInterval);
+        }
+
+        if (hips) {
+          hips.$destroy();
         }
 
       });
@@ -82,15 +86,20 @@ angular.module('dashboard.controllers', [])
       hips.$save();
 
       $scope.clearInterval = $interval(function() {
-        $scope.d.timer = count;
-        hips.timer = count;
-        hips.$save();
-        count--;
-        if (count === 0) {
+        console.log(count)
+        if (count != -1) {
+          $scope.d.timer = count;
+          hips.timer = count;
+          hips.$save();
+          count--;
+          console.log('iterating')
+        } else {
+          console.log('calculating')
           $scope.hipsCalculateResults();
-
+          hips.timer = ''
+          hips.$save();
         }
-      }, 1000, 16);
+      }, 1000, 17);
 
     }
 
@@ -128,8 +137,10 @@ angular.module('dashboard.controllers', [])
       hips.results[hips.voteIteration] = newObj
       hips.results.iterator++;
       hips.$save();
+      $timeout(function() {
+        hipsStartCountdown();
+      }, 5000)
 
-      hipsStartCountdown();
       //hipsSaveOldResults(hips.responses);
     }
 
@@ -138,6 +149,10 @@ angular.module('dashboard.controllers', [])
       hips.$loaded().then(function(){
         hipsStartCountdown();
       })
+    }
+
+    var stopHips = function() {
+
     }
 
   }])
