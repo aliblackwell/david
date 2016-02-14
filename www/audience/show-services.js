@@ -128,7 +128,6 @@ angular.module('david.show.services', [])
 
   .factory("DecisionImages", function() {
     var DecisionImages = function(section) {
-      console.log(section)
       var imgUrl1, choiceName1,
           imgUrl2, choiceName2,
           imageCollection;
@@ -149,8 +148,6 @@ angular.module('david.show.services', [])
         default:
           return false;
       }
-
-      console.log(imgUrl1)
 
       imageCollection = {
         "choice1": {

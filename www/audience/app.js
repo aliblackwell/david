@@ -36,7 +36,6 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
 
       // stop watching if already watching
       if ($rootScope.unwatchSettings) {
-        console.log('unwatching');
         $rootScope.unwatchSettings();
       }
       var settings = new Settings();

@@ -9,14 +9,11 @@ angular.module('david.intimacyController', [])
 
     $scope.d = {}
 
-    console.log(currentSection)
     if (currentSection === 'intimacy') {
       $scope.d.imgsrc = '/img/soft-blue.jpg';
     } else {
       $scope.d.imgsrc = '/img/rough.jpg';
     }
-
-
 
     $scope.d.rippleActive = false;
     $scope.d.showImage = false;
@@ -30,9 +27,7 @@ angular.module('david.intimacyController', [])
     })
 
     $scope.loadAnimation = function() {
-
       $scope.d.rippleActive = true;
-
       /**
        * Water ripple effect.
        * Original code (Java) by Neil Wallis
@@ -178,5 +173,4 @@ angular.module('david.intimacyController', [])
       requestAnimationFrame(newframe);
 
     }
-
   }])
