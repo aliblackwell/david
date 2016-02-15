@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('david.decisions', ['david.show.services', 'ui.router','ionic', 'ionic.service.core','firebase', 'david.global.services'])
-  .controller('decisionsCtrl', ['$scope', '$state', 'user', 'DecisionStore', function ($scope, $state, user, DecisionStore, DecisionImages){
+angular.module('david.decisions', [])
+  .controller('decisionsCtrl', ['$scope', '$state', 'user', 'DecisionStore', 'DecisionImages', function ($scope, $state, user, DecisionStore, DecisionImages){
     var images,
         numberOfDecisions;
 
@@ -12,7 +12,7 @@ angular.module('david.decisions', ['david.show.services', 'ui.router','ionic', '
 
     console.log("HELLO")
 
-    console.log(user)
+    console.log(DecisionImages)
 
 
     var store = new DecisionStore(currentSection, user);
@@ -20,25 +20,6 @@ angular.module('david.decisions', ['david.show.services', 'ui.router','ionic', '
       loadPage();
 
     })
-
-    // var init = function() {
-    //   $scope.d = {}
-
-    //   user = new User();
-    //   currentSection = $state.current.name;
-
-    //   user.$loaded().then(function() {
-    //     loadDatabase();
-    //   })
-    // }
-
-    // var loadDatabase = function() {
-    //   store = new DecisionStore(currentSection, user);
-    //   store.$loaded().then(function(){
-    //     loadPage();
-
-    //   })
-    // }
 
     var loadPage = function() {
       console.log(currentSection)
