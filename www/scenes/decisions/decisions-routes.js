@@ -2,18 +2,17 @@
 
 angular.module('david.decisions')
 
-.config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/sdf');
+.config(function($stateProvider) {
   $stateProvider
     .state('skipormundane', {
       cache: false,
       views: {
-        'main-view': {
+        'mainview': {
           templateUrl: 'scenes/decisions/decisions.html',
           controller: 'decisionsCtrl',
           resolve: {
             user: function(User) {
-
+              console.log('does not work')
               var user = new User();
               return user;
             }
@@ -26,7 +25,14 @@ angular.module('david.decisions')
       views: {
         'main-view': {
           templateUrl: 'scenes/decisions/decisions.html',
-          controller: 'decisionsCtrl'
+          controller: 'decisionsCtrl',
+          resolve: {
+            user: function(User) {
+              console.log('works')
+              var user = new User();
+              return user;
+            }
+          }
         }
       }
     })
