@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('david.ritControllers', [])
+angular.module('david.religioninatie', [])
   .controller('religioninatieCtrl', ['$scope', function ($scope){
 
     $scope.d = {}

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('david.hipsController', [])
+angular.module('david.hips', [])
   .controller('hipsCtrl', ['$scope', 'User', 'Hips', 'HipsResults', 'HipsTimer', 'HipsResponses', '$timeout', '$interval', '$ionicModal', function ($scope, User, Hips, HipsResults, HipsTimer, HipsResponses, $timeout, $interval, $ionicModal){
 
     /*

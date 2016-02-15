@@ -1,9 +1,24 @@
 // David Audience App
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.global.services', 'david.scanningControllers', 'david.davidtolifeControllers', 'david.decisions', 'david.welcomeControllers', 'ionic.contrib.ui.tinderCards','ui.router', 'david.intimacyController', 'david.hipsController','david.countdown','david.ritControllers', 'ngTouchmove','david.skippingControllers'])
+angular.module('david', [
+  'ionic',
+  'ionic.service.core',
+  'firebase',
+  'david.global.services',
+  'david.show.services',
+  'david.welcome',
+  'david.davidtolife',
+  'david.blank',
+  'david.decisions',
+  'david.religioninatie',
+  'david.skipping',
+  'david.intimacy',
+  'david.scanning',
+  'ionic.contrib.ui.tinderCards',
+  'ui.router',
+  'david.countdown',
+  'ngTouchmove'
+])
 
 .config(function($ionicConfigProvider) {
   // Disable caching globally
@@ -12,6 +27,7 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
 })
 
 .run(function($ionicPlatform, Settings, $location, $rootScope, $state, $ionicViewSwitcher) {
+
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -41,6 +57,7 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
       var settings = new Settings();
       $rootScope.unwatchSettings = settings.$watch(function() {
         $ionicViewSwitcher.nextDirection('back');
+        console.log(settings.section)
         $state.go(settings.section);
         if (window.navigator.vibrate) {
           window.navigator.vibrate(200);
@@ -63,90 +80,4 @@ angular.module('david', ['ionic', 'ionic.service.core', 'firebase', 'david.globa
 
 
 })
-
-
-.config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/');
-  $stateProvider
-
-    .state('welcome', {
-      url: '/',
-      cache: false,
-      views: {
-        'main-view': {
-          templateUrl: 'scenes/welcome/welcome.html',
-          controller: 'welcomeCtrl'
-        }
-      }
-    })
-
-    .state('davidtolife', {
-      cache: false,
-      views: {
-        'main-view': {
-          templateUrl: 'scenes/davidtolife/davidtolife.html',
-          controller: 'davidtolifeCtrl'
-        }
-      }
-    })
-
-
-
-    .state('intimacy', {
-      cache: false,
-      views: {
-        'main-view': {
-          templateUrl: 'scenes/intimacy/intimacy.html',
-          controller: 'intimacyCtrl'
-        }
-      }
-    })
-
-    .state('intimacy-blank', {
-      cache: false,
-      views: {
-        'main-view': {
-          templateUrl: 'scenes/intimacy/intimacy.html',
-          controller: 'intimacyCtrl'
-        }
-      }
-    })
-
-    .state('skipping', {
-      cache: true,
-      views: {
-        'main-view': {
-          templateUrl: 'scenes/skipping/skipping.html',
-          controller: 'skippingCtrl'
-        }
-      }
-    })
-
-
-
-    .state('hips', {
-      cache: true,
-      views: {
-        'main-view': {
-          templateUrl: 'scenes/hips/hips.html',
-          controller: 'hipsCtrl'
-        }
-      }
-    })
-
-    .state('religioninatie', {
-      cache: false,
-      views: {
-        'main-view': {
-          templateUrl: 'scenes/religioninatie/religioninatie.html',
-          controller: 'religioninatieCtrl'
-        }
-      }
-    })
-
-
-
-
-  })
-
-  .constant('FIREBASE_URL', 'https://david-ionic.firebaseio.com/');
+.constant('FIREBASE_URL', 'https://david-ionic.firebaseio.com/');

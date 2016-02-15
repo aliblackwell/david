@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('david.skippingControllers', [])
+angular.module('david.skipping', [])
   .controller('skippingCtrl', ['$scope', 'User', 'SkippingStore', function ($scope, User, SkippingStore){
     var currentSection, images, store, numberOfDecisions;
     $scope.d = {}

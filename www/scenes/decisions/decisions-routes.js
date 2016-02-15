@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('david.decisions')
+angular.module('david')
 
 .config(function($stateProvider) {
   $stateProvider
