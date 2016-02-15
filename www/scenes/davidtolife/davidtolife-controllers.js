@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('david.davidtolifeControllers', [])
+angular.module('david.davidtolife', [])
   .controller('davidtolifeCtrl', ['$scope', 'LifeSwipes', 'User', 'FinishedSwipes', function ($scope, LifeSwipes, User, FinishedSwipes){
 
     var lifeSwipes,

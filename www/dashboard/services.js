@@ -58,6 +58,11 @@ angular.module('dashboard.services', [])
           'key': 'intimacy-blank',
           'title': 'Intimacy Blank',
           'active': false
+        },
+        'blank': {
+          'key': 'blank',
+          'title': 'Blank',
+          'active': false
         }
 
       }

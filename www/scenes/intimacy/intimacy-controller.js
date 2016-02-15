@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('david.intimacyController', [])
+angular.module('david.intimacy', [])
   .controller('intimacyCtrl', ['$scope', 'User', '$state', '$interval', function ($scope, User, $state, $interval){
 
     var currentSection, img, canvas, stop, ctx;

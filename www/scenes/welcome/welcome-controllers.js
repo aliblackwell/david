@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('david.welcomeControllers', [])
+angular.module('david.welcome', [])
 
-  .controller('welcomeCtrl', ['$scope', 'User', 'AvailablePerformances', '$location', 'Settings', '$rootScope', '$timeout', 'Connection', function ($scope, User, AvailablePerformances, $location, Settings, $rootScope, $timeout, Connection){
+  .controller('welcomeCtrl', ['$scope', 'User', 'AvailablePerformances', '$location', 'Settings', '$rootScope', '$timeout', function ($scope, User, AvailablePerformances, $location, Settings, $rootScope, $timeout){
 
     var user, shows;
 
@@ -21,7 +21,6 @@ angular.module('david.welcomeControllers', [])
 
     var loadUser = function() {
       user = new User();
-      var connection = new Connection(user);
       user.$bindTo($scope, 'user');
       if (user.name) {
         $scope.saveResponse();
