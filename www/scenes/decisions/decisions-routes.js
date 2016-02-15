@@ -1,18 +1,18 @@
 'use strict';
 
-angular.module('david')
+angular.module('david.decisions')
 
 .config(function($stateProvider) {
   $stateProvider
-    .state('skipormundane', {
+    .state('skiporhips', {
       cache: false,
       views: {
-        'mainview': {
+        'main-view': {
           templateUrl: 'scenes/decisions/decisions.html',
           controller: 'decisionsCtrl',
           resolve: {
             user: function(User) {
-              console.log('does not work')
+              console.log('works')
               var user = new User();
               return user;
             }
@@ -20,7 +20,7 @@ angular.module('david')
         }
       }
     })
-    .state('skiporhips', {
+    .state('skipormundane', {
       cache: false,
       views: {
         'main-view': {

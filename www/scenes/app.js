@@ -9,6 +9,7 @@ angular.module('david', [
   'david.welcome',
   'david.davidtolife',
   'david.blank',
+  'david.hips',
   'david.decisions',
   'david.religioninatie',
   'david.skipping',
