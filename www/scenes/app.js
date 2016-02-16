@@ -8,11 +8,13 @@ angular.module('david', [
   'david.show.services',
   'david.welcome',
   'david.davidtolife',
+  'david.vicarioustrauma',
   'david.blank',
   'david.hips',
   'david.decisions',
   'david.religioninatie',
   'david.skipping',
+  'david.mundane',
   'david.intimacy',
   'david.scanning',
   'ionic.contrib.ui.tinderCards',
@@ -27,7 +29,7 @@ angular.module('david', [
   $ionicConfigProvider.views.transition('none');
 })
 
-.run(function($ionicPlatform, Settings, $location, $rootScope, $state, $ionicViewSwitcher) {
+.run(function($ionicPlatform, Settings, $location, $rootScope, $state, $ionicViewSwitcher, $window, TriggerReload) {
 
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -43,11 +45,6 @@ angular.module('david', [
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-
-
-
-
-
 
     $rootScope.watchSettings = function() {
 
@@ -66,6 +63,23 @@ angular.module('david', [
       });
     }
 
+    var reloadHolder = false;
+
+    $rootScope.watchForRefresh = function() {
+
+      // stop watching if already watching
+      if ($rootScope.unwatchReload) {
+        $rootScope.unwatchReload();
+      }
+      var reload = new TriggerReload();
+      $rootScope.unwatchReload = reload.$watch(function() {
+        if(reload.$value != reloadHolder) {
+          $window.location.reload();
+        }
+        console.log(reload.$value)
+      });
+    }
+
 
     // Change the route when the settings change
     if (localStorage.getItem('showId')) {
@@ -73,6 +87,9 @@ angular.module('david', [
         $rootScope.watchSettings();
       }
     }
+
+    // Watch for the server refresh command
+    $rootScope.watchForRefresh();
 
   });
 

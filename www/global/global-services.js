@@ -19,6 +19,14 @@ angular.module('david.global.services', [])
     return AvailablePerformances;
   })
 
+  .factory("TriggerReload", function($firebaseObject, FIREBASE_URL){
+    var TriggerReload = function() {
+      var itemsRef = new Firebase(FIREBASE_URL + '/reload');
+      return $firebaseObject(itemsRef);
+    }
+    return TriggerReload;
+  })
+
 
 
 
