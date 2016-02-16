@@ -1,9 +1,9 @@
 <ion-view>
   <ion-content padding="true">
+    <img class="bg-logo" src="img/epoq_logo-icon_WHITE.svg">
 
 
-
-      <div class="list list-inset" ng-if="user">
+      <div class="list list-inset" ng-if="!d.formFilled">
 
 
 
@@ -29,10 +29,17 @@
       <button  ng-if="user" class="button button-full" ng-class="d.buttonStyle" ng-click="saveResponse()">{{d.saveState}}</button>
 
 
+      <h1 class="epoq-voice" ng-if="d.formFilled">Hello {{user.name}}, you have selected {{user.show}}</h1>
 
-    <div class="epoq-logo breathing">
-      <img src="img/epoq.png">
-    </div>
+      <td-cards ng-if="d.formFilled">
+        <td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe-left="cardSwipedLeft(card)" on-swipe-right="cardSwipedRight(card)" on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}}">
+          <div class="image">
+            <div class="no-text">NOPE</div>
+            <img ng-src="{{card.image}}">
+            <div class="yes-text">LIKE</div>
+          </div>
+        </td-card>
+      </td-cards>
 
   </ion-content>
 </ion-view>
