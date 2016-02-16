@@ -13,3 +13,5 @@ plugins/
 dist
 www/lib/*
 www/lib
+www/audio/*
+www/audio
