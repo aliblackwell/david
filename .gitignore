@@ -11,7 +11,5 @@ plugins/
 *.log
 *.DS_Store
 dist
-www/lib/*
-www/lib
-www/audio/*
-www/audio
+www/lib/
+www/audio/
