@@ -22,12 +22,13 @@ img.choice {
 }
 
 img.choice.chosen {
-  border-color: green;
+  border-color: #0c01a5;
 }
 
 img.results-image {
   width: 3vw;
   float: left;
+  opacity: 0.1;
 }
 
 .choose-wrapper {

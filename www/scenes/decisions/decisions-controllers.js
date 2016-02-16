@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('david.decisions', [])
-  .controller('decisionsCtrl', ['$scope', '$state', 'user', 'DecisionStore', 'DecisionImages', function ($scope, $state, user, DecisionStore, DecisionImages){
+  .controller('decisionsCtrl', ['$scope', '$state', 'user', 'DecisionStore', 'DecisionImages', 'DecisionTimer', function ($scope, $state, user, DecisionStore, DecisionImages, DecisionTimer){
     var images,
-        numberOfDecisions;
+        numberOfDecisions,
+        timerUnwatch;
 
     $scope.greeting = 'Hello World!';
     $scope.d = {}
@@ -13,6 +14,13 @@ angular.module('david.decisions', [])
     console.log("HELLO")
 
     console.log(DecisionImages)
+
+    var decisionsTimer = new DecisionTimer(currentSection);
+    decisionsTimer.$loaded().then(function(){
+      timerUnwatch = decisionsTimer.$watch(function() {
+        $scope.d.timer = decisionsTimer.$value;
+      })
+    })
 
 
     var store = new DecisionStore(currentSection, user);
@@ -87,6 +95,10 @@ angular.module('david.decisions', [])
       }
       if($scope.unwatchResults) {
         $scope.unwatchResults();
+      }
+
+      if(timerUnwatch) {
+        timerUnwatch()
       }
     });
 

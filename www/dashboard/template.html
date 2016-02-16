@@ -15,29 +15,40 @@
 
     </div>
 
-    <div class="card" ng-repeat="section in d.sections">
-      <div class="item item-divider">
-        {{section.title}}
-      </div>
-      <div class="item item-text-wrap">
-
-        <button class="button button-positive" ng-if="section.active && section.controls" ng-click="launchControls(section)">
-          {{section.actionWord}}
-        </button>
+    <div class="card" ng-if="d.sections">
+    <button class="button button-negative" ng-click="triggerReload()">Trigger reload</button>
+    </div>
 
 
+    <div class="card-wrapper" ng-repeat="section in d.sections">
 
 
-        <ul class="list">
-          <li class="item item-toggle">
-             <label class="toggle toggle-assertive">
-               <input type="checkbox" ng-change="changeActiveSection(section)" ng-model="section.active" ng-disabled="section.active">
-               <div class="track">
-                 <div class="handle"></div>
-               </div>
-             </label>
-          </li>
-        </ul>
+      <div class="card">
+        <div class="item item-divider">
+          {{section.title}}
+        </div>
+        <div class="item item-text-wrap">
+
+        {{d.timer}}
+
+          <button class="button button-positive" ng-if="section.active && section.controls" ng-click="launchControls(section)">
+            {{section.actionWord}}
+          </button>
+
+
+
+
+          <ul class="list">
+            <li class="item item-toggle">
+               <label class="toggle toggle-assertive">
+                 <input type="checkbox" ng-change="changeActiveSection(section)" ng-model="section.active" ng-disabled="section.active">
+                 <div class="track">
+                   <div class="handle"></div>
+                 </div>
+               </label>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -55,6 +66,7 @@
       {{d.timer}}
       {{d.result}}
 
+      <button class="button button-primary" ng-click="triggerReload()">Reset all phones</button>
 
     </ion-content>
   </ion-modal-view>
