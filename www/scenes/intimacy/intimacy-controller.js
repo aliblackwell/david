@@ -10,9 +10,9 @@ angular.module('david.intimacy', [])
     $scope.d = {}
 
     if (currentSection === 'intimacy') {
-      $scope.d.imgsrc = '/img/soft-blue.jpg';
+      $scope.d.imgsrc = '/img/satin-blue.jpg';
     } else {
-      $scope.d.imgsrc = '/img/rough.jpg';
+      $scope.d.imgsrc = '/img/rough-blue.jpg';
     }
 
     $scope.d.rippleActive = false;
