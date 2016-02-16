@@ -34,7 +34,6 @@ angular.module('dashboard.controllers', [])
         reload.$value = false;
         reload.$save()
       }, 100);
-      console.log(reload);
     }
 
     $scope.setActiveSection = function() {
