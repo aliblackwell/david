@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="scenes/hips/hips.css">
     <link rel="stylesheet" href="scenes/intimacy/intimacy.css">
     <link rel="stylesheet" href="scenes/religioninatie/religioninatie.css">
+    <link rel="stylesheet" href="scenes/vicarioustrauma/vicarioustrauma.css">
+    <link rel="stylesheet" href="scenes/mundane/mundane.css">
     <link rel="stylesheet" href="directives/countdown/countdown.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/ionic.tdcards.css">
@@ -32,10 +34,14 @@
     <script src="js-lib/ionic.io.bundle.min.js"></script>
     <script src="js-lib/ngTouchmove.js"></script>
 
-    <!-- cordova script (this will be a 404 during development) -->
-    <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client... -->
-<!-- <script src="cordova.js"></script> -->
-
+    <script src="/lib/raven-js/dist/raven.js"></script>
+    <script src="/lib/raven-js/dist/plugins/angular.js"></script>
+    <script>
+      Raven
+        .config('https://83f7a83c20a441529b421e331dd4dc1b@app.getsentry.com/67297')
+        .addPlugin(Raven.Plugins.Angular)
+        .install();
+    </script>
 
     <!-- Firebase -->
     <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
@@ -54,7 +60,6 @@
     <script src="scenes/decisions/decisions-services.js"></script>
     <script src="scenes/decisions/decisions-routes.js"></script>
 
-
     <script src="scenes/welcome/welcome-controllers.js"></script>
     <script src="scenes/welcome/welcome-services.js"></script>
     <script src="scenes/welcome/welcome-routes.js"></script>
@@ -62,8 +67,6 @@
     <script src="scenes/davidtolife/davidtolife-controllers.js"></script>
     <script src="scenes/davidtolife/davidtolife-services.js"></script>
     <script src="scenes/davidtolife/davidtolife-routes.js"></script>
-
-
 
     <script src="scenes/religioninatie/religioninatie-controller.js"></script>
     <script src="scenes/religioninatie/religioninatie-services.js"></script>
@@ -85,10 +88,17 @@
     <script src="scenes/blank/blank-services.js"></script>
     <script src="scenes/blank/blank-routes.js"></script>
 
-
     <script src="scenes/hips/hips-controllers.js"></script>
     <script src="scenes/hips/hips-services.js"></script>
     <script src="scenes/hips/hips-routes.js"></script>
+
+    <script src="scenes/vicarioustrauma/vicarioustrauma-controllers.js"></script>
+    <script src="scenes/vicarioustrauma/vicarioustrauma-services.js"></script>
+    <script src="scenes/vicarioustrauma/vicarioustrauma-routes.js"></script>
+
+    <script src="scenes/mundane/mundane-controllers.js"></script>
+    <script src="scenes/mundane/mundane-services.js"></script>
+    <script src="scenes/mundane/mundane-routes.js"></script>
 
 
     <script src="directives/countdown/countdown-directive.js"></script>
@@ -105,4 +115,5 @@
 
    <ion-nav-view name="main-view"></ion-nav-view>
   </body>
+
 </html>
