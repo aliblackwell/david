@@ -1,0 +1,46 @@
+input[type=range] {
+  -webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
+
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  text-align: center;
+  left: 50%;
+  margin-left: -50%;
+
+  transform: translateY(-50%) rotate(270deg);
+}
+
+.hips h1 {
+
+}
+
+.hips input[disabled] {
+  opacity: 0.5;
+}
+
+.hips button {
+  position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+body .hips-footer {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.resultVis {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: red;
+}
+
+
+

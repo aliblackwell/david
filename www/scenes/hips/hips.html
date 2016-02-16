@@ -1,0 +1,45 @@
+<ion-view title="Hips">
+  <ion-content padding="true" scroll="false" >
+    <img class="bg-logo" src="img/epoq_logo-icon_WHITE.svg">
+    <div class="hips">
+
+
+        <countdown timer="d.timer"></countdown>
+
+        <div class="input range range-positive">
+          <input type="range" min="0" max="100" ng-model="d.distance"  ng-disabled="d.voted" ng-change="updateSliderMessage(d.distance)">
+        </div>
+
+      <div ng-show="">
+        <button class="button button-balanced button-block  pull-right" ng-class="d.buttonStyle" ng-click="submitRange()">{{d.saveState}}</button>
+
+      </div>
+
+
+      <h1 class="epoq-voice">{{d.message}}</h1>
+
+
+
+    </div>
+
+
+
+
+  </ion-content>
+<!--   <ion-footer-bar class="hips-footer"  ng-show="!d.voted">
+
+    <button class="button button-energized button-block  pull-right" ng-class="d.buttonStyle" ng-click="submitRange()">{{d.saveState}}</button>
+  </ion-footer-bar> -->
+  <script id="templates/modal.html" type="text/ng-template">
+        <ion-modal-view>
+          <ion-header-bar class="bar bar-header bar-positive">
+            <h1 class="title">Results</h1>
+            <button class="button button-clear button-primary" ng-click="closeModal()">Cancel</button>
+          </ion-header-bar>
+          <ion-content class="padding">
+            {{d.audienceResult}}
+          </ion-content>
+        </ion-modal-view>
+      </script>
+</ion-view>
+

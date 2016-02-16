@@ -1,0 +1,75 @@
+<ion-view title="Dashboard">
+  <ion-content padding="true">
+
+
+    <div class="list">
+
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Performance
+        </div>
+
+        <select ng-change="setShow()" ng-model="d.activeShow" ng-options="k as v.name for (k, v) in d.performances" >
+        </select>
+
+
+    </div>
+
+    <div class="card" ng-if="d.sections">
+    <button class="button button-negative" ng-click="triggerReload()">Trigger reload</button>
+    </div>
+
+
+    <div class="card-wrapper" ng-repeat="section in d.sections">
+
+
+      <div class="card">
+        <div class="item item-divider">
+          {{section.title}}
+        </div>
+        <div class="item item-text-wrap">
+
+        {{d.timer}}
+
+          <button class="button button-positive" ng-if="section.active && section.controls" ng-click="launchControls(section)">
+            {{section.actionWord}}
+          </button>
+
+
+
+
+          <ul class="list">
+            <li class="item item-toggle">
+               <label class="toggle toggle-assertive">
+                 <input type="checkbox" ng-change="changeActiveSection(section)" ng-model="section.active" ng-disabled="section.active">
+                 <div class="track">
+                   <div class="handle"></div>
+                 </div>
+               </label>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>
+
+<script id="hips.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+      <h1 class="title">Hips</h1>
+      <button class="button button-clear button-primary" ng-click="closeModal()">Close</button>
+    </ion-header-bar>
+    <ion-content>
+      <button class="button button-primary" ng-click="hipsStart()">Start Hips</button>
+      {{d.timer}}
+      {{d.result}}
+
+      <button class="button button-primary" ng-click="triggerReload()">Reset all phones</button>
+
+    </ion-content>
+  </ion-modal-view>
+</script>
+
+

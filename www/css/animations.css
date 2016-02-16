@@ -1,0 +1,70 @@
+.bg-logo {
+ position: absolute;
+ opacity: 0.1;
+ top: 50%;
+  transform: translateY(-50%);
+ -webkit-animation: pulsing 4s ease-out infinite normal;
+ animation: pulsing 4s ease-out infinite normal;
+}
+
+.bg-logo.bold {
+  animation: pulsing-bold 4s ease-out infinite normal;
+}
+
+
+
+@-webkit-keyframes pulsing {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+keyframes pulsing {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes pulsing-bold {
+  0% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.8;
+  }
+}
+
+keyframes pulsing-bold {
+  0% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.8;
+  }
+}

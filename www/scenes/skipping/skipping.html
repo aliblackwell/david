@@ -1,0 +1,40 @@
+<ion-view title="Skipping">
+  <ion-content padding="true" class="skipping" ng-class="d.result.yes ? 'yes' : 'no'">
+
+    <img class="bg-logo" src="img/epoq_logo-icon_WHITE.svg">
+
+
+
+    <h1 class="epoq-voice" ng-show="d.result.yes">Please hold up your phone to David</h1>
+
+    <h1 class="epoq-voice" ng-show="d.result.no">Thank you</h1>
+
+    <h1 class="epoq-voice" ng-show="d.question">Should David carry on skipping?</h1>
+
+
+    <div class="buttons" ng-show="d.question">
+
+      <button class="button button-block button-balanced" ng-click="chooseResult('yes')" >
+        Yes
+      </button>
+
+      <button class="button button-block button-assertive" ng-click="chooseResult('no')">
+        No
+      </button>
+
+    </div>
+
+    <div class="buttons" ng-show="d.result">
+
+      <button class="button button-block button-positive" ng-click="resetView()">Reset</button>
+
+    </div>
+
+
+
+
+
+
+  </ion-content>
+</ion-view>
+
