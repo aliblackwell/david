@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('dashboard.controllers', [])
-  .controller('dashboardCtrl', ['$scope', 'AvailablePerformances','Sections','ActiveSection', '$ionicModal', 'Hips', '$interval', '$timeout', function ($scope, AvailablePerformances, Sections, ActiveSection, $ionicModal, Hips, $interval, $timeout){
+  .controller('dashboardCtrl', ['$scope', 'AvailablePerformances','Sections','ActiveSection', '$ionicModal', 'Hips', '$interval', '$timeout', 'TriggerReload', 'DecisionStore', function ($scope, AvailablePerformances, Sections, ActiveSection, $ionicModal, Hips, $interval, $timeout, TriggerReload, DecisionStore){
 
-    var performances, sections;
+    var performances, sections, decision;
 
     $scope.d = {};
 
@@ -26,6 +26,17 @@ angular.module('dashboard.controllers', [])
 
     };
 
+    $scope.triggerReload = function() {
+      var reload = new TriggerReload()
+      reload.$value = true;
+      reload.$save()
+      $timeout(function(){
+        reload.$value = false;
+        reload.$save()
+      }, 100);
+      console.log(reload);
+    }
+
     $scope.setActiveSection = function() {
       $scope.d.sections = new Sections();
       $scope.d.sections[$scope.activeSection.section].active = true
@@ -33,12 +44,31 @@ angular.module('dashboard.controllers', [])
     }
 
     $scope.changeActiveSection = function(activeSection) {
+
+      cleanupPreviousSection();
+
       angular.forEach($scope.d.sections, function(section, key) {
         if (key != activeSection.key) {
           section.active = false;
         }
       });
       $scope.activeSection.section = activeSection.key;
+      if (activeSection.type === 'decision') {
+        $scope.startTimer(activeSection);
+      }
+    }
+
+    $scope.startTimer = function(activeSection) {
+      decision = new DecisionStore($scope.d.activeShow, activeSection.key);
+      var count = activeSection.timerLength;
+      $scope.clearDecisionTimer = $interval(function() {
+        if (count != -1) {
+          $scope.d.timer = count;
+          decision.timer = count;
+          decision.$save();
+          count--;
+        }
+      }, 1000, count + 1);
     }
 
     $scope.launchControls = function(activeSection) {
@@ -69,6 +99,12 @@ angular.module('dashboard.controllers', [])
       });
     }
 
+    var cleanupPreviousSection = function() {
+      if ($scope.clearDecisionTimer) {
+        $interval.cancel($scope.clearDecisionTimer);
+      }
+    }
+
 
     /*
     //  Hips Modal Controls
@@ -97,7 +133,6 @@ angular.module('dashboard.controllers', [])
           hips.$save();
         }
       }, 1000, 17);
-
     }
 
 

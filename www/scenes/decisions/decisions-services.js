@@ -47,3 +47,12 @@ angular.module('david.decisions')
       }
       return DecisionStore;
     })
+
+    .factory("DecisionTimer", function($firebaseObject, FirebaseShowURL) {
+      var DecisionTimer = function(currentSection) {
+        var f = new FirebaseShowURL();
+        var itemsRef = new Firebase(f.url + '/' + currentSection + '/timer/');
+        return $firebaseObject(itemsRef);
+      }
+      return DecisionTimer;
+    })
