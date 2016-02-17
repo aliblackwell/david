@@ -1,8 +1,7 @@
 'use strict';
 
-angular.module('david.hips').config(function($stateProvider) {
+angular.module('david.hips').config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('hips', {
-    url: '/',
     cache: false,
     views: {
       'main-view': {
@@ -11,4 +10,4 @@ angular.module('david.hips').config(function($stateProvider) {
       }
     }
   })
-});
+}]);

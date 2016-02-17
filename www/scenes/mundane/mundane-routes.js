@@ -1,8 +1,7 @@
 'use strict';
 
-angular.module('david.mundane').config(function($stateProvider) {
+angular.module('david.mundane').config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('mundane', {
-    url: '/',
     cache: false,
     views: {
       'main-view': {
@@ -11,4 +10,4 @@ angular.module('david.mundane').config(function($stateProvider) {
       }
     }
   })
-});
+}]);

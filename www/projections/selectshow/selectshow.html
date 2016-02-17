@@ -1,0 +1,15 @@
+<ion-view>
+  <ion-content padding="true">
+    <div class="list">
+
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Performance {{d.greeting}}
+        </div>
+      </label>
+        <select ng-change="setShow()" ng-model="d.activeShow" ng-options="k as v.name for (k, v) in d.performances" >
+        </select>
+    </div>
+
+  </ion-content>
+</ion-view>

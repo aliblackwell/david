@@ -1,8 +1,6 @@
 angular.module('dashboard.services', [])
 
-
-
-  .factory("Sections", function() {
+  .factory('Sections', function() {
     var Sections = function() {
       var s = {
         'welcome': {
@@ -136,26 +134,26 @@ angular.module('dashboard.services', [])
     return Sections;
   })
 
-  .factory("ActiveSection", function($firebaseObject, FIREBASE_URL){
+  .factory('ActiveSection', ['$firebaseObject', 'FIREBASE_URL', function($firebaseObject, FIREBASE_URL){
     var ActiveSection = function(show_slug) {
       var itemsRef = new Firebase(FIREBASE_URL + '/' + show_slug + '/settings');
       return $firebaseObject(itemsRef);
     }
     return ActiveSection;
-  })
+  }])
 
-  .factory("Hips", function($firebaseObject, FIREBASE_URL){
+  .factory('Hips',['$firebaseObject', 'FIREBASE_URL', function($firebaseObject, FIREBASE_URL){
     var Hips = function(show_slug) {
       var itemsRef = new Firebase(FIREBASE_URL + '/' + show_slug + '/hips');
       return $firebaseObject(itemsRef);
     }
     return Hips;
-  })
+  }])
 
-  .factory("DecisionStore", function($firebaseObject, FIREBASE_URL){
+  .factory('DecisionStore', ['$firebaseObject', 'FIREBASE_URL', function($firebaseObject, FIREBASE_URL){
     var ActiveSection = function(show_slug, decision_slug) {
       var itemsRef = new Firebase(FIREBASE_URL + '/' + show_slug + '/' + decision_slug);
       return $firebaseObject(itemsRef);
     }
     return ActiveSection;
-  })
+  }])

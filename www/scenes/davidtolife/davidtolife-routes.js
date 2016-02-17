@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('david.davidtolife').config(function($stateProvider) {
+angular.module('david.davidtolife').config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('davidtolife', {
     cache: false,
     views: {
@@ -10,4 +10,4 @@ angular.module('david.davidtolife').config(function($stateProvider) {
       }
     }
   })
-});
+}]);

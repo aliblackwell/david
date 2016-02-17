@@ -23,13 +23,13 @@ angular.module('david', [
   'ngTouchmove'
 ])
 
-.config(function($ionicConfigProvider) {
+.config(['$ionicConfigProvider', function($ionicConfigProvider) {
   // Disable caching globally
   $ionicConfigProvider.views.maxCache(0);
   $ionicConfigProvider.views.transition('none');
-})
+}])
 
-.run(function($ionicPlatform, Settings, $location, $rootScope, $state, $ionicViewSwitcher, $window, TriggerReload) {
+.run(['$ionicPlatform', 'Settings', '$location', '$rootScope', '$state', '$ionicViewSwitcher', '$window', 'TriggerReload', function($ionicPlatform, Settings, $location, $rootScope, $state, $ionicViewSwitcher, $window, TriggerReload) {
 
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -97,5 +97,24 @@ angular.module('david', [
 
 
 
-})
+}])
+
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/');
+  $stateProvider.state('welcome', {
+    url: '/',
+    cache: false,
+    views: {
+      'main-view': {
+        templateUrl: 'scenes/welcome/welcome.html',
+        controller: 'welcomeCtrl'
+      }
+    }
+  })
+
+
+
+  }])
+
+
 .constant('FIREBASE_URL', 'https://david-ionic.firebaseio.com/');
