@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('david.decisions')
-  .factory("DecisionImages", function() {
+  .factory('DecisionImages', function() {
       var DecisionImages = function(section) {
         var imgUrl1, choiceName1,
             imgUrl2, choiceName2,
@@ -25,13 +25,13 @@ angular.module('david.decisions')
         }
 
         imageCollection = {
-          "choice1": {
-            "imgUrl": imgUrl1,
-            "choiceName": choiceName1
+          'choice1': {
+            'imgUrl': imgUrl1,
+            'choiceName': choiceName1
           },
-          "choice2": {
-            "imgUrl": imgUrl2,
-            "choiceName": choiceName2
+          'choice2': {
+            'imgUrl': imgUrl2,
+            'choiceName': choiceName2
           }
         }
         return imageCollection;
@@ -39,20 +39,20 @@ angular.module('david.decisions')
       return DecisionImages;
     })
 
-    .factory("DecisionStore", function($firebaseObject, FirebaseShowURL) {
+    .factory('DecisionStore', ['$firebaseObject', 'FirebaseShowURL', function($firebaseObject, FirebaseShowURL) {
       var DecisionStore = function(currentSection) {
         var f = new FirebaseShowURL();
         var itemsRef = new Firebase(f.url + '/' + currentSection + '/responses/');
         return $firebaseObject(itemsRef);
       }
       return DecisionStore;
-    })
+    }])
 
-    .factory("DecisionTimer", function($firebaseObject, FirebaseShowURL) {
+    .factory('DecisionTimer', ['$firebaseObject', 'FirebaseShowURL', function($firebaseObject, FirebaseShowURL) {
       var DecisionTimer = function(currentSection) {
         var f = new FirebaseShowURL();
         var itemsRef = new Firebase(f.url + '/' + currentSection + '/timer/');
         return $firebaseObject(itemsRef);
       }
       return DecisionTimer;
-    })
+    }])

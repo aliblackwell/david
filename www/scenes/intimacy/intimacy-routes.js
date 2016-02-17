@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('david.intimacy')
-  .config(function($stateProvider) {
+  .config(['$stateProvider', function($stateProvider) {
     $stateProvider
       .state('intimacy', {
         cache: false,
@@ -22,4 +22,4 @@ angular.module('david.intimacy')
           }
         }
       })
-  });
+  }]);

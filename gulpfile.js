@@ -6,10 +6,15 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var imagemin = require('gulp-imagemin');
 var useref = require('gulp-useref');
 var uglify = require('gulp-uglify');
+var concat = require('gulp-concat');
 var gulpIf = require('gulp-if');
 var cssnano = require('gulp-cssnano');
+var runSequence = require('run-sequence');
+
+require('es6-promise').polyfill();
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -54,10 +59,71 @@ gulp.task('git-check', function(done) {
   done();
 });
 
-gulp.task('build-scenes', function(){
+gulp.task('scenes-uglify', function(){
   return gulp.src('./www/index.html')
     .pipe(useref())
-    .pipe(gulpIf('*.js', uglify()))
+    .pipe(gulpIf('*.js', concat('concat.js')))
     .pipe(gulpIf('*.css', cssnano()))
     .pipe(gulp.dest('dist'))
 });
+
+gulp.task('scenes-move', function () {
+  return gulp.src('./www/scenes/**/*.html') // Get source files with gulp.src
+    //.pipe(aGulpPlugin()) // Sends it through a gulp plugin
+    .pipe(gulp.dest('dist/scenes')) // Outputs the file in the destination folder
+})
+
+gulp.task('projections-uglify', function(){
+  return gulp.src('./www/projections/index.html')
+    .pipe(useref())
+    .pipe(gulpIf('*.js', uglify()))
+    .pipe(gulpIf('*.css', cssnano()))
+    .pipe(gulp.dest('dist/projections'))
+});
+
+gulp.task('projections-move', function () {
+  return gulp.src('./www/projections/**/*.html') // Get source files with gulp.src
+    //.pipe(aGulpPlugin()) // Sends it through a gulp plugin
+    .pipe(gulp.dest('dist/projections')) // Outputs the file in the destination folder
+})
+
+gulp.task('dashboard-uglify', function(){
+  return gulp.src('./www/dashboard/index.html')
+    .pipe(useref())
+    .pipe(gulpIf('*.js', uglify()))
+    .pipe(gulpIf('*.css', cssnano()))
+    .pipe(gulp.dest('dist/dashboard'))
+});
+
+gulp.task('dashboard-move', function () {
+  return gulp.src('./www/dashboard/template.html') // Get source files with gulp.src
+    //.pipe(aGulpPlugin()) // Sends it through a gulp plugin
+    .pipe(gulp.dest('dist/dashboard')) // Outputs the file in the destination folder
+})
+
+gulp.task('general-images', function(){
+  return gulp.src('./www/img/**/*.+(png|jpg|gif|svg|JPG)')
+  .pipe(imagemin())
+  .pipe(gulp.dest('dist/img'))
+});
+
+
+gulp.task('build-scenes', function(callback) {
+  runSequence('general-images', 'scenes-uglify', 'scenes-move');
+})
+
+gulp.task('build-projections', function(callback) {
+  runSequence('projections-move','projections-uglify');
+})
+
+gulp.task('build-dashboard', function(callback) {
+  runSequence('dashboard-uglify', 'dashboard-move');
+})
+
+gulp.task('build', function(callback) {
+  runSequence('build-scenes', 'build-projections', 'build-dashboard');
+})
+
+
+
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="theme-color" content="#01579d">
+    <title></title>
+
+
+    <link href='https://fonts.googleapis.com/css?family=Jura' rel='stylesheet' type='text/css'>
+    <!--build:css css/dashboard.min.css-->
+    <link href="../css/ionic.app.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- endbuild -->
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!--build:js js/dashboard.min.js -->
+    <script src="../js-lib/ionic.bundle.js"></script>
+    <script src="../js-lib/ionic.io.bundle.min.js"></script>
+    <script src="../lib/firebase/firebase.js"></script>
+    <script src="../lib/angularfire/dist/angularfire.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="../global/global-services.js"></script>
+    <script src="controllers.js"></script>
+    <script src="services.js"></script>
+    <!-- endbuild -->
+
+
+  </head>
+  <body ng-app="dashboard">
+    <img class="bg-logo" src="../img/epoq_logo-icon_WHITE.svg">
+    <ion-nav-view name="dashboard-view"></ion-nav-view>
+  </body>
+</html>

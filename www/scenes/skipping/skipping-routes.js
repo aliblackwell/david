@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('david.skipping').config(function($stateProvider) {
+angular.module('david.skipping').config(['$stateProvider', function($stateProvider) {
   $stateProvider
     .state('skipping', {
       cache: false,
@@ -34,4 +34,4 @@ angular.module('david.skipping').config(function($stateProvider) {
           }
         }
       })
-});
+}]);

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('david.scanning').config(function($stateProvider) {
+angular.module('david.scanning').config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('scanning', {
     cache: false,
     views: {
@@ -17,4 +17,4 @@ angular.module('david.scanning').config(function($stateProvider) {
       }
     }
   })
-});
+}]);

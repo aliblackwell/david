@@ -1,10 +1,7 @@
 'use strict';
 
-angular.module('david.decisions')
-
-.config(function($stateProvider) {
-  $stateProvider
-    .state('skiporhips', {
+angular.module('david.decisions').config(['$stateProvider', function($stateProvider) {
+  $stateProvider.state('skiporhips', {
       cache: false,
       views: {
         'main-view': {
@@ -36,4 +33,4 @@ angular.module('david.decisions')
         }
       }
     })
-});
+}]);

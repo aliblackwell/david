@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('david.religioninatie').config(function($stateProvider) {
+angular.module('david.religioninatie').config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('religioninatie', {
     cache: false,
     views: {
@@ -17,4 +17,4 @@ angular.module('david.religioninatie').config(function($stateProvider) {
       }
     }
   })
-});
+}]);
