@@ -1,8 +1,21 @@
 // David Projections
 
-angular.module('projections', ['ionic', 'ionic.service.core', 'firebase', 'ui.router', 'david.global.services', 'projections.selectshow'])
+angular.module('projections', [
+  'ionic',
+  'ionic.service.core',
+  'firebase',
+  'ui.router',
+  'david.global.services',
+  'projections.services',
+  'projections.selectshow',
+  'projections.puppies',
+  'projections.hips',
+  'projections.blank',
+  'projections.davidtolife'
+  ])
 
-.run(['$ionicPlatform', function($ionicPlatform) {
+.run(['$ionicPlatform',
+  '$rootScope', 'Settings', '$state', 'InteractiveSections', function($ionicPlatform, $rootScope, Settings, $state, InteractiveSections) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -17,17 +30,39 @@ angular.module('projections', ['ionic', 'ionic.service.core', 'firebase', 'ui.ro
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+
+    $rootScope.watchSettings = function() {
+
+      // stop watching if already watching
+      if ($rootScope.unwatchSettings) {
+        $rootScope.unwatchSettings();
+      }
+
+      var interactiveSections = new InteractiveSections()
+      var settings = new Settings();
+      $rootScope.unwatchSettings = settings.$watch(function() {
+
+        if (interactiveSections[settings.section]) {
+          console.log($state, settings.section)
+          $state.go(settings.section);
+        } else if ($state.current.name != 'blank') {
+          $state.go('blank');
+          console.log('going blank');
+        }
+      });
+    }
+
   });
 
 }])
 
 
 .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/choose');
   $stateProvider
 
     .state('selectshow', {
-      url: '/',
+      url: '/choose',
       cache: false,
       views: {
         'projections-view': {
