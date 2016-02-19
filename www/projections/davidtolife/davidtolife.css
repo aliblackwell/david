@@ -1,0 +1,14 @@
+span.david-greeting {
+  position: relative;
+  top: 175px;
+  width: 100%;
+  font-size: 48px;
+  line-height: 36px;
+  color: #0c01a5;
+  font-weight: 600;
+}
+
+span.david-greeting span {
+  color: #0c01a5;
+  font-size: 36px;
+}
