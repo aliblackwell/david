@@ -15,6 +15,12 @@ angular.module('dashboard.services', [])
           'active': false,
           'controls': false
         },
+        'swipinghello': {
+          'key': 'swipinghello',
+          'title': 'Swiping Hello',
+          'active': false,
+          'controls': false
+        },
         'vicarioustrauma': {
           'key': 'vicarioustrauma',
           'title': 'Vicarious Trauma 1',
@@ -134,12 +140,13 @@ angular.module('dashboard.services', [])
     return Sections;
   })
 
-  .factory('ActiveSection', ['$firebaseObject', 'FIREBASE_URL', function($firebaseObject, FIREBASE_URL){
-    var ActiveSection = function(show_slug) {
-      var itemsRef = new Firebase(FIREBASE_URL + '/' + show_slug + '/settings');
+  .factory('PuppiesWords', ['$firebaseObject', 'FIREBASE_URL', function($firebaseObject, FIREBASE_URL){
+    var PuppiesWords = function(show_slug) {
+      var itemsRef = new Firebase(FIREBASE_URL + '/' + show_slug + '/puppies/puppieswords');
       return $firebaseObject(itemsRef);
+
     }
-    return ActiveSection;
+    return PuppiesWords;
   }])
 
   .factory('Hips',['$firebaseObject', 'FIREBASE_URL', function($firebaseObject, FIREBASE_URL){
@@ -152,8 +159,16 @@ angular.module('dashboard.services', [])
 
   .factory('DecisionStore', ['$firebaseObject', 'FIREBASE_URL', function($firebaseObject, FIREBASE_URL){
     var ActiveSection = function(show_slug, decision_slug) {
-      var itemsRef = new Firebase(FIREBASE_URL + '/' + show_slug + '/' + decision_slug);
+      var itemsRef = new Firebase(FIREBASE_URL + '/' + show_slug + '/decisions/' + decision_slug);
       return $firebaseObject(itemsRef);
     }
     return ActiveSection;
+  }])
+
+  .factory('Waltz', ['$firebaseObject', 'FIREBASE_URL', function($firebaseObject, FIREBASE_URL){
+    var Waltz = function(show_slug) {
+      var itemsRef = new Firebase(FIREBASE_URL + '/' + show_slug + '/waltz/groups');
+      return $firebaseObject(itemsRef);
+    }
+    return Waltz;
   }])

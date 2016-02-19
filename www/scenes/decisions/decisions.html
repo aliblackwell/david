@@ -9,13 +9,15 @@
       <img class="results-image" ng-src="{{image.imgUrl}}" ng-repeat="image in d.results" style="width: {{d.thumbWidth}}vw">
     </div>
 
-    <h1 class="epoq-voice">Choose</h2>
-    <div class="choose-wrapper">
+    <h1 class="epoq-voice">{{d.heading}}</h2>
+    <div class="choose-wrapper" ng-if="!d.decided">
 
       <img class="choice" ng-click="makeChoice(choices.choice1)" ng-src="{{choices.choice1.imgUrl}}" ng-class="{'chosen': choices.choice1.chosen}">
 
       <img class="choice" ng-click="makeChoice(choices.choice2)" ng-src="{{choices.choice2.imgUrl}}" ng-class="{'chosen': choices.choice2.chosen}">
     </div>
+      <img class="result"  ng-if="d.decided" ng-src="{{d.result.imgUrl}}" >
+
   </ion-content>
 </ion-view>
 
