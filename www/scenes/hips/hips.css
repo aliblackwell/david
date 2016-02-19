@@ -11,6 +11,10 @@ input[type=range] {
   transform: translateY(-50%) rotate(270deg);
 }
 
+.hips {
+  overflow: hidden;
+}
+
 .hips h1 {
 
 }
