@@ -9,7 +9,6 @@ angular.module('david.decisions').config(['$stateProvider', function($stateProvi
           controller: 'decisionsCtrl',
           resolve: {
             user: function(User) {
-              console.log('works')
               var user = new User();
               return user;
             }
@@ -25,7 +24,21 @@ angular.module('david.decisions').config(['$stateProvider', function($stateProvi
           controller: 'decisionsCtrl',
           resolve: {
             user: function(User) {
-              console.log('works')
+              var user = new User();
+              return user;
+            }
+          }
+        }
+      }
+    })
+    .state('puppiesorkittens', {
+      cache: false,
+      views: {
+        'main-view': {
+          templateUrl: 'scenes/decisions/decisions.html',
+          controller: 'decisionsCtrl',
+          resolve: {
+            user: function(User) {
               var user = new User();
               return user;
             }
