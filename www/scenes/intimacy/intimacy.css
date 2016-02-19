@@ -35,3 +35,17 @@
 .ripple-wrap {
   opacity: 0.8;
 }
+
+.blank-wrap {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: transparent;
+}
+
+.blank-wrap.touched {
+  background: red;
+  opacity: 0.6;
+}

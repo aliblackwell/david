@@ -11,8 +11,12 @@ angular.module('david.intimacy', [])
 
     if (currentSection === 'intimacy') {
       $scope.d.imgsrc = '/img/satin-blue.jpg';
+      $scope.d.intimacy = true;
+      $scope.d.heading = 'touch me';
     } else {
       $scope.d.imgsrc = '/img/rough-blue.jpg';
+      $scope.d.heading = "don't touch me"
+      $scope.d.blank = true;
     }
 
     $scope.d.rippleActive = false;
@@ -27,6 +31,27 @@ angular.module('david.intimacy', [])
     })
 
     $scope.loadAnimation = function() {
+      if ($scope.d.intimacy) {
+        loadIntimacy()
+      } else {
+        loadBlankImtimacy();
+      }
+    }
+
+    var loadBlankImtimacy = function() {
+      $scope.d.rippleActive = true;
+    }
+
+    $scope.blankTouchmove = function($event) {
+      console.log('touch')
+      $scope.d.touched = true;
+    }
+
+    $scope.blankTouchend = function($event) {
+      $scope.d.touched = false;
+    }
+
+    var loadIntimacy = function() {
       $scope.d.rippleActive = true;
       /**
        * Water ripple effect.
@@ -171,6 +196,5 @@ angular.module('david.intimacy', [])
       }
 
       requestAnimationFrame(newframe);
-
     }
   }])
