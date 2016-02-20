@@ -23,6 +23,7 @@ angular.module('david.religioninatie', [])
 
     //init the sound system
     function init() {
+        var AudioContext = window.AudioContext || window.webkitAudioContext;
         try {
             ctx = new AudioContext(); //is there a better API for this?
             setupCanvas();
@@ -61,7 +62,7 @@ angular.module('david.religioninatie', [])
         src.connect(fft);
 
         // comment out below to disable sounds
-        fft.connect(ctx.destination);
+        //fft.connect(ctx.destination);
 
         //play immediately
         src.start ? src.start(0) : src.noteOn(0);
@@ -89,11 +90,12 @@ angular.module('david.religioninatie', [])
             var data = new Uint8Array(samples);
             fft.getByteFrequencyData(data);
             //console.log(counter)
-            if (counter > 50) {
+            if (counter > 20) {
                 if (data[0] > 220) {
-                    $scope.d.pulse = '100, 100, '+data[0];
+                    //$scope.d.pulse = '100, 100, '+data[0];
+                    $scope.d.pulse = true;
                 } else {
-                    $scope.d.pulse = '0,0,0';
+                    $scope.d.pulse = false;
                 }
                 $scope.$digest();
                 counter = 1;
@@ -116,7 +118,6 @@ angular.module('david.religioninatie', [])
             canvas = ''
         }
         if (animationLoop) {
-            console.log('cancelling')
             cancelRequestAnimFrame(animationLoop);
         }
     })

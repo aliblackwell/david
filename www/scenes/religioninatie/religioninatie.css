@@ -7,4 +7,9 @@
   bottom: 0px;
   left: 0px;
   right: 0px;
+  background: #08007B;
+}
+
+.rit-canvas {
+  opacity: 0;
 }
