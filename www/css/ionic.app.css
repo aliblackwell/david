@@ -8423,9 +8423,9 @@ input:checked + .checkbox-icon:after {
   position: relative; }
   .item-select select {
     -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     position: absolute;
-    -moz-appearance: tab;
     top: 0;
     bottom: 0;
     right: 0;

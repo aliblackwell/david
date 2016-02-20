@@ -79,7 +79,7 @@ textarea {
 }
 
 .epoq-voice {
-  font-size: 9vw;
+  font-size: 8vw;
   text-align: center;
   color: white;
   position: absolute;
@@ -87,6 +87,27 @@ textarea {
   top: 12.6vw;
   left: 0;
   margin-top: 0 !important;
+}
+
+.epoq-voice.relative {
+  position: relative;
+  top: 0;
+  margin-top: 12.6vw !important;
+}
+
+.faded {
+  opacity: 0.5;
+}
+
+.button.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  left: 50%;
+  line-height: 0;
+  margin: 0;
+  width: 50vw;
 }
 
 
