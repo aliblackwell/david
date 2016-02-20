@@ -5,31 +5,24 @@
 
 
 
-    <h1 class="epoq-voice" ng-show="d.result.yes">Please hold up your phone to David</h1>
+    <h1 class="epoq-voice relative" ng-show="d.start">Hold up your phone to keep David skipping</h1>
 
-    <h1 class="epoq-voice" ng-show="d.result.no">Thank you</h1>
+    <button class="button button-block button-positive centered" ng-click="startSkipping()" ng-show="d.start">
+      Got it
+    </button>
 
-    <h1 class="epoq-voice" ng-show="d.question">Should David carry on skipping?</h1>
+    <h1 class="again" ng-if="d.active">Again</h1>
 
 
-    <div class="buttons" ng-show="d.question">
 
-      <button class="button button-block button-balanced" ng-click="chooseResult('yes')" >
-        Yes
-      </button>
+    <div class="buttons" ng-show="d.active">
 
-      <button class="button button-block button-assertive" ng-click="chooseResult('no')">
-        No
-      </button>
+      <button class="button button-block button-positive" ng-click="stopSkipping()">Enough</button>
 
     </div>
 
-    <div class="buttons" ng-show="d.result">
 
-      <button class="button button-block button-positive" ng-click="resetView()">Reset</button>
-
-    </div>
-
+    <h1 class="epoq-voice relative" ng-show="d.finish">Thank you</h1>
 
 
 
