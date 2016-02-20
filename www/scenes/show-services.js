@@ -24,14 +24,6 @@ angular.module('david.show.services', [])
     return $firebaseArray(itemsRef);
   }])
 
-  .factory('Settings', ['$firebaseObject', 'FirebaseShowURL', function($firebaseObject, FirebaseShowURL) {
-    var Settings = function() {
-      var f = new FirebaseShowURL();
-      var itemsRef = new Firebase(f.url + '/settings');
-      return $firebaseObject(itemsRef);
-    }
-    return Settings;
-  }])
 
 
 

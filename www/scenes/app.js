@@ -10,17 +10,21 @@ angular.module('david', [
   'david.davidtolife',
   'david.vicarioustrauma',
   'david.blank',
+  'david.waltz',
+  'david.kittens',
   'david.hips',
   'david.decisions',
   'david.religioninatie',
   'david.skipping',
+  'david.swipinghello',
   'david.mundane',
   'david.intimacy',
-  'david.scanning',
+  'david.puppies',
   'ionic.contrib.ui.tinderCards',
   'ui.router',
   'david.countdown',
-  'ngTouchmove'
+  'ngTouchmove',
+  'ngTouchend'
 ])
 
 .config(['$ionicConfigProvider', function($ionicConfigProvider) {
@@ -58,7 +62,9 @@ angular.module('david', [
         console.log(settings.section)
         $state.go(settings.section);
         if (window.navigator.vibrate) {
+
           window.navigator.vibrate(200);
+
         }
       });
     }
@@ -81,7 +87,7 @@ angular.module('david', [
     }
 
 
-    // Change the route when the settings change
+    // If show ID is already
     if (localStorage.getItem('showId')) {
       if (localStorage.getItem('showId') != 'undefined') {
         $rootScope.watchSettings();
