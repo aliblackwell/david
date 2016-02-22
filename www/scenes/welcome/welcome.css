@@ -57,3 +57,20 @@ td-card img {
   width: 100%;
   text-align: right;
 }
+
+.tcs {
+  text-align: center;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
+.tandcs {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.modal-title {
+  text-align: center;
+  display: block;
+}

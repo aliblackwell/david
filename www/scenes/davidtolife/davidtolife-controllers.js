@@ -13,19 +13,19 @@ angular.module('david.davidtolife', ['firebase'])
 
     $scope.turnImages = [
       'DT1.JPG',
-      'DT2.JPG',
-      'DT3.JPG',
-      'DT4.JPG',
-      'DT5.JPG',
-      'DT6.JPG',
-      'DT7.JPG',
-      'DT8.JPG',
-      'DT9.JPG',
-      'DT10.JPG',
-      'DT11.JPG',
-      'DT12.JPG',
-      'DT13.JPG',
-      'DT14.JPG',
+      // 'DT2.JPG',
+      // 'DT3.JPG',
+      // 'DT4.JPG',
+      // 'DT5.JPG',
+      // 'DT6.JPG',
+      // 'DT7.JPG',
+      // 'DT8.JPG',
+      // 'DT9.JPG',
+      // 'DT10.JPG',
+      // 'DT11.JPG',
+      // 'DT12.JPG',
+      // 'DT13.JPG',
+      // 'DT14.JPG',
       'DT15.JPG'
     ]
 
@@ -44,6 +44,9 @@ angular.module('david.davidtolife', ['firebase'])
     $scope.setFinishedSwiping = function() {
       var finished = new FinishedSwipes();
       finished.$add(user.name);
+      console.log(finished)
+      //finished.$save();
+
       $scope.d.slideactive = false;
       $ionicSlideBoxDelegate.enableSlide(false);
     }
