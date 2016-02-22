@@ -107,9 +107,14 @@ gulp.task('general-images', function(){
   .pipe(gulp.dest('dist/img'))
 });
 
+gulp.task('ion-fonts', function(){
+  return gulp.src('./www/lib/ionic/fonts/ionicons.+(ttf|woff)')
+  .pipe(imagemin())
+  .pipe(gulp.dest('dist/lib/ionic/fonts'))
+});
 
 gulp.task('build-scenes', function(callback) {
-  runSequence('general-images', 'scenes-uglify', 'scenes-move');
+  runSequence('general-images', 'ion-fonts', 'scenes-uglify', 'scenes-move');
 })
 
 gulp.task('build-projections', function(callback) {
