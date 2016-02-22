@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('david.davidtolife', [])
+angular.module('david.davidtolife', ['firebase'])
   .controller('davidtolifeCtrl', ['$scope', 'User', 'FinishedSwipes', '$ionicSlideBoxDelegate', function ($scope, User, FinishedSwipes, $ionicSlideBoxDelegate){
 
     var lifeSwipes,
@@ -46,7 +46,6 @@ angular.module('david.davidtolife', [])
       finished.$add(user.name);
       $scope.d.slideactive = false;
       $ionicSlideBoxDelegate.enableSlide(false);
-
     }
 
 

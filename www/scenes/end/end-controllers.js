@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('david.blank', ['firebase'])
+angular.module('david.end', ['firebase'])
 
-  .controller('blankCtrl', ['$scope', function ($scope){
+  .controller('endCtrl', ['$scope', function ($scope){
 
     var x = false;
 
