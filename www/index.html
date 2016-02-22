@@ -2,13 +2,15 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <meta name="theme-color" content="#01579d">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta name="theme-color" content="#0c01a5">
     <title></title>
 
-    <link href="css/ionic.app.css" rel="stylesheet">
+
     <link href='https://fonts.googleapis.com/css?family=Jura' rel='stylesheet' type='text/css'>
 
+    <!--build:css css/scenes.min.css-->
+    <link href="css/ionic.app.css" rel="stylesheet">
     <link rel="stylesheet" href="scenes/decisions/decisions.css">
 
     <link rel="stylesheet" href="css/animations.css">
@@ -17,6 +19,7 @@
 
     <link rel="stylesheet" href="scenes/skipping/skipping.css">
     <link rel="stylesheet" href="scenes/hips/hips.css">
+    <link rel="stylesheet" href="scenes/waltz/waltz.css">
     <link rel="stylesheet" href="scenes/intimacy/intimacy.css">
     <link rel="stylesheet" href="scenes/religioninatie/religioninatie.css">
     <link rel="stylesheet" href="scenes/vicarioustrauma/vicarioustrauma.css">
@@ -24,31 +27,19 @@
     <link rel="stylesheet" href="directives/countdown/countdown.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/ionic.tdcards.css">
+    <!-- endbuild -->
 
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
-    <!-- ionic/angularjs js -->
+    <!--build:js concat.js -->
     <script src="js-lib/ionic.bundle.js"></script>
     <script src="js-lib/ionic.io.bundle.min.js"></script>
     <script src="js-lib/ngTouchmove.js"></script>
 
-    <script src="/lib/raven-js/dist/raven.js"></script>
-    <script src="/lib/raven-js/dist/plugins/angular.js"></script>
-    <script>
-      Raven
-        .config('https://83f7a83c20a441529b421e331dd4dc1b@app.getsentry.com/67297')
-        .addPlugin(Raven.Plugins.Angular)
-        .install();
-    </script>
+    <script src="lib/raven-js/dist/raven.js"></script>
+    <script src="lib/raven-js/dist/plugins/angular.js"></script>
 
-    <!-- Firebase -->
-    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
 
-    <!-- AngularFire -->
-    <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
-    <!-- your app's js -->
+    <script src="lib/firebase/firebase.js"></script>
+    <script src="lib/angularfire/dist/angularfire.js"></script>
 
     <script src="scenes/app.js"></script>
 
@@ -68,25 +59,26 @@
     <script src="scenes/davidtolife/davidtolife-services.js"></script>
     <script src="scenes/davidtolife/davidtolife-routes.js"></script>
 
-    <script src="scenes/religioninatie/religioninatie-controller.js"></script>
-    <script src="scenes/religioninatie/religioninatie-services.js"></script>
-    <script src="scenes/religioninatie/religioninatie-routes.js"></script>
 
     <script src="scenes/skipping/skipping-controllers.js"></script>
     <script src="scenes/skipping/skipping-services.js"></script>
     <script src="scenes/skipping/skipping-routes.js"></script>
 
+    <script src="scenes/swipinghello/swipinghello-controllers.js"></script>
+    <script src="scenes/swipinghello/swipinghello-services.js"></script>
+    <script src="scenes/swipinghello/swipinghello-routes.js"></script>
+
     <script src="scenes/intimacy/intimacy-controller.js"></script>
     <script src="scenes/intimacy/intimacy-services.js"></script>
     <script src="scenes/intimacy/intimacy-routes.js"></script>
 
-    <script src="scenes/scanning/scanning-controllers.js"></script>
-    <script src="scenes/scanning/scanning-services.js"></script>
-    <script src="scenes/scanning/scanning-routes.js"></script>
+    <script src="scenes/puppies/puppies-controllers.js"></script>
+    <script src="scenes/puppies/puppies-services.js"></script>
+    <script src="scenes/puppies/puppies-routes.js"></script>
 
-    <script src="scenes/blank/blank-controllers.js"></script>
-    <script src="scenes/blank/blank-services.js"></script>
-    <script src="scenes/blank/blank-routes.js"></script>
+    <script src="scenes/end/end-controllers.js"></script>
+    <script src="scenes/end/end-services.js"></script>
+    <script src="scenes/end/end-routes.js"></script>
 
     <script src="scenes/hips/hips-controllers.js"></script>
     <script src="scenes/hips/hips-services.js"></script>
@@ -100,15 +92,34 @@
     <script src="scenes/mundane/mundane-services.js"></script>
     <script src="scenes/mundane/mundane-routes.js"></script>
 
+    <script src="scenes/waltz/waltz-controllers.js"></script>
+    <script src="scenes/waltz/waltz-services.js"></script>
+    <script src="scenes/waltz/waltz-routes.js"></script>
+
+    <script src="scenes/kittens/kittens-controllers.js"></script>
+    <script src="scenes/kittens/kittens-services.js"></script>
+    <script src="scenes/kittens/kittens-routes.js"></script>
+
+    <script src="scenes/religioninatie/religioninatie-controller.js"></script>
+    <script src="scenes/religioninatie/religioninatie-services.js"></script>
+    <script src="scenes/religioninatie/religioninatie-routes.js"></script>
+
 
     <script src="directives/countdown/countdown-directive.js"></script>
 
-
-
-    <!-- Tinder cards -->
-    <script src="js-lib/ionic.tdcards.js"></script>
     <script src="js-lib/collide.js"></script>
+    <!-- endbuild -->
 
+    <script src="js-lib/ionic.tdcards.js"></script>
+    <script src="js-lib/ngTouchend.js"></script>
+
+
+    <script>
+      Raven
+        .config('https://83f7a83c20a441529b421e331dd4dc1b@app.getsentry.com/67297')
+        .addPlugin(Raven.Plugins.Angular)
+        .install();
+    </script>
 
   </head>
   <body ng-app="david">

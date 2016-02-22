@@ -1,6 +1,6 @@
 angular.module('david.show.services', [])
 
-  .factory("User", function($firebaseObject, FIREBASE_URL) {
+  .factory('User',['$firebaseObject', 'FIREBASE_URL', function($firebaseObject, FIREBASE_URL) {
     var User = function() {
       var showId, uuid,
           itemsRef, fbUrl;
@@ -16,22 +16,14 @@ angular.module('david.show.services', [])
       return $firebaseObject(itemsRef);
     }
     return User;
-  })
+  }])
 
-  .factory("Items", function($firebaseArray, FirebaseShowURL) {
+  .factory('Items', ['$firebaseArray','FirebaseShowURL', function($firebaseArray, FirebaseShowURL) {
     var url = new FirebaseShowURL();
     var itemsRef = new Firebase(url + '/items');
     return $firebaseArray(itemsRef);
-  })
+  }])
 
-  .factory("Settings", function($firebaseObject, FirebaseShowURL) {
-    var Settings = function() {
-      var f = new FirebaseShowURL();
-      var itemsRef = new Firebase(f.url + '/settings');
-      return $firebaseObject(itemsRef);
-    }
-    return Settings;
-  })
 
 
 

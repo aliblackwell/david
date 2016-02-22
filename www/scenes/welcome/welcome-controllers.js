@@ -9,16 +9,23 @@ angular.module('david.welcome', [])
     // Workaround for ion-content bug
     $scope.d = {};
 
+    console.log('welcome')
+
     $scope.d.formFilled = false;
 
+
     var loadAvailableShows = function() {
+      console.log('loading shows')
       shows = new AvailablePerformances();
       shows.$loaded().then(function(){
+        console.log(shows);
         $scope.d.shows = shows;
         $scope.d.saveState = 'Save';
-        $scope.d.buttonStyle = 'button-positive'
+        $scope.d.buttonStyle = 'button button-full button-positive';
         loadUser();
-      })
+      }).catch(function(error) {
+
+      });
     }
 
     var loadUser = function() {
@@ -43,11 +50,11 @@ angular.module('david.welcome', [])
     $scope.saveResponse = function() {
       if ($scope.d.formFilled) {
         $scope.d.saveState = 'Save';
-        $scope.d.buttonStyle = 'button-positive';
+        $scope.d.buttonStyle = 'button button-full button-positive';
         $scope.d.formFilled = false;
       } else {
         $scope.d.saveState = 'Edit';
-        $scope.d.buttonStyle = 'button-balanced';
+        $scope.d.buttonStyle = 'edit-toggle';
         $scope.d.formFilled = true;
       }
 
@@ -55,7 +62,7 @@ angular.module('david.welcome', [])
 
     $scope.resetSave = function() {
       $scope.d.saveState = 'Save';
-      $scope.d.buttonStyle = 'button-positive';
+      $scope.d.buttonStyle = 'button button-full button-positive';
     }
 
     loadAvailableShows();
@@ -63,11 +70,21 @@ angular.module('david.welcome', [])
 
     var lifeSwipes,
         counter = 0,
-        cardTypes = [
-      { image: '/img/davids/d1.jpg' },
-      { image: '/img/davids/d2.jpg' },
-      { image: '/img/davids/d3.jpg' },
-      { image: '/img/davids/d4.jpg' }
+        firstCards = [
+      { image: '/img/davids/excited.jpg' },
+      { image: '/img/davids/professional.jpg' }
+    ];
+
+    var allCards = [
+      { image: '/img/davids/angry.jpg' },
+      { image: '/img/davids/debauched.jpg' },
+      { image: '/img/davids/defamation.jpg' },
+      { image: '/img/davids/disappearing.jpg' },
+      { image: '/img/davids/disgust.jpg' },
+      { image: '/img/davids/dull.jpg' },
+      { image: '/img/davids/excited.jpg' },
+      { image: '/img/davids/professional.jpg' },
+      { image: '/img/davids/sad.jpg' }
     ];
 
     var setFinishedSwiping = function() {
@@ -81,7 +98,7 @@ angular.module('david.welcome', [])
     user.$loaded().then(function(){
       user.uuid = user.$id;
       lifeSwipes = new LifeSwipes(user);
-      $scope.cards = Array.prototype.slice.call(cardTypes, 0);
+      $scope.cards = Array.prototype.slice.call(firstCards, 0);
     })
 
 
@@ -92,6 +109,12 @@ angular.module('david.welcome', [])
       $scope.cards.splice(index, 1);
     };
 
+    $scope.addCard = function() {
+      var newCard = allCards[Math.floor(Math.random() * allCards.length)];
+      newCard.id = Math.random();
+      $scope.cards.unshift(angular.extend({}, newCard));
+    }
+
     $scope.cardSwiped = function(sentiment, card) {
       counter++;
       card.sentiment = sentiment;
@@ -101,10 +124,12 @@ angular.module('david.welcome', [])
 
     $scope.cardSwipedLeft = function(card) {
       $scope.cardSwiped('dislike', card);
+      $scope.addCard();
 
     };
     $scope.cardSwipedRight = function(card) {
       $scope.cardSwiped('like', card);
+      $scope.addCard();
     };
 
 

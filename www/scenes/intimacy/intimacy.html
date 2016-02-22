@@ -4,7 +4,7 @@
 
     <span class="intimacy-trigger" ng-show="!d.rippleActive" on-touch="loadAnimation()">
 
-    <p>touch me</p>
+    <p>{{d.heading}}</p>
 
     </span>
 
@@ -14,8 +14,10 @@
       }
     </style>
 
+    <div class="blank-wrap" ng-class="{'touched': d.touched}" ng-touchmove="blankTouchmove($event)" ng-touchend="blankTouchend($event)" ng-if="d.blank"></div>
 
-    <div class="ripple-wrap" ng-touchmove="onTouchmove($event)"><img ng-show="d.showImage" id="ripple-me" ng-src="{{d.imgsrc}}" height="768" width="1024" /></div>
+
+    <div class="ripple-wrap" ng-touchmove="onTouchmove($event)" ng-if="d.intimacy"><img ng-show="d.showImage" id="ripple-me" ng-src="{{d.imgsrc}}" height="768" width="1024" /></div>
 
 
   </ion-content>

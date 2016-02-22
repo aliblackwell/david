@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('david.davidtolife', [])
+angular.module('david.davidtolife', ['firebase'])
   .controller('davidtolifeCtrl', ['$scope', 'User', 'FinishedSwipes', '$ionicSlideBoxDelegate', function ($scope, User, FinishedSwipes, $ionicSlideBoxDelegate){
 
     var lifeSwipes,
@@ -14,23 +14,20 @@ angular.module('david.davidtolife', [])
     $scope.turnImages = [
       'DT1.JPG',
       'DT2.JPG',
-      // 'DT3.JPG',
-      // 'DT4.JPG',
-      // 'DT5.JPG',
-      // 'DT6.JPG',
-      // 'DT7.JPG',
-      // 'DT8.JPG',
-      // 'DT9.JPG',
-      // 'DT10.JPG',
-      // 'DT11.JPG',
-      // 'DT12.JPG',
-      // 'DT13.JPG',
+      'DT3.JPG',
+      'DT4.JPG',
+      'DT5.JPG',
+      'DT6.JPG',
+      'DT7.JPG',
+      'DT8.JPG',
+      'DT9.JPG',
+      'DT10.JPG',
+      'DT11.JPG',
+      'DT12.JPG',
+      'DT13.JPG',
       'DT14.JPG',
       'DT15.JPG'
     ]
-
-    console.log($scope.turnImages.length)
-
 
     var user = new User();
 
@@ -39,8 +36,7 @@ angular.module('david.davidtolife', [])
     });
 
     $scope.slideHasChanged = function(index) {
-      console.log(index)
-      if (index === $scope.turnImages.length) {
+      if (index === $scope.turnImages.length + 1) {
         $scope.setFinishedSwiping();
       }
     }
@@ -50,7 +46,6 @@ angular.module('david.davidtolife', [])
       finished.$add(user.name);
       $scope.d.slideactive = false;
       $ionicSlideBoxDelegate.enableSlide(false);
-
     }
 
 

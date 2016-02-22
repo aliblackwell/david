@@ -5,13 +5,13 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('dashboard', ['ionic', 'ionic.service.core', 'firebase', 'dashboard.controllers', 'dashboard.services', 'ui.router', 'david.global.services'])
 
-.config(function($ionicConfigProvider) {
+.config(['$ionicConfigProvider', function($ionicConfigProvider) {
   // Disable caching globally
   $ionicConfigProvider.views.maxCache(0);
   $ionicConfigProvider.views.transition('none');
-})
+}])
 
-.run(function($ionicPlatform) {
+.run(['$ionicPlatform', function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -30,19 +30,19 @@ angular.module('dashboard', ['ionic', 'ionic.service.core', 'firebase', 'dashboa
 
   });
 
-})
+}])
 
 
-.config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/dashboard');
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/');
   $stateProvider
 
     .state('dashboard', {
-      url: '/dashboard',
+      url: '/',
       cache: false,
       views: {
         'dashboard-view': {
-          templateUrl: 'dashboard/template.html',
+          templateUrl: 'template.html',
           controller: 'dashboardCtrl'
         }
       }
@@ -50,6 +50,6 @@ angular.module('dashboard', ['ionic', 'ionic.service.core', 'firebase', 'dashboa
 
 
 
-  })
+  }])
 
   .constant('FIREBASE_URL', 'https://david-ionic.firebaseio.com/');

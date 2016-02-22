@@ -9,27 +9,31 @@ angular.module('david', [
   'david.welcome',
   'david.davidtolife',
   'david.vicarioustrauma',
-  'david.blank',
+  'david.end',
+  'david.waltz',
+  'david.kittens',
   'david.hips',
   'david.decisions',
   'david.religioninatie',
   'david.skipping',
+  'david.swipinghello',
   'david.mundane',
   'david.intimacy',
-  'david.scanning',
+  'david.puppies',
   'ionic.contrib.ui.tinderCards',
   'ui.router',
   'david.countdown',
-  'ngTouchmove'
+  'ngTouchmove',
+  'ngTouchend'
 ])
 
-.config(function($ionicConfigProvider) {
+.config(['$ionicConfigProvider', function($ionicConfigProvider) {
   // Disable caching globally
   $ionicConfigProvider.views.maxCache(0);
   $ionicConfigProvider.views.transition('none');
-})
+}])
 
-.run(function($ionicPlatform, Settings, $location, $rootScope, $state, $ionicViewSwitcher, $window, TriggerReload) {
+.run(['$ionicPlatform', 'Settings', '$location', '$rootScope', '$state', '$ionicViewSwitcher', '$window', 'TriggerReload', function($ionicPlatform, Settings, $location, $rootScope, $state, $ionicViewSwitcher, $window, TriggerReload) {
 
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -58,7 +62,9 @@ angular.module('david', [
         console.log(settings.section)
         $state.go(settings.section);
         if (window.navigator.vibrate) {
+
           window.navigator.vibrate(200);
+
         }
       });
     }
@@ -81,7 +87,7 @@ angular.module('david', [
     }
 
 
-    // Change the route when the settings change
+    // If show ID is already
     if (localStorage.getItem('showId')) {
       if (localStorage.getItem('showId') != 'undefined') {
         $rootScope.watchSettings();
@@ -97,5 +103,24 @@ angular.module('david', [
 
 
 
-})
+}])
+
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/');
+  $stateProvider.state('welcome', {
+    url: '/',
+    cache: false,
+    views: {
+      'main-view': {
+        templateUrl: 'scenes/welcome/welcome.html',
+        controller: 'welcomeCtrl'
+      }
+    }
+  })
+
+
+
+  }])
+
+
 .constant('FIREBASE_URL', 'https://david-ionic.firebaseio.com/');

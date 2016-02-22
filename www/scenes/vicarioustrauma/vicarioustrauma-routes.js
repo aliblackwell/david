@@ -1,9 +1,8 @@
 'use strict';
 
-angular.module('david.vicarioustrauma').config(function($stateProvider) {
+angular.module('david.vicarioustrauma').config(['$stateProvider', function($stateProvider) {
   $stateProvider
     .state('vicarioustrauma', {
-      url: '/',
       cache: false,
       views: {
         'main-view': {
@@ -13,7 +12,6 @@ angular.module('david.vicarioustrauma').config(function($stateProvider) {
       }
     })
     .state('vicarioustrauma2', {
-        url: '/',
         cache: false,
         views: {
           'main-view': {
@@ -23,7 +21,6 @@ angular.module('david.vicarioustrauma').config(function($stateProvider) {
         }
       })
     .state('vicarioustrauma3', {
-        url: '/',
         cache: false,
         views: {
           'main-view': {
@@ -32,4 +29,4 @@ angular.module('david.vicarioustrauma').config(function($stateProvider) {
           }
         }
       })
-});
+}]);

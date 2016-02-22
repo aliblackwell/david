@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('dashboard.controllers', [])
-  .controller('dashboardCtrl', ['$scope', 'AvailablePerformances','Sections','ActiveSection', '$ionicModal', 'Hips', '$interval', '$timeout', 'TriggerReload', 'DecisionStore', function ($scope, AvailablePerformances, Sections, ActiveSection, $ionicModal, Hips, $interval, $timeout, TriggerReload, DecisionStore){
+  .controller('dashboardCtrl', ['$scope', 'AvailablePerformances','Sections','ActiveSection', '$ionicModal', 'Hips', '$interval', '$timeout', 'TriggerReload', 'DecisionStore', 'PuppiesWords', 'Waltz', function ($scope, AvailablePerformances, Sections, ActiveSection, $ionicModal, Hips, $interval, $timeout, TriggerReload, DecisionStore, PuppiesWords, Waltz){
 
-    var performances, sections, decision;
+    var performances, sections, decision, puppies, waltz;
 
     $scope.d = {};
 
@@ -55,6 +55,70 @@ angular.module('dashboard.controllers', [])
       if (activeSection.type === 'decision') {
         $scope.startTimer(activeSection);
       }
+
+      // Set up puppies words ready for the next scene (if it's puppies)
+      if(activeSection.key === 'puppiesorkittens') {
+        initiatePuppies();
+      }
+
+      if(activeSection.key === 'waltz') {
+        initiateWaltz();
+      }
+    }
+
+    var initiateWaltz = function() {
+      waltz = new Waltz($scope.d.activeShow);
+      waltz.$loaded().then(function() {
+        waltz.$remove().then(function(){
+          var obj = {
+            'g1': 'on',
+            'g2': 'on',
+            'g3': 'on'
+          }
+          console.log(obj)
+          waltz.$value = obj;
+          waltz.$save();
+        })
+
+      })
+    }
+
+    var initiatePuppies = function() {
+      puppies = new PuppiesWords($scope.d.activeShow);
+      puppies.$loaded().then(function(){
+        var words = {
+          'sexy': {
+            'tapCount': 0,
+            'word': 'sexy',
+            'order': 0
+          },
+          'shiny': {
+            'tapCount': 0,
+            'word': 'shiny',
+            'order': 1
+          },
+          'neutral': {
+            'tapCount': 0,
+            'word': 'neutral',
+            'order': 2
+          },
+          'artificial': {
+            'tapCount': 0,
+            'word': 'artificial',
+            'order': 3
+          },
+          'pathetic': {
+            'tapCount': 0,
+            'word': 'pathetic',
+            'order': 4
+          }
+        }
+        // if(!puppies.neutral) {
+        puppies.$value = words;
+        puppies.$save()
+        // }
+      })
+
     }
 
     $scope.startTimer = function(activeSection) {
@@ -66,8 +130,16 @@ angular.module('dashboard.controllers', [])
           decision.timer = count;
           decision.$save();
           count--;
+        } else {
+          calculateDecisionResult();
         }
-      }, 1000, count + 1);
+      }, 1000, count + 2);
+    }
+
+    var calculateDecisionResult = function() {
+
+
+      //decision.$save();
     }
 
     $scope.launchControls = function(activeSection) {

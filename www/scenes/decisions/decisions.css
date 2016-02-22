@@ -4,6 +4,7 @@
   left: 0;
   z-index: -1;
   height: 100%;
+  width: 100%;
 }
 
 .decisions-results-wrapper:before {
@@ -39,4 +40,14 @@ img.results-image {
 .choose-wrapper h2 {
   color: white;
   text-align: center;
+}
+
+img.result {
+  width: 70vw;
+  border-radius: 100%;
+  border: 2vw solid rgba(255,255,255,.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
 }

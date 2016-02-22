@@ -1,61 +1,57 @@
-describe('david/skipormundane', function() {
+'use strict';
 
-  var state, scope, user;
+describe('david.decisions', function() {
+  var scope, controller, WaltzGroups, firebaseMock, $firebaseObject;
 
-  beforeEach(module('david.decisions'))
+  // Load the module
+  beforeEach(function () {
+    module('ionic');
+    module('david.decisions');
+  });
 
-  beforeEach(inject(function ($state) {
-    state = $state.get('skipormundane');
-  }));
+  window.MockFirebase.override();
 
-  // instantiate the controller and mocks for every test
-  beforeEach(inject(function($controller, $q, $rootScope) {
-    deferredLogin = $q.defer();
-
-    // mock decisionStore
-    decisionStoreMock = function(section, user){
-        this.$loaded = function() {
-          return true;
-        }
-        return this
-    };
-
+  beforeEach(inject(function($rootScope, $controller, $firebaseObject, $firebaseArray, $ionicSlideBoxDelegate, DecisionImages, $timeout, $state) {
     scope = $rootScope.$new();
 
-    user = {
-
+    var User = function() {
+      var ref = new Firebase('https://david-ionic.firebaseio.com/tests');
+      return $firebaseArray(ref);
     }
 
-    var decisionImages = function(section) {
-      return {
-        "choice1": {
-          "imgUrl": 'img/image1.jpg',
-          "choiceName": 'choice1'
-        },
-        "choice2": {
-          "imgUrl": 'img/image2.jpg',
-          "choiceName": 'choice2'
-        }
-      }
-    }
-
-    // instantiate LoginController
     controller = $controller('decisionsCtrl', {
-        '$scope': scope,
-        'user': user,
-        'DecisionStore': decisionStoreMock,
-        'DecisionImages': decisionImages
-      }
-    );
+      $scope: scope,
+      $state: $state,
+      user: new User(),
+      DecisionStore: function() {
+        var ref = new Firebase('https://david-ionic.firebaseio.com/tests');
+        return $firebaseArray(ref);
+      },
+      DecisionImages: DecisionImages,
+      DecisionTimer:  function() {
+        var ref = new Firebase('https://david-ionic.firebaseio.com/tests');
+        return $firebaseObject(ref);
+      },
+      DecisionResult: function() {
+        var ref = new Firebase('https://david-ionic.firebaseio.com/tests');
+        return $firebaseObject(ref);
+      },
+      $timeout: $timeout
+    });
   }));
 
+  it('should have the controller', inject(function() {
+    expect(controller).toBeDefined();
+  }));
 
-  it('loads the correct template', function () {
-    expect(state.views.mainview.templateUrl).toEqual('scenes/decisions/decisions.html');
-  });
+  // it('should enable a slider when it loads', inject(function () {
+  //   expect(scope.d.slideactive).toBeTruthy();
+  // }));
 
-  it('says hello world!', function () {
-    expect("Hello World!").toEqual("Hello World!");
-  });
+  // it('should disable the slider after all the pictures', inject(function () {
+  //   var numberOfImages = scope.turnImages.length;
+  //   scope.slideHasChanged(numberOfImages + 1);
+  //   expect(scope.d.slideactive).toBeFalsy();
+  // }));
 
 });

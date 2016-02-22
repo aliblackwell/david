@@ -27,11 +27,27 @@ module.exports = function(config) {
     //   './www/directives/**/*.js'
     // ],
 
+    // files: [
+    //     'www/lib/ionic/js/ionic.bundle.js',
+    //     'www/lib/angular-mocks/angular-mocks.js',
+    //     'www/lib/angular-ui-router/release/angular-ui-router.js',
+    //     'www/lib/mockfirebase/browser/mockfirebase.js',
+    //     'www/scenes/**/*.js',
+    //     'www/scenes/*.js',
+    //     'www/global/global-services.js',
+    //     'www/directives/**/*.js'
+    // ],
+
     files: [
-        'www/lib/ionic/js/ionic.bundle.js',
+        'www/lib/angular/angular.js',
+        'www/lib/angular-animate/angular-animate.js',
+        'www/lib/angular-sanitize/angular-sanitize.js',
         'www/lib/angular-mocks/angular-mocks.js',
         'www/lib/angular-ui-router/release/angular-ui-router.js',
+        'www/lib/angularfire/dist/angularfire.js',
         'www/lib/mockfirebase/browser/mockfirebase.js',
+        'www/js-lib/ionic.bundle.js',
+        'www/js-lib/ionic.io.bundle.min.js',
         'www/scenes/**/*.js',
         'www/scenes/*.js',
         'www/global/global-services.js',
@@ -41,6 +57,8 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
+        'www/scenes/**/*-routes.js'
+        // // 'www/scenes/**/*-services.js'
     ],
 
 

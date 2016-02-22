@@ -1,8 +1,7 @@
 'use strict';
 
-angular.module('david.blank').config(function($stateProvider) {
+angular.module('david.blank').config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('blank', {
-    url: '/',
     cache: false,
     views: {
       'main-view': {
@@ -11,4 +10,4 @@ angular.module('david.blank').config(function($stateProvider) {
       }
     }
   })
-});
+}]);

@@ -1,0 +1,14 @@
+<ion-view>
+  <ion-content padding="true" scroll="false">
+  <img class="bg-logo" src="img/epoq_logo-icon_WHITE.svg">
+
+    <h1 class="epoq-voice relative" ng-if="!d.showLight">Light David</h1>
+    <button class="button button-block button-positive centered" ng-if="!d.showLight" ng-click="lightsOn()">Go</button>
+
+    <div class="light" ng-class="d.black" ng-if="d.showLight">
+
+    </div>
+
+  </ion-content>
+</ion-view>
+

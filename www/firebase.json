@@ -1,9 +1,0 @@
-{
-  "firebase": "david-ionic",
-  "public": ".",
-  "ignore": [
-    "firebase.json",
-    "**/.*",
-    "**/node_modules/**"
-  ]
-}

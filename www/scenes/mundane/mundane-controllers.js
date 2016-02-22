@@ -9,7 +9,7 @@ angular.module('david.mundane', [])
     // Workaround for ion-content bug
     $scope.d = {};
 
-    $scope.d.greeting = "Hello, World!";
+    $scope.d.greeting = "hahahahaha";
 
     // Should be run whenever this view is closed
     $scope.$on('$destroy', function() {

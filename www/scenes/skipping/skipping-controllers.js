@@ -5,8 +5,7 @@ angular.module('david.skipping', [])
     var currentSection, images, store, numberOfDecisions;
     $scope.d = {}
 
-    $scope.d.question = true;
-    $scope.d.result = false;
+    $scope.d.start = true;
 
 
     var user = new User();
@@ -19,17 +18,15 @@ angular.module('david.skipping', [])
       store = new SkippingStore(currentSection, user);
     }
 
-    $scope.chooseResult = function(answer) {
+    $scope.startSkipping = function() {
+      $scope.d.active = true;
+      $scope.d.start = false;
+    }
 
-      $scope.d.question = false;
-      $scope.d.result = {};
-      if (answer === 'yes') {
-        $scope.d.result.yes = true;
-        $scope.d.result.no = false;
-      } else {
-        $scope.d.result.yes = false;
-        $scope.d.result.no = true;
-      }
+    $scope.stopSkipping = function() {
+
+      $scope.d.finish = true;
+      $scope.d.active = false;
     }
 
     $scope.resetView = function() {

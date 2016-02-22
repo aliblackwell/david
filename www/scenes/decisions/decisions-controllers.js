@@ -1,24 +1,34 @@
 'use strict';
 
-angular.module('david.decisions', [])
-  .controller('decisionsCtrl', ['$scope', '$state', 'user', 'DecisionStore', 'DecisionImages', 'DecisionTimer', function ($scope, $state, user, DecisionStore, DecisionImages, DecisionTimer){
+angular.module('david.decisions', ['firebase'])
+  .controller('decisionsCtrl', ['$scope', '$state', 'user', 'DecisionStore', 'DecisionImages', 'DecisionTimer', 'DecisionResult', '$timeout', function ($scope, $state, user, DecisionStore, DecisionImages, DecisionTimer, DecisionResult, $timeout){
     var images,
         numberOfDecisions,
-        timerUnwatch;
+        timerUnwatch,
+        resultUnwatch;
 
-    $scope.greeting = 'Hello World!';
     $scope.d = {}
+    $scope.d.decided = false;
+    $scope.d.heading = 'Choose';
 
     var currentSection = $state.current.name;
-
-    console.log("HELLO")
-
-    console.log(DecisionImages)
 
     var decisionsTimer = new DecisionTimer(currentSection);
     decisionsTimer.$loaded().then(function(){
       timerUnwatch = decisionsTimer.$watch(function() {
         $scope.d.timer = decisionsTimer.$value;
+        if ($scope.d.timer === 0) {
+          $timeout(function() {
+            calculateResults();
+          }, 1000)
+        }
+      })
+    })
+
+    var decisionsResult = new DecisionResult(currentSection);
+    decisionsResult.$loaded().then(function(){
+      resultUnwatch = decisionsResult.$watch(function() {
+        $scope.d.result = decisionsResult.$value;
       })
     })
 
@@ -30,7 +40,6 @@ angular.module('david.decisions', [])
     })
 
     var loadPage = function() {
-      console.log(currentSection)
       images = new DecisionImages(currentSection);
       $scope.choices = images
       showAudienceResults();
@@ -67,8 +76,31 @@ angular.module('david.decisions', [])
       $scope.d.results = store;
     }
 
-    $scope.makeChoice = function(choice) {
+    var calculateResults = function() {
+      var firstOption = [];
+      var secondOption = [];
+      var result;
+      angular.forEach(store, function(v) {
+        if (images.choice1.choiceName === v.choiceName) {
+          firstOption.push(v);
 
+        } else {
+          secondOption.push(v);
+
+        }
+
+      })
+
+      if (firstOption.length <= secondOption.length) {
+        $scope.d.result = images.choice2;
+      } else {
+        $scope.d.result = images.choice1
+      }
+      $scope.d.heading = 'You and the audience chose'
+      $scope.d.decided = true;
+    }
+
+    $scope.makeChoice = function(choice) {
       choice.chosen = true;
       angular.forEach($scope.choices, function(v,k) {
         if (v.choiceName != choice.choiceName) {
@@ -101,7 +133,5 @@ angular.module('david.decisions', [])
         timerUnwatch()
       }
     });
-
-
 
   }])

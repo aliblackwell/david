@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('david.blank', [])
+angular.module('david.blank', ['firebase'])
 
   .controller('blankCtrl', ['$scope', function ($scope){
 

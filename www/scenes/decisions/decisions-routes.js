@@ -1,10 +1,7 @@
 'use strict';
 
-angular.module('david.decisions')
-
-.config(function($stateProvider) {
-  $stateProvider
-    .state('skiporhips', {
+angular.module('david.decisions').config(['$stateProvider', function($stateProvider) {
+  $stateProvider.state('skiporhips', {
       cache: false,
       views: {
         'main-view': {
@@ -12,7 +9,6 @@ angular.module('david.decisions')
           controller: 'decisionsCtrl',
           resolve: {
             user: function(User) {
-              console.log('works')
               var user = new User();
               return user;
             }
@@ -28,7 +24,6 @@ angular.module('david.decisions')
           controller: 'decisionsCtrl',
           resolve: {
             user: function(User) {
-              console.log('works')
               var user = new User();
               return user;
             }
@@ -36,4 +31,19 @@ angular.module('david.decisions')
         }
       }
     })
-});
+    .state('puppiesorkittens', {
+      cache: false,
+      views: {
+        'main-view': {
+          templateUrl: 'scenes/decisions/decisions.html',
+          controller: 'decisionsCtrl',
+          resolve: {
+            user: function(User) {
+              var user = new User();
+              return user;
+            }
+          }
+        }
+      }
+    })
+}]);

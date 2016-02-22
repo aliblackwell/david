@@ -13,3 +13,5 @@ plugins/
 dist
 www/lib/
 www/audio/
+examples/
+myapp-release-key.keystore

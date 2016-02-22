@@ -1,0 +1,119 @@
+.projections .centered {
+  position: relative;
+  color: white;
+  top: 52px;
+  text-align: center;
+  font-size: 120px;
+  line-height: 0;
+}
+
+.scan {
+  background: white;
+  width: 100%;
+  position: absolute;
+  z-index: 999;
+  height: 30px;
+  left: 0px;
+  top: 0px;
+  transition: all 8s linear;
+}
+
+.scan.top {
+  margin-top: 30px;
+}
+
+.scan.bottom {
+  margin-top: 800px;
+}
+
+.mask-wrap {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: white;
+}
+
+.mask {
+  background: rgb(0,255,0);
+  position: absolute;
+  width: 100%;
+  left: 0px;
+  height: 270px;
+  z-index: 999;
+  transition: all 1s linear;
+}
+
+.mask.top {
+  top: 0px;
+  animation: infinite 8s masktop;
+  -webkit-animation: infinite 8s linear masktop;
+}
+
+.mask.bottom {
+  bottom: 0px;
+  animation: infinite 8s maskbottom;
+  -webkit-animation: infinite 8s linear maskbottom;
+}
+
+/* The animation code */
+@-webkit-keyframes masktop {
+    0% {
+      height: 0px;
+    }
+
+    50% {
+      height: 270px;
+    }
+
+    100% {
+      height: 0px;
+    }
+}
+
+/* The animation code */
+@-webkit-keyframes maskbottom {
+    0% {
+      height: 270px;
+    }
+
+    50% {
+      height: 0px;
+    }
+
+    100% {
+      height: 270px;
+    }
+}
+
+/* The animation code */
+@keyframes masktop {
+    0% {
+      height: 0px;
+    }
+
+    50% {
+      height: 270px;
+    }
+
+    100% {
+      height: 0px;
+    }
+}
+
+/* The animation code */
+@keyframes maskbottom {
+    0% {
+      height: 270px;
+    }
+
+    50% {
+      height: 0px;
+    }
+
+    100% {
+      height: 270px;
+    }
+}
+
