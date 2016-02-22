@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('david.waltz', [])
+angular.module('david.waltz', ['firebase'])
 
   .controller('waltzCtrl', ['$scope', 'WaltzGroups', function ($scope, WaltzGroups){
 
@@ -13,12 +13,11 @@ angular.module('david.waltz', [])
 
     // randomly assign them to a group
     var options = ['g1', 'g2', 'g3'];
-    var group = options[Math.floor(Math.random()*options.length)]
+    $scope.group = options[Math.floor(Math.random()*options.length)]
     groupListener = new WaltzGroups();
     $scope.unwatchResults = groupListener.$watch(function() {
 
-      if (groupListener[group] === 'off') {
-        console.log('off')
+      if (groupListener[$scope.group] === 'off') {
         $scope.d.black = 'black';
       }
     })
@@ -30,7 +29,9 @@ angular.module('david.waltz', [])
 
     // Should be run whenever this view is closed
     $scope.$on('$destroy', function() {
-
+      if (groupListener) {
+        groupListener.$destroy();
+      }
     });
 
   }])

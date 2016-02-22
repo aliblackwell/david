@@ -9,7 +9,7 @@ angular.module('david', [
   'david.welcome',
   'david.davidtolife',
   'david.vicarioustrauma',
-  'david.blank',
+  'david.end',
   'david.waltz',
   'david.kittens',
   'david.hips',

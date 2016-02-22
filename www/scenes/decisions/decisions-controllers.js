@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('david.decisions', [])
+angular.module('david.decisions', ['firebase'])
   .controller('decisionsCtrl', ['$scope', '$state', 'user', 'DecisionStore', 'DecisionImages', 'DecisionTimer', 'DecisionResult', '$timeout', function ($scope, $state, user, DecisionStore, DecisionImages, DecisionTimer, DecisionResult, $timeout){
     var images,
         numberOfDecisions,
@@ -19,7 +19,6 @@ angular.module('david.decisions', [])
         $scope.d.timer = decisionsTimer.$value;
         if ($scope.d.timer === 0) {
           $timeout(function() {
-            console.log('calu')
             calculateResults();
           }, 1000)
         }
@@ -92,9 +91,6 @@ angular.module('david.decisions', [])
 
       })
 
-      console.log(firstOption)
-      console.log(secondOption)
-
       if (firstOption.length <= secondOption.length) {
         $scope.d.result = images.choice2;
       } else {
@@ -137,7 +133,5 @@ angular.module('david.decisions', [])
         timerUnwatch()
       }
     });
-
-
 
   }])

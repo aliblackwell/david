@@ -128,9 +128,9 @@ angular.module('dashboard.services', [])
           'active': false,
           'controls': false
         },
-        'blank': {
-          'key': 'blank',
-          'title': 'Blank',
+        'end': {
+          'key': 'end',
+          'title': 'The End',
           'active': false
         }
 
