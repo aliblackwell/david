@@ -25,6 +25,8 @@
         </form>
       </div>
 
+      <p class="tcs" ng-if="!d.formFilled">You agree to our <span class="tandcs" ng-click="openModal()">Terms and Conditions</span></p>
+
       <span  ng-if="user" ng-class="d.buttonStyle" ng-click="saveResponse()">{{d.saveState}}</span>
 
 
@@ -43,3 +45,23 @@
   </ion-content>
 </ion-view>
 
+
+<script id="my-modal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar ng-click="closeModal()">
+      <div class="row">
+        <div class="col col-10"></div>
+          <div class="col col-80">
+            <span class="modal-title">Epoq Terms and Conditions</span>
+          </div>
+          <div class="col col-10">
+            <i class="ion-close-round"></i>
+          </div>
+
+      </div>
+    </ion-header-bar>
+    <ion-content padding="true">
+      Hello!
+    </ion-content>
+  </ion-modal-view>
+</script>
