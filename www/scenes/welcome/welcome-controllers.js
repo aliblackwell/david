@@ -2,23 +2,34 @@
 
 angular.module('david.welcome', [])
 
-  .controller('welcomeCtrl', ['$scope', 'User', 'AvailablePerformances', '$location', 'Settings', '$rootScope', '$timeout', 'LifeSwipes', 'FinishedSwipes', '$ionicModal', function ($scope, User, AvailablePerformances, $location, Settings, $rootScope, $timeout, LifeSwipes, FinishedSwipes, $ionicModal){
+  .controller('welcomeCtrl', ['$scope', 'User', 'AvailablePerformances', '$location', 'Settings', '$rootScope', '$timeout', '$interval', 'LifeSwipes', '$ionicModal', 'preloader', 'TinderCards', function ($scope, User, AvailablePerformances, $location, Settings, $rootScope, $timeout, $interval, LifeSwipes, $ionicModal, preloader, TinderCards){
 
-    var user, shows;
+    var user, shows, lifeSwipes,
+        firstCards = [
+      { image: '/img/davids/excited.jpg' },
+      { image: '/img/davids/professional.jpg' }
+    ];
+
+    var allCards = TinderCards;
+    var imagesToPreload = [];
+    for (var i=0; i<allCards.length; i++) {
+      imagesToPreload.push(allCards[i].image);
+    }
 
     // Workaround for ion-content bug
     $scope.d = {};
 
-    console.log('welcome')
-
     $scope.d.formFilled = false;
+
+    preloader.preloadImages(imagesToPreload)
+    .then(function() {
+      loadAvailableShows();
+    })
 
 
     var loadAvailableShows = function() {
-      console.log('loading shows')
       shows = new AvailablePerformances();
       shows.$loaded().then(function(){
-        console.log(shows);
         $scope.d.shows = shows;
         $scope.d.saveState = 'Save';
         $scope.d.buttonStyle = 'button button-full button-positive';
@@ -32,6 +43,8 @@ angular.module('david.welcome', [])
       user = new User();
       user.$bindTo($scope, 'user');
       user.$loaded().then(function() {
+
+        user.uuid = user.$id;
         if (user.name) {
           $scope.saveResponse();
         }
@@ -55,8 +68,12 @@ angular.module('david.welcome', [])
       } else {
         $scope.d.saveState = 'Edit';
         $scope.d.buttonStyle = 'edit-toggle';
+        lifeSwipes = new LifeSwipes(user);
+        $scope.cards = Array.prototype.slice.call(firstCards, 0);
         $scope.d.formFilled = true;
       }
+
+      $scope.pageLoaded = true;
 
     }
 
@@ -65,41 +82,6 @@ angular.module('david.welcome', [])
       $scope.d.buttonStyle = 'button button-full button-positive';
     }
 
-    loadAvailableShows();
-
-
-    var lifeSwipes,
-        counter = 0,
-        firstCards = [
-      { image: '/img/davids/excited.jpg' },
-      { image: '/img/davids/professional.jpg' }
-    ];
-
-    var allCards = [
-      { image: '/img/davids/angry.jpg' },
-      { image: '/img/davids/debauched.jpg' },
-      { image: '/img/davids/defamation.jpg' },
-      { image: '/img/davids/disappearing.jpg' },
-      { image: '/img/davids/disgust.jpg' },
-      { image: '/img/davids/dull.jpg' },
-      { image: '/img/davids/excited.jpg' },
-      { image: '/img/davids/professional.jpg' },
-      { image: '/img/davids/sad.jpg' }
-    ];
-
-    var setFinishedSwiping = function() {
-      var finished = new FinishedSwipes();
-
-      finished.$add(user);
-    }
-
-    var user = new User();
-
-    user.$loaded().then(function(){
-      user.uuid = user.$id;
-      lifeSwipes = new LifeSwipes(user);
-      $scope.cards = Array.prototype.slice.call(firstCards, 0);
-    })
 
 
 
@@ -116,21 +98,24 @@ angular.module('david.welcome', [])
     }
 
     $scope.cardSwiped = function(sentiment, card) {
-      counter++;
       card.sentiment = sentiment;
       lifeSwipes.$add(card);
       lifeSwipes.$save();
+      $scope.addCard();
+      $scope.addCard(); // hack. cards don't always register as having swiped
     }
 
     $scope.cardSwipedLeft = function(card) {
       $scope.cardSwiped('dislike', card);
-      $scope.addCard();
-
     };
+
     $scope.cardSwipedRight = function(card) {
       $scope.cardSwiped('like', card);
-      $scope.addCard();
     };
+
+    $scope.cardPartialSwipe = function(amt) {
+
+    }
 
 
     // Should be run whenever this view is closed
@@ -140,6 +125,9 @@ angular.module('david.welcome', [])
       }
       if (user) {
         user.$destroy();
+      }
+      if ($scope.cards) {
+        $scope.cards = false;
       }
     });
 

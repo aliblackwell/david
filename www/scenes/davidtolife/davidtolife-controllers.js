@@ -1,39 +1,36 @@
 'use strict';
 
 angular.module('david.davidtolife', ['firebase'])
-  .controller('davidtolifeCtrl', ['$scope', 'User', 'FinishedSwipes', '$ionicSlideBoxDelegate', function ($scope, User, FinishedSwipes, $ionicSlideBoxDelegate){
-
-    var lifeSwipes,
+  .controller('davidtolifeCtrl', ['$scope', 'User', '$ionicSlideBoxDelegate', 'preloader', 'SwipeImages', 'DavidToLifeResults', 'FinishedSwipes', function ($scope, User, $ionicSlideBoxDelegate, preloader, SwipeImages, DavidToLifeResults, FinishedSwipes){
+    var user,
+        result,
+        lifeSwipes,
         counter = 0;
 
-    $scope.d = {}
+    $scope.turnImages = SwipeImages;
 
-    $scope.d.slideactive = true;
-    $scope.d.show = true;
+    preloader.preloadImages($scope.turnImages)
+    .then(function() {
+      init();
+    })
 
-    $scope.turnImages = [
-      'DT1.JPG',
-      // 'DT2.JPG',
-      // 'DT3.JPG',
-      // 'DT4.JPG',
-      // 'DT5.JPG',
-      // 'DT6.JPG',
-      // 'DT7.JPG',
-      // 'DT8.JPG',
-      // 'DT9.JPG',
-      // 'DT10.JPG',
-      // 'DT11.JPG',
-      // 'DT12.JPG',
-      // 'DT13.JPG',
-      // 'DT14.JPG',
-      'DT15.JPG'
-    ]
+    var init = function() {
+      $scope.d = {}
+      $scope.d.slideactive = true;
+      $scope.d.show = true;
+      user = new User();
+      user.$loaded().then(function(){
+        user.uuid = user.$id;
+        result = new DavidToLifeResults();
+        result.$loaded().then(function() {
+          result[user.$id] = {}
+          result[user.$id].start = Date.now();
+          result.$save()
+        })
+      });
 
-    var user = new User();
 
-    user.$loaded().then(function(){
-      user.uuid = user.$id;
-    });
+    }
 
     $scope.slideHasChanged = function(index) {
       if (index === $scope.turnImages.length + 1) {
@@ -43,13 +40,12 @@ angular.module('david.davidtolife', ['firebase'])
 
     $scope.setFinishedSwiping = function() {
       var finished = new FinishedSwipes();
+      var arr
       finished.$add(user.name);
-      console.log(finished)
-      //finished.$save();
-
+      finished.$save();
       $scope.d.slideactive = false;
       $ionicSlideBoxDelegate.enableSlide(false);
+      result[user.$id].end = Date.now();
+      result.$save()
     }
-
-
   }])

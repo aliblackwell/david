@@ -46,5 +46,20 @@ body .hips-footer {
   background: red;
 }
 
+.hips-results {
+  background: white;
+}
+
+.hips-results .epoq-voice {
+  color: #0c01a5;
+}
+
+.hips-results .hips input[disabled] {
+  opacity: 1;
+}
+
+.hips-results .range input::-webkit-slider-thumb:before {
+  background: #0c01a5 !important;
+}
 
 

@@ -1,17 +1,34 @@
 'use strict';
 
 angular.module('david.decisions', ['firebase'])
-  .controller('decisionsCtrl', ['$scope', '$state', 'user', 'DecisionStore', 'DecisionImages', 'DecisionTimer', 'DecisionResult', '$timeout', function ($scope, $state, user, DecisionStore, DecisionImages, DecisionTimer, DecisionResult, $timeout){
+  .controller('decisionsCtrl', ['$scope', '$state', 'user', 'DecisionStore', 'DecisionImages', 'DecisionTimer', 'DecisionResult', '$timeout', 'preloader', function ($scope, $state, user, DecisionStore, DecisionImages, DecisionTimer, DecisionResult, $timeout, preloader){
     var images,
         numberOfDecisions,
         timerUnwatch,
-        resultUnwatch;
+        resultUnwatch,
+        store;
 
     $scope.d = {}
     $scope.d.decided = false;
     $scope.d.heading = 'Choose';
 
     var currentSection = $state.current.name;
+
+    images = new DecisionImages(currentSection);
+    var imagesToPreload = []
+    imagesToPreload.push(images.choice1.imgUrl);
+    imagesToPreload.push(images.choice2.imgUrl);
+    preloader.preloadImages(imagesToPreload)
+    .then(function() {
+      init();
+    })
+
+    var init = function() {
+      store = new DecisionStore(currentSection, user);
+      store.$loaded().then(function(){
+        loadPage();
+      })
+    }
 
     var decisionsTimer = new DecisionTimer(currentSection);
     decisionsTimer.$loaded().then(function(){
@@ -33,15 +50,11 @@ angular.module('david.decisions', ['firebase'])
     })
 
 
-    var store = new DecisionStore(currentSection, user);
-    store.$loaded().then(function(){
-      loadPage();
 
-    })
 
     var loadPage = function() {
-      images = new DecisionImages(currentSection);
       $scope.choices = images
+      $scope.imagesLoaded = true;
       showAudienceResults();
       watchResults();
     }
@@ -131,6 +144,10 @@ angular.module('david.decisions', ['firebase'])
 
       if(timerUnwatch) {
         timerUnwatch()
+      }
+
+      if(resultUnwatch) {
+        resultUnwatch()
       }
     });
 

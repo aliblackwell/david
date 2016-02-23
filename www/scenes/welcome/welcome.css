@@ -27,7 +27,7 @@ td-card img {
   height: auto !important;
 }
 
-.yes-text {
+.yes-text, .no-text {
   position: absolute;
   top: 10px;
   left: 10px;
@@ -35,15 +35,12 @@ td-card img {
   font-weight: bold;
   color: #0c01a5;
   opacity: 0;
+  border: 5px solid #0c01a5;
+  padding: 10px;
 }
 .no-text {
-  position: absolute;
-  top: 10px;
+  left: auto;
   right: 10px;
-  font-size: 30px;
-  color: #0c01a5;
-  font-weight: bold;
-  opacity: 0;
 }
 
 .edit-toggle {

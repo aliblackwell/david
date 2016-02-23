@@ -37,39 +37,7 @@
             <li ng-repeat="user in audience" ng-if="user.name" ng-click="setActive(user.id)" ng-class="{'active': user.active}">{{user.name}}</li>
         </ul>
 
-
-
-
-
-        <div class="welcome" ng-controller="welcomeCtrl">
-            <p>{{tits}}
-                Before the show,
-                <span ng-if="preshowPositive">the audience liked David more than they disliked him.</span>
-                <span ng-if="!preshowPositive">the audience disliked David more than they liked him.</span>
-                There were {{audienceNumberOfLikes}} likes, and {{audienceNumberOfDislikes}} dislikes.
-                <span ng-if="preShowPositive">What a lovely bunch.</span>
-                <span ng-if="!preShowPositive">Charming.</span>
-
-            </p>
-
-            <p ng-if="activeUser">
-                {{activeUser.greeting}}
-
-                <span ng-if="userPreshowPositive">liked David overall,</span>
-                <span ng-if="!userPreshowPositive">disliked David overall,</span>
-                with {{userNumberOfLikes}} likes and {{userNumberOfDislikes}} dislikes.
-    <!--             <span ng-if="userPreshowPositive">What a lovely bunch.</span>
-                <span ng-if="!userPreshowPositive">Charming.</span> -->
-
-            </p>
-
-            <p>
-            This was the most popular image, with {{mostPopularImage.count}} likes:
-            <img ng-src="{{mostPopularImage.url}}">
-            While this was the least popular, with {{leastPopularImage.count}} dislikes:
-            <img ng-src="{{leastPopularImage.url}}">
-            </p>
-        </div>
+        <welcomeresults></welcomeresults>
 
     </div>
 

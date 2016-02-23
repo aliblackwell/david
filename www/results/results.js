@@ -8,32 +8,28 @@ angular.module('results', [
 
 angular.module('results.controller', [])
   .controller('resultsCtrl', ['$scope', '$location', 'Database', function($scope, $location, Database) {
-    console.log($location.path());
 
-    var showSlug, selectedUserId;
-
-    var db = Database;
-    var personal = false;
+    $scope.db = new Database();
+    $scope.personal = false;
 
 
-    db.$loaded().then(function(){
+    $scope.db.$loaded().then(function(){
+
+
       displayResults();
-
-
-
     })
 
     var displayResults = function() {
       var params = $location.path().split('/')
-      showSlug = params[1];
+      $scope.showSlug = params[1];
       if (params[2] != '') {
-        selectedUserId = params[2];
+        $scope.selectedUserId = params[2];
       }
 
       if (params[3] === 'personal') {
-        personal = true;
+        $scope.personal = true;
       }
-      $scope.performance = db.availablePerformances[showSlug].name
+      $scope.performance = $scope.db.availablePerformances[$scope.showSlug].name
       getAudience();
 
     }
@@ -41,15 +37,15 @@ angular.module('results.controller', [])
     var getAudience = function() {
       var audienceCount = []
       $scope.audience = {}
-      angular.forEach(db.users, function(user,id) {
-        if (user.show === showSlug) {
+      angular.forEach($scope.db.users, function(user,id) {
+        if (user.show === $scope.showSlug) {
           user.id = id;
           user.greeting = user.name;
           audienceCount.push(user);
-          if (selectedUserId) {
-            if (id === selectedUserId) {
+          if ($scope.selectedUserId) {
+            if (id === $scope.selectedUserId) {
               user.active = true;
-              if (personal) {
+              if ($scope.personal) {
                 user.greeting = 'You'
               }
               $scope.activeUser = user;
@@ -59,7 +55,7 @@ angular.module('results.controller', [])
         }
       });
       $scope.audienceCount = audienceCount.length;
-      calculateTinderResultsGroup();
+      $scope.audienceLoaded = true;
     }
 
     $scope.setActive = function(userId) {
@@ -68,23 +64,22 @@ angular.module('results.controller', [])
         user.active = false;
       })
       $scope.audience[userId].active = true;
-      $location.path('/'+showSlug+'/'+userId);
-
+      $location.path('/'+$scope.showSlug+'/'+userId);
+      //$scope.calculateTinderResultsGroup();
     }
 
-
-
-
-
-
+    $scope.calculateTinderResultsGroup = function() {
+      // dummy function
+    }
 
   }])
 
 
 angular.module('results.firebase', ['firebase'])
   .factory('Database', ['$firebaseObject', function($firebaseObject) {
-
-    var itemsRef = new Firebase('https://david-ionic.firebaseio.com/');
-    return $firebaseObject(itemsRef);
-
+    var Database = function(currentSection) {
+      var itemsRef = new Firebase('https://david-ionic.firebaseio.com/');
+      return $firebaseObject(itemsRef);
+    }
+    return Database;
   }])

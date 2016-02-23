@@ -1,0 +1,27 @@
+<div class="welcome">
+    <p>
+        Before the show,
+        <span ng-if="preshowPositive">the audience liked David more than they disliked him.</span>
+        <span ng-if="!preshowPositive">the audience disliked David more than they liked him.</span>
+        There were {{audienceNumberOfLikes}} likes, and {{audienceNumberOfDislikes}} dislikes.
+        <span ng-if="preShowPositive">What a lovely bunch.</span>
+        <span ng-if="!preShowPositive">Charming.</span>
+
+    </p>
+
+    <p ng-if="activeUser">
+        {{activeUser.greeting}}
+
+        <span ng-if="userPreshowPositive">liked David overall,</span>
+        <span ng-if="!userPreshowPositive">disliked David overall,</span>
+        with {{userNumberOfLikes}} likes and {{userNumberOfDislikes}} dislikes.
+
+    </p>
+
+    <p>
+    This was the most popular image, with {{mostPopularImage.count}} likes:
+    <img ng-src="{{mostPopularImage.url}}">
+    While this was the least popular, with {{leastPopularImage.count}} dislikes:
+    <img ng-src="{{leastPopularImage.url}}">
+    </p>
+</div>

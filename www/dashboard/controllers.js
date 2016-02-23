@@ -185,9 +185,9 @@ angular.module('dashboard.controllers', [])
 
     var hips, voteIteration = 0;
 
-    // count down from 15 seconds
+    // count down from 8 seconds
     var hipsStartCountdown = function() {
-      var count = 15;
+      var count = 8;
       hips.voteIteration = 'vote'+voteIteration;
       voteIteration++;
       hips.$save();
@@ -203,7 +203,7 @@ angular.module('dashboard.controllers', [])
           hips.timer = ''
           hips.$save();
         }
-      }, 1000, 17);
+      }, 1000, 10);
     }
 
 
