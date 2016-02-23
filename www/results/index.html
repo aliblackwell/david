@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
 
-        <link href='https://fonts.googleapis.com/css?family=Jura:400,500,600,300' rel='stylesheet' type='text/css'>
+<!--         <link href='https://fonts.googleapis.com/css?family=Jura:400,500,600,300' rel='stylesheet' type='text/css'> -->
 
         <!--build:css css/projections.min.css-->
         <link rel="stylesheet" href="../lib/normalize-css/normalize.css">
@@ -24,7 +24,7 @@
 
 
 
-    <div class="container" ng-if="loaded">
+    <div class="container">
 
     <header>
         <h1><img class="logo" src="/img/epoq_logo_WHITE.svg"></h1>
@@ -41,37 +41,35 @@
 
 
 
+        <div class="welcome" ng-controller="welcomeCtrl">
+            <p>{{tits}}
+                Before the show,
+                <span ng-if="preshowPositive">the audience liked David more than they disliked him.</span>
+                <span ng-if="!preshowPositive">the audience disliked David more than they liked him.</span>
+                There were {{audienceNumberOfLikes}} likes, and {{audienceNumberOfDislikes}} dislikes.
+                <span ng-if="preShowPositive">What a lovely bunch.</span>
+                <span ng-if="!preShowPositive">Charming.</span>
 
-        <p>
-            Before the show,
-            <span ng-if="preshowPositive">the audience liked David more than they disliked him.</span>
-            <span ng-if="!preshowPositive">the audience disliked David more than they liked him.</span>
-            There were {{audienceNumberOfLikes}} likes, and {{audienceNumberOfDislikes}} dislikes.
-            <span ng-if="preShowPositive">What a lovely bunch.</span>
-            <span ng-if="!preShowPositive">Charming.</span>
+            </p>
 
-        </p>
+            <p ng-if="activeUser">
+                {{activeUser.greeting}}
 
-        <p ng-if="activeUser">
-            {{activeUser.greeting}}
+                <span ng-if="userPreshowPositive">liked David overall,</span>
+                <span ng-if="!userPreshowPositive">disliked David overall,</span>
+                with {{userNumberOfLikes}} likes and {{userNumberOfDislikes}} dislikes.
+    <!--             <span ng-if="userPreshowPositive">What a lovely bunch.</span>
+                <span ng-if="!userPreshowPositive">Charming.</span> -->
 
-            <span ng-if="userPreshowPositive">liked David overall,</span>
-            <span ng-if="!userPreshowPositive">disliked David overall,</span>
-            with {{userNumberOfLikes}} likes and {{userNumberOfDislikes}} dislikes.
-<!--             <span ng-if="userPreshowPositive">What a lovely bunch.</span>
-            <span ng-if="!userPreshowPositive">Charming.</span> -->
+            </p>
 
-        </p>
-
-        <p>
-        This was the most popular image, with {{mostPopularImage.count}} likes:
-        <img ng-src="{{mostPopularImage.url}}">
-        While this was the least popular, with {{leastPopularImage.count}} dislikes:
-        <img ng-src="{{leastPopularImage.url}}">
-
-
-
-        </p>
+            <p>
+            This was the most popular image, with {{mostPopularImage.count}} likes:
+            <img ng-src="{{mostPopularImage.url}}">
+            While this was the least popular, with {{leastPopularImage.count}} dislikes:
+            <img ng-src="{{leastPopularImage.url}}">
+            </p>
+        </div>
 
     </div>
 
@@ -82,5 +80,6 @@
     <script src="../lib/firebase/firebase.js"></script>
     <script src="../lib/angularfire/dist/angularfire.js"></script>
     <script src="results.js"></script>
+    <script src="welcome/welcome.js"></script>
     <!-- endbuild -->
 </html>
