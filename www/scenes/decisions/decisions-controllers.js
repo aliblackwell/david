@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('david.decisions', ['firebase'])
-  .controller('decisionsCtrl', ['$scope', '$state', 'user', 'DecisionStore', 'DecisionImages', 'DecisionTimer', 'DecisionResult', '$timeout', 'preloader', function ($scope, $state, user, DecisionStore, DecisionImages, DecisionTimer, DecisionResult, $timeout, preloader){
+  .controller('decisionsCtrl', ['$scope', '$state', 'user', 'DecisionStoreUser', 'DecisionImages', 'Decisions', 'DecisionsTimer', '$timeout', 'preloader', function ($scope, $state, user, DecisionStoreUser, DecisionImages, Decisions, DecisionsTimer, $timeout, preloader){
     var images,
         numberOfDecisions,
+        decisionsUnwatch,
         timerUnwatch,
-        resultUnwatch,
         store;
 
     $scope.d = {}
@@ -23,52 +23,16 @@ angular.module('david.decisions', ['firebase'])
       init();
     })
 
-    var init = function() {
-      store = new DecisionStore(currentSection, user);
-      store.$loaded().then(function(){
-        loadPage();
-      })
-    }
-
-    var decisionsTimer = new DecisionTimer(currentSection);
-    decisionsTimer.$loaded().then(function(){
-      timerUnwatch = decisionsTimer.$watch(function() {
-        $scope.d.timer = decisionsTimer.$value;
-        if ($scope.d.timer === 0) {
-          $timeout(function() {
-            calculateResults();
-          }, 1000)
-        }
-      })
-    })
-
-    var decisionsResult = new DecisionResult(currentSection);
-    decisionsResult.$loaded().then(function(){
-      resultUnwatch = decisionsResult.$watch(function() {
-        $scope.d.result = decisionsResult.$value;
-      })
-    })
-
-
-
-
     var loadPage = function() {
       $scope.choices = images
       $scope.imagesLoaded = true;
       showAudienceResults();
-      watchResults();
-    }
-
-    var watchResults = function() {
-      // Every time the results change in Firebase
-      $scope.unwatchResults = store.$watch(function() {
-        showAudienceResults();
-      })
+      //watchResults();
     }
 
     var showAudienceResults = function() {
       numberOfDecisions = []
-      angular.forEach(store, function(k,v) {
+      angular.forEach(decisions.responses, function(k,v) {
         numberOfDecisions.push(k)
       });
 
@@ -86,22 +50,38 @@ angular.module('david.decisions', ['firebase'])
       }
 
       $scope.d.thumbWidth = 100 / numDecs;
-      $scope.d.results = store;
+      $scope.d.results = decisions.responses;
     }
+
+
+
+    var decisions = new Decisions(currentSection);
+
+    decisionsUnwatch = decisions.$watch(function() {
+      showAudienceResults();
+    })
+
+    var timer = new DecisionsTimer(currentSection);
+    timerUnwatch = timer.$watch(function(){
+      $scope.d.timer = timer.timer
+      if ($scope.d.timer === 0) {
+        $timeout(function() {
+          calculateResults();
+        }, 1000)
+      }
+    })
 
     var calculateResults = function() {
       var firstOption = [];
       var secondOption = [];
       var result;
-      angular.forEach(store, function(v) {
+      angular.forEach(decisions.responses, function(v) {
         if (images.choice1.choiceName === v.choiceName) {
           firstOption.push(v);
 
         } else {
           secondOption.push(v);
-
         }
-
       })
 
       if (firstOption.length <= secondOption.length) {
@@ -120,14 +100,15 @@ angular.module('david.decisions', ['firebase'])
           v.chosen = false
         } else {
           v.chosen = true;
-          saveChoice(v);
+          $scope.decision = v;
         }
       })
     }
 
-    var saveChoice = function(v) {
-      store[user.$id] = v;
-      store.$save();
+    var init = function() {
+      store = new DecisionStoreUser(currentSection, user.$id);
+      store.$bindTo($scope, 'decision');
+      loadPage();
     }
 
     // Should be run whenever this view is closed
@@ -142,12 +123,12 @@ angular.module('david.decisions', ['firebase'])
         $scope.unwatchResults();
       }
 
-      if(timerUnwatch) {
-        timerUnwatch()
+      if(decisionsUnwatch) {
+        decisionsUnwatch()
       }
 
-      if(resultUnwatch) {
-        resultUnwatch()
+      if(timerUnwatch) {
+        timerUnwatch()
       }
     });
 

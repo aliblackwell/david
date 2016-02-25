@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dashboard.controllers', [])
-  .controller('dashboardCtrl', ['$scope', 'AvailablePerformances','Sections','ActiveSection', '$ionicModal', 'Hips', '$interval', '$timeout', 'TriggerReload', 'DecisionStore', 'PuppiesWords', 'Waltz', function ($scope, AvailablePerformances, Sections, ActiveSection, $ionicModal, Hips, $interval, $timeout, TriggerReload, DecisionStore, PuppiesWords, Waltz){
+  .controller('dashboardCtrl', ['$scope', 'AvailablePerformances','Sections','ActiveSection', '$ionicModal', 'Hips', '$interval', '$timeout', 'TriggerReload', 'DecisionTimer', 'PuppiesWords', 'Waltz', function ($scope, AvailablePerformances, Sections, ActiveSection, $ionicModal, Hips, $interval, $timeout, TriggerReload, DecisionTimer, PuppiesWords, Waltz){
 
     var performances, sections, decision, puppies, waltz;
 
@@ -122,18 +122,23 @@ angular.module('dashboard.controllers', [])
     }
 
     $scope.startTimer = function(activeSection) {
-      decision = new DecisionStore($scope.d.activeShow, activeSection.key);
-      var count = activeSection.timerLength;
-      $scope.clearDecisionTimer = $interval(function() {
-        if (count != -1) {
-          $scope.d.timer = count;
-          decision.timer = count;
-          decision.$save();
-          count--;
-        } else {
-          calculateDecisionResult();
-        }
-      }, 1000, count + 2);
+      decision = new DecisionTimer($scope.d.activeShow, activeSection.key);
+      decision.$loaded().then(function() {
+        var count = activeSection.timerLength;
+        var counter = count;
+        $scope.clearDecisionTimer = $interval(function() {
+          if (counter != -1) {
+            decision.$value = counter;
+            decision.$save();
+            counter--;
+          } else {
+            calculateDecisionResult();
+          }
+        }, 1000, count + 2);
+      })
+
+
+
     }
 
     var calculateDecisionResult = function() {

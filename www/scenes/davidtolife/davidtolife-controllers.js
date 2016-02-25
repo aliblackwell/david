@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('david.davidtolife', ['firebase'])
-  .controller('davidtolifeCtrl', ['$scope', 'User', '$ionicSlideBoxDelegate', 'preloader', 'SwipeImages', 'DavidToLifeResults', 'FinishedSwipes', function ($scope, User, $ionicSlideBoxDelegate, preloader, SwipeImages, DavidToLifeResults, FinishedSwipes){
+  .controller('davidtolifeCtrl', ['$scope', 'User', '$ionicSlideBoxDelegate', 'preloader', 'SwipeImages', 'DavidToLifeResults', 'FinishedSwipesScenes', function ($scope, User, $ionicSlideBoxDelegate, preloader, SwipeImages, DavidToLifeResults, FinishedSwipesScenes){
     var user,
         result,
         lifeSwipes,
@@ -21,12 +21,10 @@ angular.module('david.davidtolife', ['firebase'])
       user = new User();
       user.$loaded().then(function(){
         user.uuid = user.$id;
-        result = new DavidToLifeResults();
-        result.$loaded().then(function() {
-          result[user.$id] = {}
-          result[user.$id].start = Date.now();
-          result.$save()
-        })
+        result = new DavidToLifeResults(user.uuid);
+        result.start = Date.now();
+        result.$save()
+
 
         // change the blobs to arrows
         var icons = document.querySelectorAll('.icon.ion-record');
@@ -46,12 +44,12 @@ angular.module('david.davidtolife', ['firebase'])
     }
 
     $scope.setFinishedSwiping = function() {
-      var finished = new FinishedSwipes();
-      finished.$add(user.name);
+      var finished = new FinishedSwipesScenes(user.$id);
+      finished.$value = user.name;
       finished.$save();
       $scope.d.slideactive = false;
       $ionicSlideBoxDelegate.enableSlide(false);
-      result[user.$id].end = Date.now();
+      result.end = Date.now();
       result.$save()
     }
   }])

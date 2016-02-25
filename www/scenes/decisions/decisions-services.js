@@ -45,29 +45,38 @@ angular.module('david.decisions')
       return DecisionImages;
     })
 
-    .factory('DecisionStore', ['$firebaseObject', 'FirebaseShowURL', function($firebaseObject, FirebaseShowURL) {
-      var DecisionStore = function(currentSection) {
+    .factory('DecisionStoreUser', ['$firebaseObject', 'FirebaseShowURL', function($firebaseObject, FirebaseShowURL) {
+      var DecisionStoreUser = function(currentSection, uid) {
         var f = new FirebaseShowURL();
-        var itemsRef = new Firebase(f.url + '/decisions/' + currentSection + '/responses/');
+        var itemsRef = new Firebase(f.url + '/decisions/' + currentSection + '/responses/' + uid);
         return $firebaseObject(itemsRef);
       }
-      return DecisionStore;
+      return DecisionStoreUser;
     }])
 
-    .factory('DecisionTimer', ['$firebaseObject', 'FirebaseShowURL', function($firebaseObject, FirebaseShowURL) {
-      var DecisionTimer = function(currentSection) {
+    .factory('Decisions', ['$firebaseObject', 'FirebaseShowURL', function($firebaseObject, FirebaseShowURL) {
+      var Decisions = function(currentSection) {
         var f = new FirebaseShowURL();
-        var itemsRef = new Firebase(f.url + '/decisions/' + currentSection + '/timer/');
+        var itemsRef = new Firebase(f.url + '/decisions/' + currentSection);
         return $firebaseObject(itemsRef);
       }
-      return DecisionTimer;
+      return Decisions;
     }])
 
-    .factory('DecisionResult', ['$firebaseObject', 'FirebaseShowURL', function($firebaseObject, FirebaseShowURL) {
-      var DecisionResult = function(currentSection) {
+    .factory('DecisionsTimer', ['$firebaseObject', 'FirebaseShowURL', function($firebaseObject, FirebaseShowURL) {
+      var DecisionsTimer = function(currentSection) {
         var f = new FirebaseShowURL();
-        var itemsRef = new Firebase(f.url + '/decisions/' + currentSection + '/result/');
+        var itemsRef = new Firebase(f.url + '/decisionstimers/' + currentSection);
         return $firebaseObject(itemsRef);
       }
-      return DecisionResult;
+      return DecisionsTimer;
     }])
+
+    // .factory('DecisionTimer', ['$firebaseObject', 'FirebaseShowURL', function($firebaseObject, FirebaseShowURL) {
+    //   var DecisionTimer = function(currentSection) {
+    //     var f = new FirebaseShowURL();
+    //     var itemsRef = new Firebase(f.url + '/decisions/' + currentSection + '/timer/');
+    //     return $firebaseObject(itemsRef);
+    //   }
+    //   return DecisionTimer;
+    // }])

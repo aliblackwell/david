@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('projections.davidtolife')
+angular.module('projections.hips')
 
   .factory("Hips", ['$firebaseObject','FirebaseShowURL', function($firebaseObject, FirebaseShowURL) {
         var Hips = function() {

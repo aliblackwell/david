@@ -157,9 +157,9 @@ angular.module('dashboard.services', [])
     return Hips;
   }])
 
-  .factory('DecisionStore', ['$firebaseObject', 'FIREBASE_URL', function($firebaseObject, FIREBASE_URL){
+  .factory('DecisionTimer', ['$firebaseObject', 'FIREBASE_URL', function($firebaseObject, FIREBASE_URL){
     var ActiveSection = function(show_slug, decision_slug) {
-      var itemsRef = new Firebase(FIREBASE_URL + '/' + show_slug + '/decisions/' + decision_slug);
+      var itemsRef = new Firebase(FIREBASE_URL + '/' + show_slug + '/decisionstimers/' + decision_slug + '/timer');
       return $firebaseObject(itemsRef);
     }
     return ActiveSection;
