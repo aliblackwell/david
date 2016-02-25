@@ -172,3 +172,11 @@ angular.module('dashboard.services', [])
     }
     return Waltz;
   }])
+
+  .factory('PuppiesAudienceStore', ['$firebaseObject', 'FIREBASE_URL', function($firebaseObject, FIREBASE_URL) {
+    var PuppiesAudienceStore = function(show_slug) {
+      var itemsRef = new Firebase(FIREBASE_URL + '/' + show_slug + '/puppies/responses/');
+      return $firebaseObject(itemsRef);
+    }
+    return PuppiesAudienceStore;
+  }])

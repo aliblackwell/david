@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('dashboard.controllers', [])
-  .controller('dashboardCtrl', ['$scope', 'AvailablePerformances','Sections','ActiveSection', '$ionicModal', 'Hips', '$interval', '$timeout', 'TriggerReload', 'DecisionTimer', 'PuppiesWords', 'Waltz', function ($scope, AvailablePerformances, Sections, ActiveSection, $ionicModal, Hips, $interval, $timeout, TriggerReload, DecisionTimer, PuppiesWords, Waltz){
+  .controller('dashboardCtrl', ['$scope', 'AvailablePerformances','Sections','ActiveSection', '$ionicModal', 'Hips', '$interval', '$timeout', 'TriggerReload', 'DecisionTimer', 'PuppiesWords', 'PuppiesAudienceStore', 'Waltz', function ($scope, AvailablePerformances, Sections, ActiveSection, $ionicModal, Hips, $interval, $timeout, TriggerReload, DecisionTimer, PuppiesWords, PuppiesAudienceStore, Waltz){
 
-    var performances, sections, decision, puppies, waltz;
+    var performances, sections, decision, puppies, puppiesAudienceStore, waltz;
 
     $scope.d = {};
 
@@ -64,6 +64,10 @@ angular.module('dashboard.controllers', [])
       if(activeSection.key === 'waltz') {
         initiateWaltz();
       }
+
+      if(activeSection.key === 'puppies') {
+        startCountingPuppies();
+      }
     }
 
     var initiateWaltz = function() {
@@ -114,12 +118,61 @@ angular.module('dashboard.controllers', [])
           }
         }
         // if(!puppies.neutral) {
-        puppies.$value = words;
-        puppies.$save()
+        puppies.$ref().set(words);
         // }
       })
 
     }
+
+    var startCountingPuppies = function() {
+      puppiesAudienceStore = new PuppiesAudienceStore($scope.d.activeShow);
+      puppiesAudienceStore.$loaded().then(function() {
+        $scope.clearPuppiesCounter = $interval(function() {
+          countPuppies();
+        },200);
+      })
+    }
+
+    var countPuppies = function() {
+      var sexy = 0,
+          shiny = 0,
+          neutral = 0,
+          artificial = 0,
+          pathetic = 0;
+
+      angular.forEach(puppiesAudienceStore, function(user, key) {
+        angular.forEach(user, function(value, word) {
+
+          switch(word) {
+            case 'sexy':
+              sexy += value.tapCount;
+              break;
+            case 'shiny':
+              shiny += value.tapCount;
+              break;
+            case 'neutral':
+              neutral += value.tapCount;
+              break;
+            case 'artificial':
+              artificial += value.tapCount;
+              break;
+            case 'pathetic':
+              pathetic += value.tapCount;
+              break;
+            default:
+              sexy = 0;
+          }
+        })
+      })
+      puppies.sexy.tapCount = sexy;
+      puppies.shiny.tapCount = shiny;
+      puppies.neutral.tapCount = neutral;
+      puppies.artificial.tapCount = artificial;
+      puppies.pathetic.tapCount = pathetic;
+      puppies.$save();
+    }
+
+
 
     $scope.startTimer = function(activeSection) {
       decision = new DecisionTimer($scope.d.activeShow, activeSection.key);
@@ -178,6 +231,10 @@ angular.module('dashboard.controllers', [])
     var cleanupPreviousSection = function() {
       if ($scope.clearDecisionTimer) {
         $interval.cancel($scope.clearDecisionTimer);
+      }
+
+      if ($scope.clearPuppiesCounter) {
+        $interval.cancel($scope.clearPuppiesCounter);
       }
     }
 
