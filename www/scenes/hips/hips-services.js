@@ -1,13 +1,22 @@
 'use strict';
 
 angular.module('david.hips')
-  .factory("HipsResponses", ['$firebaseObject','FirebaseShowURL', function($firebaseObject, FirebaseShowURL) {
-    var HipsResponses = function(user, voteIteration) {
+  .factory("HipsUserResponse", ['$firebaseObject','FirebaseShowURL', function($firebaseObject, FirebaseShowURL) {
+    var HipsUserResponse = function(user, voteIteration) {
       var f = new FirebaseShowURL();
       var itemsRef = new Firebase(f.url + '/hips/responses/' + voteIteration + '/' + user.$id);
       return $firebaseObject(itemsRef);
     }
-    return HipsResponses;
+    return HipsUserResponse;
+  }])
+
+  .factory("HipsAudienceResponses", ['$firebaseObject','FirebaseShowURL', function($firebaseObject, FirebaseShowURL) {
+    var HipsAudienceResponses = function(voteIteration) {
+      var f = new FirebaseShowURL();
+      var itemsRef = new Firebase(f.url + '/hips/responses/' + voteIteration);
+      return $firebaseObject(itemsRef);
+    }
+    return HipsAudienceResponses;
   }])
 
   .factory("Hips", ['$firebaseObject','FirebaseShowURL', function($firebaseObject, FirebaseShowURL) {

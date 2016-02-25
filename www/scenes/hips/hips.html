@@ -7,7 +7,7 @@
         <countdown timer="d.timer"></countdown>
 
         <div class="input range range-positive">
-          <input type="range" min="0" max="100" ng-model="d.distance"  ng-disabled="d.voted" ng-change="updateSliderMessage(d.distance)">
+          <input type="range" min="0" max="100" ng-model="d.distance"  ng-disabled="d.voted" ng-change="updateSliderMessage(d.distance)" ng-model-options="{ debounce: 500 }">
         </div>
 
       <div ng-show="">

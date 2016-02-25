@@ -44,6 +44,8 @@ angular.module('dashboard.controllers', [])
 
     $scope.changeActiveSection = function(activeSection) {
 
+      var delay = 100;
+
       cleanupPreviousSection();
 
       angular.forEach($scope.d.sections, function(section, key) {
@@ -51,7 +53,7 @@ angular.module('dashboard.controllers', [])
           section.active = false;
         }
       });
-      $scope.activeSection.section = activeSection.key;
+
       if (activeSection.type === 'decision') {
         $scope.startTimer(activeSection);
       }
@@ -68,6 +70,21 @@ angular.module('dashboard.controllers', [])
       if(activeSection.key === 'puppies') {
         startCountingPuppies();
       }
+
+      if(activeSection.key === 'hips') {
+        $scope.hipsStart();
+        // set a slightly longer delay if it's hips
+        // to give time for voteIteration to be set
+        // bit hacky but it's 9pm the night before the show...
+        delay = 1000;
+      }
+
+      $timeout(function() {
+        $scope.activeSection.section = activeSection.key;
+      }, delay);
+
+
+
     }
 
     var initiateWaltz = function() {
@@ -217,13 +234,6 @@ angular.module('dashboard.controllers', [])
         // cleanup
         $scope.modal.remove();
 
-        if ($scope.clearInterval) {
-          $interval.cancel($scope.clearInterval);
-        }
-
-        if (hips) {
-          hips.$destroy();
-        }
 
       });
     }
@@ -235,6 +245,14 @@ angular.module('dashboard.controllers', [])
 
       if ($scope.clearPuppiesCounter) {
         $interval.cancel($scope.clearPuppiesCounter);
+      }
+
+      if ($scope.clearInterval) {
+        $interval.cancel($scope.clearInterval);
+      }
+
+      if (hips) {
+        hips.$destroy();
       }
     }
 
@@ -297,10 +315,8 @@ angular.module('dashboard.controllers', [])
       }
       if (!hips.results) {
         hips.results = {}
-        hips.results.iterator = 0;
       }
-      hips.results[hips.voteIteration] = newObj
-      hips.results.iterator++;
+      hips.results[hips.voteIteration] = newObj;
       hips.$save();
       $timeout(function() {
         hipsStartCountdown();
@@ -311,9 +327,11 @@ angular.module('dashboard.controllers', [])
 
     $scope.hipsStart = function() {
       hips = new Hips($scope.d.activeShow);
-      hips.$loaded().then(function(){
-        hipsStartCountdown();
-      })
+      hips.$ref().set({})
+      voteIteration = 0;
+
+      hipsStartCountdown();
+
     }
 
     var stopHips = function() {

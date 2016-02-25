@@ -23,10 +23,4 @@ angular.module('projections.hips', [])
       });
     }
 
-
-
-
-
-
-
   }])

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('david.hips', [])
-  .controller('hipsCtrl', ['$scope', 'User', 'Hips', 'HipsResults', 'HipsTimer', 'HipsResponses', '$timeout', '$interval', '$ionicModal', function ($scope, User, Hips, HipsResults, HipsTimer, HipsResponses, $timeout, $interval, $ionicModal){
+  .controller('hipsCtrl', ['$scope', 'User', 'Hips', 'HipsResults', 'HipsTimer', 'HipsUserResponse', 'HipsAudienceResponses', '$timeout', '$interval', '$ionicModal', function ($scope, User, Hips, HipsResults, HipsTimer, HipsUserResponse, HipsAudienceResponses, $timeout, $interval, $ionicModal){
 
     /*
       This controller saves the user response
@@ -10,7 +10,7 @@ angular.module('david.hips', [])
       // Improve the CSS of the animations
     */
 
-    var unwatchResults, choice,
+    var unwatchResults, choice, iteration,
         timer, hips, saveLocation,
         introMessage = 'Move David...',
         user = new User();
@@ -22,7 +22,29 @@ angular.module('david.hips', [])
     }
 
     hips = new Hips();
+    hips.$loaded().then(function(){
+      watchAudienceResults();
+    })
 
+    var audienceUnwatch, hipsAudienceResponses;
+    var watchAudienceResults = function() {
+      console.log('watching')
+      if (audienceUnwatch) {
+        audienceUnwatch();
+      }
+      if (hipsAudienceResponses) {
+        hipsAudienceResponses.$destroy();
+      }
+      console.log(iteration);
+      hipsAudienceResponses = new HipsAudienceResponses('vote'+iteration);
+      audienceUnwatch = hipsAudienceResponses.$watch(function() {
+
+        angular.forEach(hipsAudienceResponses, function(vote, user) {
+          console.log(vote, user);
+        })
+
+      })
+    }
 
 
     var getRelativeDistance = function(oldValue, newValue) {
@@ -68,43 +90,38 @@ angular.module('david.hips', [])
 
 
     $scope.d.voted = false;
-
     $scope.d.distance = $scope.previousValue;
+    iteration = 0;
+
+
+
+
 
     timer = new HipsTimer();
     var timerUnwatch = timer.$watch(function() {
       $scope.d.timer = timer.$value;
     })
 
-
-
-
     user.$loaded().then(function(){
       user.uuid = user.$id;
     });
 
-
-
     $scope.submitRange = function() {
-      saveLocation = new HipsResponses(user, hips.voteIteration);
+      saveLocation = new HipsUserResponse(user, 'vote'+iteration);
       saveLocation.decision = $scope.d.distance;
       saveLocation.$save();
     };
 
 
     $scope.allowNewVote = function() {
-      if ($scope.modal) {
-        $scope.modal.hide().then(function(){
-          $scope.modal.remove();
-        })
-      }
+      watchAudienceResults();
       $scope.d.voted = false;
       $scope.d.message = introMessage;
     };
 
     var displayAudienceResult = function() {
       // Display a written result
-      var message = getRelativeDistance($scope.previousValue, results[hips.voteIteration].avg);
+      var message = getRelativeDistance($scope.previousValue, results['vote'+iteration].avg);
       if (message) {
         if (message === 'same') {
           $scope.d.message = 'The audience thought he was just right';
@@ -163,18 +180,19 @@ angular.module('david.hips', [])
 
 
 
-      if(results[hips.voteIteration]) {
+      if(results['vote'+iteration]) {
 
 
         // Display a message
         displayAudienceResult()
 
         // change previous value after running displayAudienceResult
-        $scope.previousValue = results[hips.voteIteration].avg;
+        $scope.previousValue = results['vote'+iteration].avg;
 
         // Update the slider with the new value
         $timeout(function(){
-          animateSlider(results[hips.voteIteration].avg);
+          animateSlider(results['vote'+iteration].avg);
+          iteration++
         }, 1000);
         // If they haven't voted by now, force the voted=true state
         $scope.d.voted = true;
