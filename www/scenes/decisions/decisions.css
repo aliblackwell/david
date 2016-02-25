@@ -44,10 +44,12 @@ img.results-image {
 
 img.result {
   width: 70vw;
+  -webkit-border-radius: 100%;
   border-radius: 100%;
   border: 2vw solid rgba(255,255,255,.1);
   position: absolute;
   top: 50%;
   left: 50%;
+  -webkit-transform: translateY(-50%) translateX(-50%);
   transform: translateY(-50%) translateX(-50%);
 }

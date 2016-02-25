@@ -33,7 +33,7 @@ angular.module('david', [
   $ionicConfigProvider.views.transition('none');
 }])
 
-.run(['$ionicPlatform', 'Settings', '$location', '$rootScope', '$state', '$ionicViewSwitcher', '$window', 'TriggerReload', function($ionicPlatform, Settings, $location, $rootScope, $state, $ionicViewSwitcher, $window, TriggerReload) {
+.run(['$ionicPlatform', 'Settings', '$location', '$rootScope', '$state', '$ionicViewSwitcher', '$window', 'TriggerReload', 'NetworkCheck', function($ionicPlatform, Settings, $location, $rootScope, $state, $ionicViewSwitcher, $window, TriggerReload, NetworkCheck) {
 
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -59,12 +59,9 @@ angular.module('david', [
       var settings = new Settings();
       $rootScope.unwatchSettings = settings.$watch(function() {
         $ionicViewSwitcher.nextDirection('back');
-        console.log(settings.section)
         $state.go(settings.section);
         if (window.navigator.vibrate) {
-
           window.navigator.vibrate(200);
-
         }
       });
     }
@@ -82,7 +79,6 @@ angular.module('david', [
         if(reload.$value != reloadHolder) {
           $window.location.reload();
         }
-        console.log(reload.$value)
       });
     }
 

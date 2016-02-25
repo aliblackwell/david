@@ -44,8 +44,8 @@ angular.module('dashboard.services', [])
           'actionWord': 'Launch Modal',
           'controls': true
         },
-        'skipping': {
-          'key': 'skipping',
+        'skipping1': {
+          'key': 'skipping1',
           'type': 'option',
           'active': false,
           'controls': false,

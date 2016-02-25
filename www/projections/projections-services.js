@@ -24,6 +24,14 @@ angular.module('projections.services', [])
           'active': false,
           'actionWord': 'Launch Modal',
           'controls': true
+        },
+        'end': {
+          'key': 'end',
+          'title': 'The End',
+          'type': 'option',
+          'active': false,
+          'actionWord': 'Launch Modal',
+          'controls': true
         }
 
       }

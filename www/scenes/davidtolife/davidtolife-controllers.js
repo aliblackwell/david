@@ -17,7 +17,7 @@ angular.module('david.davidtolife', ['firebase'])
     var init = function() {
       $scope.d = {}
       $scope.d.slideactive = true;
-      $scope.d.show = true;
+
       user = new User();
       user.$loaded().then(function(){
         user.uuid = user.$id;
@@ -27,6 +27,13 @@ angular.module('david.davidtolife', ['firebase'])
           result[user.$id].start = Date.now();
           result.$save()
         })
+
+        // change the blobs to arrows
+        var icons = document.querySelectorAll('.icon.ion-record');
+        for(var i = 0; i < icons.length; i++) {
+          icons[i].className = 'icon ion-arrow-right-c'
+        }
+        $scope.d.show = true;
       });
 
 
@@ -40,7 +47,6 @@ angular.module('david.davidtolife', ['firebase'])
 
     $scope.setFinishedSwiping = function() {
       var finished = new FinishedSwipes();
-      var arr
       finished.$add(user.name);
       finished.$save();
       $scope.d.slideactive = false;

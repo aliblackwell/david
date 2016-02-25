@@ -8,11 +8,13 @@
     "mockfirebase": "~0.11.0",
     "firebase": "~2.4.0",
     "angularfire": "~1.1.3",
-    "normalize-css": "~3.0.3"
+    "normalize-css": "~3.0.3",
+    "brim": "~1.0.11"
   },
   "dependencies": {
     "ngtouchmove": "~1.0.1",
-    "raven-js": "~2.1.1"
+    "raven-js": "~2.1.1",
+    "platform.js": "platform#~1.3.1"
   },
   "resolutions": {
     "angular": "1.5.0"

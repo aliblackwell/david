@@ -9,7 +9,6 @@ angular.module('david.puppies').config(['$stateProvider', function($stateProvide
         controller: 'puppiesCtrl',
           resolve: {
             user: function(User) {
-              console.log('works')
               var user = new User();
               return user;
             }

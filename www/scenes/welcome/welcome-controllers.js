@@ -26,6 +26,11 @@ angular.module('david.welcome', [])
       loadAvailableShows();
     })
 
+    $scope.d.openModal = function() {
+      user.readTCs = true;
+      user.$save();
+      $scope.modal.show();
+    };
 
     var loadAvailableShows = function() {
       shows = new AvailablePerformances();
@@ -34,9 +39,7 @@ angular.module('david.welcome', [])
         $scope.d.saveState = 'Save';
         $scope.d.buttonStyle = 'button button-full button-positive';
         loadUser();
-      }).catch(function(error) {
-
-      });
+      })
     }
 
     var loadUser = function() {
@@ -48,6 +51,9 @@ angular.module('david.welcome', [])
         if (user.name) {
           $scope.saveResponse();
         }
+
+        $scope.pageLoaded = true;
+
       })
 
     }
@@ -72,9 +78,6 @@ angular.module('david.welcome', [])
         $scope.cards = Array.prototype.slice.call(firstCards, 0);
         $scope.d.formFilled = true;
       }
-
-      $scope.pageLoaded = true;
-
     }
 
     $scope.resetSave = function() {
@@ -138,15 +141,14 @@ angular.module('david.welcome', [])
     }).then(function(modal) {
       $scope.modal = modal;
     });
-    $scope.openModal = function() {
-      user.readTCs = true;
-      user.$save();
-      console.log(user);
-      $scope.modal.show();
-    };
+
+
+
     $scope.closeModal = function() {
       $scope.modal.hide();
     };
+
+
     //Cleanup the modal when we're done with it!
     $scope.$on('$destroy', function() {
       $scope.modal.remove();

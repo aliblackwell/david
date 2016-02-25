@@ -1,20 +1,27 @@
 'use strict';
 
 angular.module('david.intimacy', [])
-  .controller('intimacyCtrl', ['$scope', 'User', '$state', '$interval', function ($scope, User, $state, $interval){
+  .controller('intimacyCtrl', ['$scope', 'User', '$state', '$interval', 'preloader', function ($scope, User, $state, $interval, preloader){
 
     var currentSection, img, canvas, stop, ctx;
 
     currentSection = $state.current.name;
 
+    var images = ['/img/satin-blue.jpg', '/img/rough-blue.jpg']
+
+    preloader.preloadImages(images)
+    .then(function() {
+      $scope.d.imagesLoaded = true;
+    })
+
     $scope.d = {}
 
     if (currentSection === 'intimacy') {
-      $scope.d.imgsrc = '/img/satin-blue.jpg';
+      $scope.d.imgsrc = images[0];
       $scope.d.intimacy = true;
       $scope.d.heading = 'touch me';
     } else {
-      $scope.d.imgsrc = '/img/rough-blue.jpg';
+      $scope.d.imgsrc = images[1];
       $scope.d.heading = "don't touch me"
       $scope.d.blank = true;
     }

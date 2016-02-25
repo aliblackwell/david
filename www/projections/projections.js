@@ -11,7 +11,8 @@ angular.module('projections', [
   'projections.puppies',
   'projections.hips',
   'projections.blank',
-  'projections.davidtolife'
+  'projections.davidtolife',
+  'projections.end'
   ])
 
 .run(['$ionicPlatform',

@@ -53,6 +53,10 @@ angular.module('david.global.services', [])
     return FinishedSwipes;
   }])
 
+  .factory("NetworkCheck", ['FIREBASE_URL', function(FIREBASE_URL) {
+    return new Firebase(FIREBASE_URL + 'networkcheck');
+  }])
+
 
 
 

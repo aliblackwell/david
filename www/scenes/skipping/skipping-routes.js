@@ -2,7 +2,7 @@
 
 angular.module('david.skipping').config(['$stateProvider', function($stateProvider) {
   $stateProvider
-    .state('skipping', {
+    .state('skipping1', {
       cache: false,
       views: {
         'main-view': {
@@ -10,7 +10,6 @@ angular.module('david.skipping').config(['$stateProvider', function($stateProvid
           controller: 'skippingCtrl',
             resolve: {
               user: function(User) {
-                console.log('works')
                 var user = new User();
                 return user;
               }
@@ -26,7 +25,6 @@ angular.module('david.skipping').config(['$stateProvider', function($stateProvid
             controller: 'skippingCtrl',
               resolve: {
                 user: function(User) {
-                  console.log('works')
                   var user = new User();
                   return user;
                 }

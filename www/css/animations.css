@@ -2,7 +2,8 @@
  position: absolute;
  opacity: 0.1;
  top: 50%;
-  transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+ transform: translateY(-50%);
  -webkit-animation: pulsing 4s ease-out infinite normal;
  animation: pulsing 4s ease-out infinite normal;
 }

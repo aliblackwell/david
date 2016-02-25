@@ -27,7 +27,8 @@
         </form>
       </div>
 
-      <p class="tcs" ng-if="!d.formFilled">You agree to our <span class="tandcs" ng-click="openModal()">Terms and Conditions</span></p>
+
+      <p class="tcs" ng-if="!d.formFilled">You agree to our <span class="tandcs" ng-click="d.openModal()">Terms and Conditions</span></p>
 
       <span  ng-if="user" ng-class="d.buttonStyle" ng-click="saveResponse()">{{d.saveState}}</span>
 
@@ -50,6 +51,7 @@
 
 
 <script id="my-modal.html" type="text/ng-template">
+
   <ion-modal-view>
     <ion-header-bar ng-click="closeModal()">
       <div class="row">
@@ -67,4 +69,5 @@
       Hello!
     </ion-content>
   </ion-modal-view>
+
 </script>

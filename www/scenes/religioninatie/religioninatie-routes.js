@@ -9,7 +9,6 @@ angular.module('david.religioninatie').config(['$stateProvider', function($state
         controller: 'religioninatieCtrl',
           resolve: {
             user: function(User) {
-              console.log('works')
               var user = new User();
               return user;
             }
