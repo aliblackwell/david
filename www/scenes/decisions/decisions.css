@@ -17,6 +17,7 @@
 
 img.choice {
   width: 46vw;
+  -webkit-border-radius: 100%;
   border-radius: 100%;
   border: 2vw solid rgba(255,255,255,.1);
   float: left;

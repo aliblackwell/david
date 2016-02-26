@@ -13,7 +13,7 @@ angular.module('david.mundane', [])
 
     var intWatch;
 
-    var laughArray = ['lmao','haha','lol','rofl','lolz','hahaha','lolz','ha','haha', 'ooooo']
+    var laughArray = ['lmao','haha','lol','rofl','lolz','hahaha','lolz','ha','haha', 'ooooo','hehehe']
 
     $scope.$watch('d.laughing', function(newVal) {
       console.log(newVal)

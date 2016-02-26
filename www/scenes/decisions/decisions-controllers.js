@@ -10,7 +10,7 @@ angular.module('david.decisions', ['firebase'])
 
     $scope.d = {}
     $scope.d.decided = false;
-    $scope.d.heading = 'Choose';
+    $scope.d.heading = 'Choose what happens next';
 
     var currentSection = $state.current.name;
 

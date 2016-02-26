@@ -1,11 +1,17 @@
 'use strict';
 
 angular.module('david.skipping', [])
-  .controller('skippingCtrl', ['$scope', 'User', 'SkippingStore', '$state', function ($scope, User, SkippingStore, $state){
+  .controller('skippingCtrl', ['$scope', 'User', 'SkippingStore', '$state', '$timeout', function ($scope, User, SkippingStore, $state, $timeout){
     var currentSection, images, store, numberOfDecisions;
     $scope.d = {}
 
-    $scope.d.active = true;
+
+    var store;
+
+
+    $timeout(function() {
+      $scope.d.enough = true;
+    }, 90000);
 
 
     var user = new User();
@@ -18,12 +24,16 @@ angular.module('david.skipping', [])
 
     var loadDatabase = function() {
       currentSection = $state.current.name;
-      store = new SkippingStore(currentSection);
+      store = new SkippingStore(currentSection, user.$id);
+      store.$loaded().then(function(){
+        $scope.startSkipping();
+      })
+
     }
 
     $scope.startSkipping = function() {
       $scope.d.active = true;
-      $scope.d.start = false;
+      $scope.d.enough = false;
       store[user.$id] = {};
       store[user.$id].start = Date.now();
       store.$save();
@@ -34,6 +44,7 @@ angular.module('david.skipping', [])
 
       $scope.d.finish = true;
       $scope.d.active = false;
+      $scope.d.enough = false;
       store[user.$id].end = Date.now();
       store.$save();
     }

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('david.davidtolife', ['firebase'])
-  .controller('davidtolifeCtrl', ['$scope', 'User', '$ionicSlideBoxDelegate', 'preloader', 'SwipeImages', 'DavidToLifeResults', 'FinishedSwipesScenes', function ($scope, User, $ionicSlideBoxDelegate, preloader, SwipeImages, DavidToLifeResults, FinishedSwipesScenes){
+  .controller('davidtolifeCtrl', ['$scope', 'User', '$ionicSlideBoxDelegate', 'preloader', 'SwipeImages', 'DavidToLifeResults', 'FinishedSwipesScenes', '$timeout', function ($scope, User, $ionicSlideBoxDelegate, preloader, SwipeImages, DavidToLifeResults, FinishedSwipesScenes, $timeout){
     var user,
         result,
         lifeSwipes,
@@ -25,12 +25,13 @@ angular.module('david.davidtolife', ['firebase'])
         result.start = Date.now();
         result.$save()
 
-
-        // change the blobs to arrows
-        var icons = document.querySelectorAll('.icon.ion-record');
-        for(var i = 0; i < icons.length; i++) {
-          icons[i].className = 'icon ion-arrow-right-c'
-        }
+        $timeout(function() {
+          // change the blobs to arrows
+          var icons = document.querySelectorAll('.icon.ion-record');
+          for(var i = 0; i < icons.length; i++) {
+            icons[i].className = 'icon ion-arrow-right-c'
+          }
+        })
         $scope.d.show = true;
       });
 

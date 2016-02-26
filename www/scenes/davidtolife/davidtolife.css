@@ -22,3 +22,7 @@ ion-slide {
 .finished, .begin {
   background: transparent;
 }
+
+.icon.ion-record {
+  display: none;
+}

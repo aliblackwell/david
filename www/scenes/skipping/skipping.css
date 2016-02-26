@@ -1,9 +1,4 @@
-.skipping .buttons {
-  position: absolute;
-  bottom: 1vh;
-  right: 0;
-  width: 100%;
-}
+
 
 ion-content.skipping {
   background: transparent;
@@ -30,4 +25,21 @@ h1.again {
     left: 50%;
     line-height: 0;
     margin: 0;
+}
+
+.skipping-button {
+  left: 50%;
+  position: absolute;
+  bottom: 6vh;
+  width: 50vw;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+/* Landscape */
+@media only screen
+  and (orientation: landscape) {
+    .skipping .epoq-voice {
+      display: none;
+    }
 }

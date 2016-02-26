@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('david.religioninatie', [])
-  .controller('religioninatieCtrl', ['$scope', function ($scope){
+  .controller('religioninatieCtrl', ['$scope', 'user', 'BopsUserStore', function ($scope, user, BopsUserStore){
 
-    console.log('going')
-    ripplyScott.init('js-ripple-btn', 0.75);
+    var store = new BopsUserStore(user);
+    ripplyScott.init('js-ripple-btn', 0.75, store);
 
 
     // Should be run whenever this view is closed

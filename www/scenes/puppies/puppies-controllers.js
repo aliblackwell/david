@@ -31,7 +31,7 @@ angular.module('david.puppies', [])
       }
       // Update count locally to feel immediate
       // this will get overwritten in the next $watch cycle
-      //$scope.words[wordObj.word].tapCount+=1;
+      $scope.words[wordObj.word].tapCount+=1;
     }
 
     $timeout(function() {

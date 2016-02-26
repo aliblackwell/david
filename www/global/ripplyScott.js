@@ -21,7 +21,7 @@ var ripplyScott = (function() {
       transformOrigin: '50% 50%',
       scale: 0,
       opacity: 1,
-      ease: Linear.easeOut
+      ease: Linear.easeIn
     },{
       scale: scale_ratio,
       opacity: 0
@@ -32,12 +32,14 @@ var ripplyScott = (function() {
   return {
 
     tl: '',
-    init: function(target, timing) {
+    init: function(target, timing, store) {
       var button = document.getElementById(target);
       var circle = document.getElementById('js-ripple'),
           ripple = document.querySelectorAll('.js-ripple');
 
       button.addEventListener('click', function(event) {
+        store[Date.now()] = 'bop';
+        store.$save();
         rippleAnimation.call(this, event, timing, ripple);
       });
     },

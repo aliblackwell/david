@@ -4,25 +4,19 @@
     <img class="bg-logo" src="img/epoq_logo-icon_WHITE.svg">
 
 
+    <h1 class="epoq-voice relative" ng-show="d.active && !d.enough">show David this screen to keep him skipping</h1>
 
-<!--     <h1 class="epoq-voice relative" ng-show="d.start">Hold your phone up high to keep David skipping</h1>
-
-    <button class="button button-block button-positive centered" ng-click="startSkipping()" ng-show="d.start">
-      Got it
-    </button> -->
-
-
-    <h1 class="epoq-voice relative" ng-show="d.active">show David this screen to keep him skipping</h1>
+    <h1 class="epoq-voice relative" ng-show="d.active && d.enough">keep him skipping?</h1>
 
     <h1 class="again" ng-if="d.active">Again</h1>
 
 
 
-    <div class="buttons" ng-show="d.active">
 
-      <button class="button button-block button-positive" ng-click="stopSkipping()">Enough</button>
 
-    </div>
+      <button  ng-show="d.enough" class="button button-positive skipping-button" ng-click="stopSkipping()">Enough</button>
+
+
 
 
     <h1 class="epoq-voice relative" ng-show="d.finish">Thank you</h1>
