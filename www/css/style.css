@@ -114,3 +114,14 @@ button.centered {
   width: 50vw;
 }
 
+/* Landscape */
+@media only screen
+  and (orientation: landscape) {
+    .hide-port {
+      display: none;
+    }
+
+    .puppies .epoq-voice {
+      display: none;
+    }
+}

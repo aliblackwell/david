@@ -1,7 +1,11 @@
 <ion-view>
-  <ion-content padding="true" scroll="false">
+  <ion-content padding="true" scroll="false" class="puppies">
 
-    <h1 class="epoq-voice relative"><span ng-if="d.prep">What do you think of David?</span><span ng-if="!d.prep">David is&hellip;?</span></h1>
+    <h1 class="epoq-voice relative"><span ng-if="d.prep && !d.encourageReload">What do you think of David?</span>
+
+    <h1 class="epoq-voice relative hide-port"><span ng-if="d.encourageReload">Rotate your phone to see the results</span>
+
+    <span ng-if="!d.prep && !d.encourageReload">David is&hellip;?</span></h1>
     <div class="list list-inset" ng-class="{'faded': d.prep}">
       <div class="item" ng-click="tapWord(word)"  ng-repeat="word in words" id="{{word.word}}">
         {{word.word}}

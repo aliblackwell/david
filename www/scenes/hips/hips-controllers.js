@@ -28,14 +28,12 @@ angular.module('david.hips', [])
 
     var audienceUnwatch, hipsAudienceResponses;
     var watchAudienceResults = function() {
-      console.log('watching')
       if (audienceUnwatch) {
         audienceUnwatch();
       }
       if (hipsAudienceResponses) {
         hipsAudienceResponses.$destroy();
       }
-      console.log(iteration);
       hipsAudienceResponses = new HipsAudienceResponses('vote'+iteration);
       audienceUnwatch = hipsAudienceResponses.$watch(function() {
         $scope.audienceResponses = hipsAudienceResponses;

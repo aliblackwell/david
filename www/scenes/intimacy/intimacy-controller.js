@@ -50,7 +50,6 @@ angular.module('david.intimacy', [])
     }
 
     $scope.blankTouchmove = function($event) {
-      console.log('touch')
       $scope.d.touched = true;
     }
 

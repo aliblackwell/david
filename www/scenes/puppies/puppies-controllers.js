@@ -1,6 +1,6 @@
 'use strict';
 angular.module('david.puppies', [])
-  .controller('puppiesCtrl', ['$scope', 'PuppiesWords', 'PuppiesUserStore', '$timeout', 'user', '$state', function ($scope, PuppiesWords, PuppiesUserStore, $timeout, user, $state){
+  .controller('puppiesCtrl', ['$scope', 'PuppiesWords', 'PuppiesUserStore', '$timeout', 'user', '$state', '$window', function ($scope, PuppiesWords, PuppiesUserStore, $timeout, user, $state, $window){
 
 
     var currentSection = $state.current.name;
@@ -11,6 +11,7 @@ angular.module('david.puppies', [])
     var words = new PuppiesWords();
 
     $scope.d = {}
+    $scope.encourageReload = false;
 
     $scope.d.prep = true;
 
@@ -19,6 +20,18 @@ angular.module('david.puppies', [])
     words.$watch(function() {
       // we are only watching, not binding/syncing to remove chance of falling out of sync
       $scope.words = words;
+
+      if (!$scope.d.encourageReload) {
+        var biggestWord = 0;
+        angular.forEach(words, function(word, key) {
+          if (word.tapCount > biggestWord) {
+            biggestWord = word.tapCount;
+          }
+        })
+        if (biggestWord > ($window.innerWidth - 20)) {
+          $scope.d.encourageReload = true;
+        }
+      }
     })
 
     $scope.tapWord = function(wordObj) {
@@ -31,7 +44,7 @@ angular.module('david.puppies', [])
       }
       // Update count locally to feel immediate
       // this will get overwritten in the next $watch cycle
-      $scope.words[wordObj.word].tapCount+=1;
+      // $scope.words[wordObj.word].tapCount+=1;
     }
 
     $timeout(function() {

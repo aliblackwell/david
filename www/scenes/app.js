@@ -51,7 +51,6 @@ angular.module('david', [
     }
 
     $rootScope.watchSettings = function() {
-      console.log($state.current.name)
       if ($state.current.name != 'refresh') {
         // stop watching if already watching
         if ($rootScope.unwatchSettings) {
