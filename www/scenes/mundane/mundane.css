@@ -1,0 +1,9 @@
+.laughter {
+  position: absolute;
+  top: 0px;
+  left: -10%;
+  width: 120%;
+  color: white;
+  opacity: 0.3;
+  line-height: 1rem;
+}

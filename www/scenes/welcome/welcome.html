@@ -4,9 +4,9 @@
 
     <div ng-if="pageLoaded">
 
+      <h1 class="epoq-voice relative" ng-if="d.formFilled">Hello {{user.name}}, you have selected {{showName}}</h1>
+
       <div class="list list-inset" ng-if="!d.formFilled">
-
-
 
         <form>
           <label class="item item-input item-stacked-label">
@@ -27,13 +27,12 @@
         </form>
       </div>
 
-
       <p class="tcs" ng-if="!d.formFilled">You agree to our <span class="tandcs" ng-click="d.openModal()">Terms and Conditions</span></p>
 
       <span  ng-if="user" ng-class="d.buttonStyle" ng-click="saveResponse()">{{d.saveState}}</span>
 
 
-      <h1 class="epoq-voice" ng-if="d.formFilled">Hello {{user.name}}, you have selected {{user.show}}</h1>
+
 
       <td-cards ng-if="d.formFilled">
         <td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe-left="cardSwipedLeft(card)" on-swipe-right="cardSwipedRight(card)" on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}}">

@@ -72,6 +72,7 @@ angular.module('david.welcome', [])
         $scope.d.buttonStyle = 'button button-full button-positive';
         $scope.d.formFilled = false;
       } else {
+        $scope.showName = shows[$scope.user.show].name;
         $scope.d.saveState = 'Edit';
         $scope.d.buttonStyle = 'edit-toggle';
         lifeSwipes = new LifeSwipes(user);

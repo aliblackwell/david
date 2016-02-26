@@ -8,7 +8,7 @@
       <countdown timer="d.timer"></countdown>
 
 
-      <div class="decisions-results-wrapper">
+      <div class="decisions-results-wrapper" ng-if="!d.decided">
         <img class="results-image" ng-src="{{image.imgUrl}}" ng-repeat="image in d.results" style="width: {{d.thumbWidth}}vw">
       </div>
 

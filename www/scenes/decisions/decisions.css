@@ -20,10 +20,14 @@ img.choice {
   border-radius: 100%;
   border: 2vw solid rgba(255,255,255,.1);
   float: left;
+  -webkit-transform: scale(0.9,0.9);
+  transform: scale(0.9,0.9);
 }
 
 img.choice.chosen {
   border-color: #0c01a5;
+  -webkit-transform: scale(1,1);
+  transform: scale(1,1);
 }
 
 img.results-image {

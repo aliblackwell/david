@@ -38,12 +38,8 @@ angular.module('david.hips', [])
       console.log(iteration);
       hipsAudienceResponses = new HipsAudienceResponses('vote'+iteration);
       audienceUnwatch = hipsAudienceResponses.$watch(function() {
-
-        angular.forEach(hipsAudienceResponses, function(vote, user) {
-          console.log(vote, user);
-        })
-
-      })
+        $scope.audienceResponses = hipsAudienceResponses;
+      });
     }
 
 
