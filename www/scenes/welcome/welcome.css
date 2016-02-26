@@ -76,3 +76,7 @@ td-card img {
   text-align: center;
   display: block;
 }
+
+.tcs-wrap {
+  padding: 0 2vw;
+}

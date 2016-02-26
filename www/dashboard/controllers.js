@@ -291,6 +291,15 @@ angular.module('dashboard.controllers', [])
       var mean,
           results = []
       if (hips.responses) {
+
+        // if there's a previous result, get results that are either bigger or smaller than it:
+
+        // var previousVoteIteration = voteIteration-1;
+        // if ((previousVoteIteration > -1) && (hips.results != undefined)) {
+        //   console.log(hips.results);
+        //   var previousResult = hips.results['vote'+previousVoteIteration].avg;
+        //   console.log(previousResult);
+        // }
         angular.forEach(hips.responses[hips.voteIteration], function(response, key) {
           results.push(parseInt(response.decision));
         });

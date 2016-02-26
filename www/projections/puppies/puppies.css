@@ -48,13 +48,15 @@
 .mask.top {
   top: 0px;
   animation: infinite 8s masktop;
-  -webkit-animation: infinite 8s linear masktop;
+  -webkit-animation-timing-function: steps(200);
+  -webkit-animation: masktop 8s infinite linear;
 }
 
 .mask.bottom {
   bottom: 0px;
   animation: infinite 8s maskbottom;
-  -webkit-animation: infinite 8s linear maskbottom;
+  -webkit-animation-timing-function: steps(200);
+  -webkit-animation: maskbottom 8s infinite linear;
 }
 
 /* The animation code */

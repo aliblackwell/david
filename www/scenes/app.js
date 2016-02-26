@@ -51,19 +51,21 @@ angular.module('david', [
     }
 
     $rootScope.watchSettings = function() {
-
-      // stop watching if already watching
-      if ($rootScope.unwatchSettings) {
-        $rootScope.unwatchSettings();
-      }
-      var settings = new Settings();
-      $rootScope.unwatchSettings = settings.$watch(function() {
-        $ionicViewSwitcher.nextDirection('back');
-        $state.go(settings.section);
-        if (window.navigator.vibrate) {
-          window.navigator.vibrate(200);
+      console.log($state.current.name)
+      if ($state.current.name != 'refresh') {
+        // stop watching if already watching
+        if ($rootScope.unwatchSettings) {
+          $rootScope.unwatchSettings();
         }
-      });
+        var settings = new Settings();
+        $rootScope.unwatchSettings = settings.$watch(function() {
+          $ionicViewSwitcher.nextDirection('back');
+          $state.go(settings.section);
+          if (window.navigator.vibrate) {
+            window.navigator.vibrate(200);
+          }
+        });
+      }
     }
 
     var reloadHolder = false;
@@ -110,6 +112,17 @@ angular.module('david', [
       'main-view': {
         templateUrl: 'scenes/welcome/welcome.html',
         controller: 'welcomeCtrl'
+      }
+    }
+  })
+
+  $stateProvider.state('refresh', {
+    url: '/refresh',
+    cache: false,
+    views: {
+      'main-view': {
+        templateUrl: 'scenes/welcome/refresh.html',
+        controller: 'refreshCtrl'
       }
     }
   })
